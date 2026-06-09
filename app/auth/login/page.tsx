@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from 'sonner'
+import { Logo } from '@/components/brand/Logo'
 import { Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
@@ -34,8 +35,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">CardFloat Pro</CardTitle>
+        <CardHeader className="text-center items-center">
+          <Logo size="md" className="mb-2" />
           <CardDescription>Log masuk ke akaun anda</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>

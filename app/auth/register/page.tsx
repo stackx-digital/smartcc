@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from 'sonner'
+import { Logo } from '@/components/brand/Logo'
 import { Loader2 } from 'lucide-react'
 
 export default function RegisterPage() {
@@ -39,7 +40,8 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
+        <CardHeader className="text-center items-center">
+          <Logo size="md" className="mb-2" />
           <CardTitle className="text-2xl">Daftar Akaun</CardTitle>
           <CardDescription>Mulakan perjalanan float optimum anda</CardDescription>
         </CardHeader>

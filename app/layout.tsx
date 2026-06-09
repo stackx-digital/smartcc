@@ -6,8 +6,8 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CardFloat Pro — Credit Card Float Optimizer',
-  description: 'Maximize your credit card float and know the best time to make purchases.',
+  title: 'smartcc — Credit Card Float Optimizer',
+  description: 'Tahu bila masa terbaik untuk guna kad kredit dan dapatkan sehingga 50 hari float percuma.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

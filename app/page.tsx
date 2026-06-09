@@ -3,6 +3,7 @@ import {
   Calculator, CreditCard, TrendingUp, CheckCircle2, AlertTriangle,
   BarChart3, Shield, Zap, ChevronDown, Star, ArrowRight, Clock
 } from 'lucide-react'
+import { Logo } from '@/components/brand/Logo'
 
 export default function LandingPage() {
   return (
@@ -11,7 +12,7 @@ export default function LandingPage() {
       {/* NAV */}
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <span className="text-xl font-bold text-blue-600">CardFloat Pro</span>
+          <Logo size="sm" />
           <div className="flex items-center gap-3">
             <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block">
               Log Masuk
@@ -406,7 +407,7 @@ export default function LandingPage() {
       {/* FOOTER */}
       <footer className="py-8 px-4 border-t bg-white">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <div className="font-semibold text-gray-900">CardFloat Pro</div>
+          <Logo size="sm" />
           <p>© 2025 CardFloat Pro. Hak cipta terpelihara.</p>
           <div className="flex gap-4">
             <Link href="/auth/login" className="hover:text-gray-900">Log Masuk</Link>

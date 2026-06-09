@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, Calculator, CreditCard, History, Lightbulb, Settings, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase'
+import { Logo } from '@/components/brand/Logo'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -25,9 +26,8 @@ export function Sidebar() {
 
   return (
     <aside className="hidden md:flex flex-col w-[220px] min-h-screen border-r bg-background px-3 py-4 fixed top-0 left-0 z-40">
-      <div className="mb-6 px-3">
-        <h1 className="text-xl font-bold text-primary">CardFloat Pro</h1>
-        <p className="text-xs text-muted-foreground">Float Optimizer</p>
+      <div className="mb-6 px-2">
+        <Logo size="sm" />
       </div>
 
       <nav className="flex-1 space-y-1">
