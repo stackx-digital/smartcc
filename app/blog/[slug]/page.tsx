@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -6,7 +7,50 @@ import { ArrowLeft, Calendar } from 'lucide-react'
 
 export const revalidate = 60
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smartcc.my'
+
+type Props = { params: Promise<{ slug: string }> }
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const supabase = await createClient()
+  const { data: post } = await supabase
+    .from('blog_posts')
+    .select('title, excerpt, cover_image, published_at, slug')
+    .eq('slug', slug)
+    .eq('published', true)
+    .single()
+
+  if (!post) return { title: 'Post tidak dijumpai — smartcc' }
+
+  const description = post.excerpt || `Baca artikel ${post.title} di blog smartcc.`
+  const url = `${SITE_URL}/blog/${post.slug}`
+  const image = post.cover_image || `${SITE_URL}/og-default.png`
+
+  return {
+    title: `${post.title} — smartcc`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      title: post.title,
+      description,
+      url,
+      siteName: 'smartcc',
+      images: [{ url: image, width: 1200, height: 630, alt: post.title }],
+      publishedTime: post.published_at ?? undefined,
+      locale: 'ms_MY',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description,
+      images: [image],
+    },
+  }
+}
+
+export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const supabase = await createClient()
   const { data: post } = await supabase
@@ -18,11 +62,40 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   if (!post) notFound()
 
-  // Simple markdown → HTML renderer (no deps needed)
   const rendered = renderMarkdown(post.content)
+  const url = `${SITE_URL}/blog/${post.slug}`
+
+  // JSON-LD structured data
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt || '',
+    image: post.cover_image || `${SITE_URL}/og-default.png`,
+    url,
+    datePublished: post.published_at,
+    dateModified: post.updated_at || post.published_at,
+    author: {
+      '@type': 'Organization',
+      name: 'smartcc',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'smartcc',
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.svg` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  }
 
   return (
     <div className="min-h-screen bg-[#f8faff]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/60 shadow-sm">
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <Link href="/"><Logo size="sm" /></Link>
@@ -48,7 +121,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {post.published_at && (
             <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-4">
               <Calendar className="h-4 w-4" />
-              {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
+              <time dateTime={post.published_at}>
+                {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </time>
             </div>
           )}
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">{post.title}</h1>
@@ -72,30 +147,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
 function renderMarkdown(md: string): string {
   let html = md
-    // Headings
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
     .replace(/^## (.+)$/gm, '<h2>$1</h2>')
     .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    // Bold & italic
     .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    // Code block
     .replace(/```[\w]*\n([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    // Inline code
     .replace(/`(.+?)`/g, '<code>$1</code>')
-    // Links
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    // Unordered lists
     .replace(/^\s*[-*+] (.+)$/gm, '<li>$1</li>')
     .replace(/(<li>[\s\S]*<\/li>)/, '<ul>$1</ul>')
-    // Ordered lists
     .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    // Blockquote
     .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    // Horizontal rule
     .replace(/^---$/gm, '<hr>')
-    // Paragraphs (double newline)
     .replace(/\n\n/g, '</p><p>')
 
   return `<p>${html}</p>`

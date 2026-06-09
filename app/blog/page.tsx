@@ -1,9 +1,31 @@
+import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase-server'
 import Link from 'next/link'
 import { Logo } from '@/components/brand/Logo'
 import { ArrowRight, Calendar } from 'lucide-react'
 
 export const revalidate = 60
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smartcc.my'
+
+export const metadata: Metadata = {
+  title: 'Blog — Ilmu Kad Kredit | smartcc',
+  description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda. Dapatkan float maksimum dan cashback terbaik.',
+  alternates: { canonical: `${SITE_URL}/blog` },
+  openGraph: {
+    type: 'website',
+    title: 'Blog — Ilmu Kad Kredit | smartcc',
+    description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda.',
+    url: `${SITE_URL}/blog`,
+    siteName: 'smartcc',
+    locale: 'ms_MY',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Blog — Ilmu Kad Kredit | smartcc',
+    description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda.',
+  },
+}
 
 export default async function BlogPage() {
   const supabase = await createClient()
