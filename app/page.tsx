@@ -14,6 +14,9 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <Logo size="sm" />
           <div className="flex items-center gap-3">
+            <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+              Blog
+            </Link>
             <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
               Log Masuk
             </Link>

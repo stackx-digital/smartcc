@@ -64,3 +64,34 @@ $$ language plpgsql security definer;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure handle_new_user();
+
+-- Blog posts table
+create table blog_posts (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  slug text not null unique,
+  excerpt text,
+  content text not null,
+  cover_image text,
+  published boolean default false,
+  published_at timestamptz,
+  author_email text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+alter table blog_posts enable row level security;
+
+create policy "Public can read published posts"
+  on blog_posts for select
+  using (published = true);
+
+create policy "Admin can manage all posts"
+  on blog_posts for all
+  using (
+    exists (
+      select 1 from profiles
+      where profiles.id = auth.uid()
+      and profiles.email = 'stackxdigital@gmail.com'
+    )
+  );

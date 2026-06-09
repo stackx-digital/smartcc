@@ -34,6 +34,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
+  // Admin route — redirect non-admin to home
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (!user || user.email !== 'stackxdigital@gmail.com') {
+      return NextResponse.redirect(new URL('/', request.url))
+    }
+  }
+
   if (user && (request.nextUrl.pathname.startsWith('/auth/login') || request.nextUrl.pathname.startsWith('/auth/register'))) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
