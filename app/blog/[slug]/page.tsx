@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import { marked } from 'marked'
 import { createClient } from '@/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Logo } from '@/components/brand/Logo'
-import { ArrowLeft, Calendar } from 'lucide-react'
+import { Calendar, Clock, ArrowLeft, ChevronRight } from 'lucide-react'
 
 export const revalidate = 60
 
@@ -50,6 +51,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
+function estimateReadTime(content: string) {
+  const words = content.trim().split(/\s+/).length
+  return Math.max(1, Math.ceil(words / 200))
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const supabase = await createClient()
@@ -62,10 +68,13 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound()
 
-  const rendered = renderMarkdown(post.content)
+  // Configure marked for clean HTML
+  marked.setOptions({ breaks: true })
+  const rendered = await marked.parse(post.content)
+
+  const readTime = estimateReadTime(post.content)
   const url = `${SITE_URL}/blog/${post.slug}`
 
-  // JSON-LD structured data
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -75,11 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
     url,
     datePublished: post.published_at,
     dateModified: post.updated_at || post.published_at,
-    author: {
-      '@type': 'Organization',
-      name: 'smartcc',
-      url: SITE_URL,
-    },
+    author: { '@type': 'Organization', name: 'smartcc', url: SITE_URL },
     publisher: {
       '@type': 'Organization',
       name: 'smartcc',
@@ -90,80 +95,93 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f8faff]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <div className="min-h-screen bg-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/60 shadow-sm">
+      {/* Nav */}
+      <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <Link href="/"><Logo size="sm" /></Link>
           <div className="flex items-center gap-3">
-            <Link href="/blog" className="text-sm font-medium text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
-              ← Blog
+            <Link href="/blog" className="text-sm font-medium text-gray-500 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors hidden sm:flex items-center gap-1">
+              <ArrowLeft className="h-3.5 w-3.5" /> Blog
             </Link>
-            <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200/60">
+            <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-sm">
               Cuba Percuma
             </Link>
           </div>
         </div>
       </nav>
 
-      <article className="max-w-2xl mx-auto px-4 py-16">
+      {/* Breadcrumb */}
+      <div className="border-b border-gray-100 bg-gray-50/50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-3">
+          <nav className="flex items-center gap-1.5 text-xs text-gray-400">
+            <Link href="/" className="hover:text-gray-700 transition-colors">smartcc</Link>
+            <ChevronRight className="h-3 w-3" />
+            <Link href="/blog" className="hover:text-gray-700 transition-colors">Blog</Link>
+            <ChevronRight className="h-3 w-3" />
+            <span className="text-gray-600 truncate max-w-xs">{post.title}</span>
+          </nav>
+        </div>
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+        {/* Article header */}
+        <header className="mb-10">
+          <div className="flex items-center gap-4 text-sm text-gray-400 mb-5">
+            {post.published_at && (
+              <span className="flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5" />
+                <time dateTime={post.published_at}>
+                  {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </time>
+              </span>
+            )}
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
+              {readTime} minit bacaan
+            </span>
+          </div>
+
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-[1.25] mb-5 tracking-tight">
+            {post.title}
+          </h1>
+
+          {post.excerpt && (
+            <p className="text-lg text-gray-500 leading-relaxed border-l-4 border-blue-500 pl-4 bg-blue-50 py-3 pr-4 rounded-r-xl">
+              {post.excerpt}
+            </p>
+          )}
+        </header>
+
+        {/* Cover image */}
         {post.cover_image && (
-          <div className="rounded-2xl overflow-hidden mb-10 shadow-lg">
-            <img src={post.cover_image} alt={post.title} className="w-full object-cover max-h-72" />
+          <div className="rounded-2xl overflow-hidden mb-10 shadow-md">
+            <img src={post.cover_image} alt={post.title} className="w-full object-cover max-h-80" />
           </div>
         )}
 
-        <header className="mb-10">
-          {post.published_at && (
-            <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-4">
-              <Calendar className="h-4 w-4" />
-              <time dateTime={post.published_at}>
-                {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
-              </time>
-            </div>
-          )}
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">{post.title}</h1>
-          {post.excerpt && <p className="text-xl text-gray-500 leading-relaxed">{post.excerpt}</p>}
-        </header>
+        {/* Article body */}
+        <div className="blog-content" dangerouslySetInnerHTML={{ __html: rendered }} />
 
-        <div
-          className="prose prose-slate max-w-none prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-p:text-justify prose-p:leading-8 prose-p:text-gray-700 prose-li:text-gray-700 prose-li:leading-7 prose-h2:mt-10 prose-h2:mb-4 prose-h3:mt-8 prose-h3:mb-3 prose-blockquote:border-blue-400 prose-blockquote:bg-blue-50 prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-gray-700"
-          dangerouslySetInnerHTML={{ __html: rendered }}
-        />
+        {/* Footer CTA */}
+        <div className="mt-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white text-center shadow-xl shadow-blue-200/50">
+          <p className="font-bold text-xl mb-2">Nak tahu bila masa terbaik nak berbelanja?</p>
+          <p className="text-blue-200 text-sm mb-5">smartcc kira float maksimum untuk setiap kad kredit anda — percuma.</p>
+          <Link href="/auth/register" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors text-sm shadow-lg">
+            Cuba Percuma Sekarang →
+          </Link>
+        </div>
 
-        <div className="mt-16 pt-8 border-t border-gray-100">
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+        {/* Back link */}
+        <div className="mt-10 pt-8 border-t border-gray-100">
+          <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-900 transition-colors">
             <ArrowLeft className="h-4 w-4" /> Kembali ke Blog
           </Link>
         </div>
-      </article>
+      </div>
     </div>
   )
-}
-
-function renderMarkdown(md: string): string {
-  let html = md
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/```[\w]*\n([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    .replace(/^\s*[-*+] (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>[\s\S]*<\/li>)/, '<ul>$1</ul>')
-    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
-    .replace(/^---$/gm, '<hr>')
-    .replace(/\n\n/g, '</p><p>')
-
-  return `<p>${html}</p>`
-    .replace(/<p><(h[1-3]|ul|ol|li|pre|blockquote|hr)/g, '<$1')
-    .replace(/<\/(h[1-3]|ul|ol|li|pre|blockquote)><\/p>/g, '</$1>')
 }
