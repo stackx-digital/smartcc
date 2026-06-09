@@ -1,305 +1,282 @@
 import Link from 'next/link'
 import {
   Calculator, CreditCard, TrendingUp, CheckCircle2, AlertTriangle,
-  BarChart3, Shield, Zap, ChevronDown, Star, ArrowRight, Clock
+  BarChart3, Shield, Zap, ChevronDown, Star, ArrowRight, Clock, Sparkles
 } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-[#f8faff] text-gray-900 overflow-x-hidden">
 
       {/* NAV */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/60 shadow-sm">
+        <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
           <Logo size="sm" />
           <div className="flex items-center gap-3">
-            <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block">
+            <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
               Log Masuk
             </Link>
-            <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200/60">
               Cuba Percuma
             </Link>
           </div>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="bg-gradient-to-b from-blue-50 via-white to-white pt-20 pb-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-sm font-medium mb-8">
-            <Star className="h-3.5 w-3.5 fill-current" />
+      {/* ─── HERO ─── */}
+      <section className="relative pt-20 pb-28 px-4 overflow-hidden">
+        {/* Mesh blobs */}
+        <div className="mesh-blob-1 -top-32 -left-32 opacity-70" />
+        <div className="mesh-blob-2 top-20 right-0 opacity-80" />
+        <div className="mesh-blob-3 bottom-0 left-1/3 opacity-60" />
+        {/* Dot texture */}
+        <div className="absolute inset-0 bg-dot-pattern opacity-40" />
+
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-200 text-blue-700 text-sm font-medium mb-8 shadow-sm">
+            <Sparkles className="h-3.5 w-3.5" />
             Percuma selamanya untuk 2 kad kredit
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
             Dapatkan Sehingga{' '}
-            <span className="text-blue-600 relative">
-              50 Hari Float
-              <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 300 6" fill="none">
-                <path d="M0 3 Q75 0 150 3 Q225 6 300 3" stroke="#3B82F6" strokeWidth="3" strokeLinecap="round" fill="none"/>
+            <span className="relative inline-block">
+              <span className="gradient-text">50 Hari Float</span>
+              <svg className="absolute -bottom-1 left-0 w-full" height="5" viewBox="0 0 300 5" fill="none" preserveAspectRatio="none">
+                <path d="M0 2.5 Q75 0 150 2.5 Q225 5 300 2.5" stroke="url(#ug)" strokeWidth="3" strokeLinecap="round" fill="none"/>
+                <defs>
+                  <linearGradient id="ug" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#3b82f6"/>
+                    <stop offset="100%" stopColor="#6366f1"/>
+                  </linearGradient>
+                </defs>
               </svg>
             </span>{' '}
             Percuma
           </h1>
 
-          <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Ramai pengguna kad kredit tidak tahu <strong className="text-gray-900">bila masa terbaik untuk berbelanja.</strong>{' '}
+          <p className="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Ramai pengguna kad kredit tidak tahu <strong className="text-gray-800">bila masa terbaik untuk berbelanja.</strong>{' '}
             smartcc tunjukkan kad mana dan hari bila untuk capai float maksimum — tanpa bayar faedah sesen pun.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-14">
             <Link
               href="/auth/register"
-              className="inline-flex items-center justify-center gap-2 h-13 px-8 py-3.5 rounded-xl bg-blue-600 text-white font-semibold text-base hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-blue-600 text-white font-semibold text-base hover:bg-blue-700 transition-all shadow-xl shadow-blue-300/40 hover:shadow-blue-400/40 hover:-translate-y-0.5"
             >
               Mulakan Percuma <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/dashboard"
-              className="inline-flex items-center justify-center h-13 px-8 py-3.5 rounded-xl border-2 border-gray-200 bg-white text-gray-700 font-semibold text-base hover:border-gray-300 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-gray-200 bg-white/80 text-gray-700 font-semibold text-base hover:bg-white hover:border-gray-300 transition-all shadow-sm backdrop-blur"
             >
               Lihat Demo
             </Link>
           </div>
 
-          {/* Social proof */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
-              Tiada kad kredit diperlukan
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
-              Persediaan dalam 2 minit
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-green-500" />
-              Selamat & peribadi
-            </div>
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-500">
+            {['Tiada kad kredit diperlukan', 'Persediaan dalam 2 minit', 'Selamat & peribadi'].map(t => (
+              <div key={t} className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" />
+                {t}
+              </div>
+            ))}
+          </div>
+
+          {/* Floating stats cards */}
+          <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            {[
+              { value: '50', label: 'Hari Float Max', color: 'text-blue-600' },
+              { value: 'RM0', label: 'Kos Bermula', color: 'text-emerald-600' },
+              { value: '2min', label: 'Setup Masa', color: 'text-violet-600' },
+            ].map(s => (
+              <div key={s.label} className="glass-card rounded-2xl p-4 shadow-lg shadow-blue-100/50">
+                <div className={`text-2xl font-extrabold ${s.color}`}>{s.value}</div>
+                <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* PROBLEM */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
+      {/* ─── PROBLEM ─── */}
+      <section className="relative py-24 px-4 bg-white overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Berapa banyak float yang anda bazir setiap bulan?</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Kebanyakan pengguna kad kredit buat kesilapan ini tanpa sedar</p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Masalah</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Berapa banyak float yang anda bazir?</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">Kebanyakan pengguna kad kredit buat kesilapan ini tanpa sedar</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
                 icon: AlertTriangle,
-                color: 'text-red-500 bg-red-50',
+                bg: 'bg-red-50', border: 'border-red-100', iconBg: 'bg-red-100', iconColor: 'text-red-500',
+                badge: 'bg-red-100 text-red-700',
                 title: 'Beli Masa Salah',
                 desc: 'Membeli 1–3 hari sebelum statement date bermakna anda hanya dapat ~22 hari float. Bayaran due hampir tiba!',
                 stat: '~22 hari float',
-                statColor: 'text-red-600 bg-red-50',
               },
               {
                 icon: Clock,
-                color: 'text-amber-500 bg-amber-50',
+                bg: 'bg-amber-50', border: 'border-amber-100', iconBg: 'bg-amber-100', iconColor: 'text-amber-500',
+                badge: 'bg-amber-100 text-amber-700',
                 title: 'Tak Tahu Kad Mana',
-                desc: 'Punya 2-3 kad dengan statement date berbeza tapi sentiasa guna kad yang sama? Anda mungkin rugi 20+ hari float.',
+                desc: 'Punya 2–3 kad dengan statement date berbeza tapi sentiasa guna kad yang sama? Anda rugi 20+ hari.',
                 stat: '~31 hari float',
-                statColor: 'text-amber-600 bg-amber-50',
               },
               {
                 icon: TrendingUp,
-                color: 'text-green-500 bg-green-50',
+                bg: 'bg-emerald-50', border: 'border-emerald-100', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600',
+                badge: 'bg-emerald-100 text-emerald-700',
                 title: 'Beli Masa Tepat',
                 desc: 'Beli sehari selepas statement date dengan kad yang betul — float sehingga 50 hari. Wang di tangan lebih lama!',
                 stat: '~50 hari float',
-                statColor: 'text-green-600 bg-green-50',
               },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 ${item.color}`}>
-                  <item.icon className="h-6 w-6" />
+              <div key={i} className={`rounded-2xl p-6 border ${item.bg} ${item.border} relative overflow-hidden group hover:-translate-y-1 transition-transform duration-200`}>
+                <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4 ${item.iconBg}`}>
+                  <item.icon className={`h-5 w-5 ${item.iconColor}`} />
                 </div>
-                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.desc}</p>
-                <div className={`inline-block px-3 py-1 rounded-full text-sm font-bold ${item.statColor}`}>
-                  {item.stat}
-                </div>
+                <h3 className="font-bold text-lg mb-2 text-gray-900">{item.title}</h3>
+                <p className="text-gray-600 text-sm mb-5 leading-relaxed">{item.desc}</p>
+                <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${item.badge}`}>{item.stat}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-20 px-4">
-        <div className="max-w-5xl mx-auto">
+      {/* ─── HOW IT WORKS ─── */}
+      <section className="py-24 px-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 relative overflow-hidden">
+        {/* Texture overlay */}
+        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+        <div className="mesh-blob-1 -top-40 left-1/4 opacity-20" />
+
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Macam mana ia berfungsi?</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">3 langkah mudah untuk optimumkan float kad kredit anda</p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">Cara Kerja</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">3 Langkah Mudah</h2>
+            <p className="text-slate-400 max-w-xl mx-auto">Mulakan dalam masa 2 minit</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* connector line desktop */}
-            <div className="hidden md:block absolute top-8 left-1/3 right-1/3 h-0.5 bg-blue-100 z-0" />
-
+            <div className="hidden md:block absolute top-8 left-[calc(33%+2rem)] right-[calc(33%+2rem)] h-px bg-gradient-to-r from-blue-500/50 to-indigo-500/50" />
             {[
-              {
-                step: '01',
-                title: 'Daftar & Tambah Kad',
-                desc: 'Daftar akaun percuma. Masukkan maklumat kad kredit anda — had kredit, baki, dan hari statement.',
-              },
-              {
-                step: '02',
-                title: 'Semak Dashboard',
-                desc: 'Dashboard tunjukkan traffic light status setiap kad — hijau (masa terbaik), kuning (ok), merah (tahan dulu).',
-              },
-              {
-                step: '03',
-                title: 'Plan Pembelian',
-                desc: 'Guna Smart Planner — masukkan tarikh belanja, dan sistem cari kad dengan float terpanjang untuk anda.',
-              },
+              { step: '01', title: 'Daftar & Tambah Kad', desc: 'Daftar akaun percuma. Masukkan maklumat kad kredit anda — had kredit, baki, dan hari statement.' },
+              { step: '02', title: 'Semak Dashboard', desc: 'Dashboard tunjukkan traffic light status setiap kad — hijau (masa terbaik), kuning (ok), merah (tahan dulu).' },
+              { step: '03', title: 'Plan Pembelian', desc: 'Guna Smart Planner — masukkan tarikh belanja, dan sistem cari kad dengan float terpanjang untuk anda.' },
             ].map((item, i) => (
-              <div key={i} className="relative z-10 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-blue-600 text-white text-xl font-bold mb-5 shadow-lg shadow-blue-200">
+              <div key={i} className="relative z-10 text-center group">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-xl font-black mb-5 shadow-2xl shadow-blue-900/60 group-hover:scale-105 transition-transform">
                   {item.step}
                 </div>
-                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-lg mb-2 text-white">{item.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-5xl mx-auto">
+      {/* ─── FEATURES ─── */}
+      <section className="relative py-24 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+        <div className="mesh-blob-2 top-0 right-0 opacity-50" />
+        <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Ciri-ciri</span>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Semua yang anda perlukan</h2>
-            <p className="text-gray-600 max-w-xl mx-auto">Direka khas untuk pengguna kad kredit Malaysia</p>
+            <p className="text-gray-500 max-w-xl mx-auto">Direka khas untuk pengguna kad kredit Malaysia</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              {
-                icon: BarChart3,
-                title: 'Float Calculator',
-                desc: 'Kira tepat bilangan hari float untuk mana-mana tarikh pembelian dan kad kredit anda.',
-              },
-              {
-                icon: Zap,
-                title: 'Traffic Light System',
-                desc: 'Status hijau/kuning/merah pada setiap kad — tahu sekilas pandang sama ada hari ini masa terbaik atau tidak.',
-              },
-              {
-                icon: Calculator,
-                title: 'Smart Purchase Planner',
-                desc: 'Bandingkan semua kad anda dan dapatkan cadangan kad terbaik untuk tarikh pembelian yang dipilih.',
-              },
-              {
-                icon: CreditCard,
-                title: 'Pengurusan Pelbagai Kad',
-                desc: 'Uruskan semua kad kredit dalam satu tempat. Pantau baki, had kredit, dan penggunaan setiap kad.',
-              },
-              {
-                icon: TrendingUp,
-                title: 'Sejarah Float',
-                desc: 'Rekod semua kiraan float anda. Tapis mengikut kad atau tarikh dan eksport ke CSV (Pro).',
-              },
-              {
-                icon: Shield,
-                title: 'Selamat & Peribadi',
-                desc: 'Data anda disulitkan dan dilindungi oleh Supabase. Kami tidak simpan maklumat sensitif kad kredit.',
-              },
+              { icon: BarChart3, title: 'Float Calculator', desc: 'Kira tepat bilangan hari float untuk mana-mana tarikh pembelian dan kad kredit anda.', accent: 'from-blue-500 to-blue-600' },
+              { icon: Zap, title: 'Traffic Light System', desc: 'Status hijau/kuning/merah pada setiap kad — tahu sekilas pandang sama ada hari ini masa terbaik.', accent: 'from-amber-400 to-orange-500' },
+              { icon: Calculator, title: 'Smart Purchase Planner', desc: 'Bandingkan semua kad anda dan dapatkan cadangan kad terbaik untuk tarikh pembelian yang dipilih.', accent: 'from-indigo-500 to-violet-600' },
+              { icon: CreditCard, title: 'Pengurusan Pelbagai Kad', desc: 'Uruskan semua kad kredit dalam satu tempat. Pantau baki, had kredit, dan penggunaan setiap kad.', accent: 'from-pink-500 to-rose-500' },
+              { icon: TrendingUp, title: 'Sejarah Float', desc: 'Rekod semua kiraan float anda. Tapis mengikut kad atau tarikh dan eksport ke CSV (Pro).', accent: 'from-emerald-500 to-teal-600' },
+              { icon: Shield, title: 'Selamat & Peribadi', desc: 'Data anda disulitkan dan dilindungi oleh Supabase. Kami tidak simpan maklumat sensitif kad kredit.', accent: 'from-slate-600 to-slate-700' },
             ].map((f, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-100 mb-4">
-                  <f.icon className="h-5 w-5 text-blue-600" />
+              <div key={i} className="glass-card rounded-2xl p-6 shadow-lg shadow-blue-50 hover:shadow-xl hover:shadow-blue-100 hover:-translate-y-1 transition-all duration-200 group">
+                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${f.accent} mb-4 shadow-md group-hover:scale-110 transition-transform`}>
+                  <f.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="font-semibold mb-1.5">{f.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="font-semibold mb-1.5 text-gray-900">{f.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PRICING */}
-      <section className="py-20 px-4" id="harga">
-        <div className="max-w-4xl mx-auto">
+      {/* ─── PRICING ─── */}
+      <section className="relative py-24 px-4 bg-white overflow-hidden" id="harga">
+        <div className="absolute inset-0 bg-dot-pattern opacity-25" />
+        <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-14">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Harga</span>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Harga yang berpatutan</h2>
-            <p className="text-gray-600">Mula percuma. Naik taraf bila anda bersedia.</p>
+            <p className="text-gray-500">Mula percuma. Naik taraf bila anda bersedia.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {/* Free */}
-            <div className="rounded-2xl border-2 border-gray-100 p-8">
+            <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
               <div className="mb-6">
                 <h3 className="text-xl font-bold mb-1">Free</h3>
-                <p className="text-gray-500 text-sm">Untuk bermula</p>
-                <div className="mt-4">
-                  <span className="text-4xl font-extrabold">RM0</span>
-                  <span className="text-gray-500 ml-1">/bulan</span>
+                <p className="text-gray-400 text-sm">Untuk bermula</p>
+                <div className="mt-4 flex items-end gap-1">
+                  <span className="text-4xl font-extrabold text-gray-900">RM0</span>
+                  <span className="text-gray-400 mb-1">/bulan</span>
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
-                {[
-                  'Sehingga 2 kad kredit',
-                  'Float calculator',
-                  'Traffic light dashboard',
-                  'Smart Purchase Planner',
-                  'Sejarah 30 hari',
-                ].map(f => (
-                  <li key={f} className="flex items-center gap-2.5 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" />
-                    {f}
+                {['Sehingga 2 kad kredit', 'Float calculator', 'Traffic light dashboard', 'Smart Purchase Planner', 'Sejarah 30 hari'].map(f => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-gray-700">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link
-                href="/auth/register"
-                className="block text-center w-full py-3 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-colors"
-              >
+              <Link href="/auth/register" className="block text-center w-full py-3 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-all">
                 Mula Percuma
               </Link>
             </div>
 
             {/* Pro */}
-            <div className="rounded-2xl border-2 border-blue-600 p-8 relative bg-blue-600 text-white">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">
-                  PALING POPULAR
+            <div className="rounded-2xl p-8 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 text-white shadow-2xl shadow-blue-300/40">
+              {/* bg texture */}
+              <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/5" />
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-white/5" />
+
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                <span className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                  ⭐ PALING POPULAR
                 </span>
               </div>
-              <div className="mb-6">
+              <div className="relative mb-6 pt-2">
                 <h3 className="text-xl font-bold mb-1">Pro</h3>
                 <p className="text-blue-200 text-sm">Untuk pengguna serius</p>
-                <div className="mt-4">
+                <div className="mt-4 flex items-end gap-1">
                   <span className="text-4xl font-extrabold">RM9</span>
-                  <span className="text-blue-200 ml-1">/bulan</span>
+                  <span className="text-blue-200 mb-1">/bulan</span>
                 </div>
               </div>
-              <ul className="space-y-3 mb-8">
-                {[
-                  'Semua ciri Free',
-                  'Kad kredit tanpa had',
-                  'Export sejarah ke CSV',
-                  'Sejarah penuh (tiada had)',
-                  'Analitik lanjutan',
-                  'Priority support',
-                ].map(f => (
+              <ul className="relative space-y-3 mb-8">
+                {['Semua ciri Free', 'Kad kredit tanpa had', 'Export sejarah ke CSV', 'Sejarah penuh (tiada had)', 'Analitik lanjutan', 'Priority support'].map(f => (
                   <li key={f} className="flex items-center gap-2.5 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-blue-200 flex-shrink-0" />
-                    {f}
+                    <CheckCircle2 className="h-4 w-4 text-blue-200 flex-shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
-              <Link
-                href="/auth/register"
-                className="block text-center w-full py-3 rounded-xl bg-white font-semibold text-blue-600 hover:bg-blue-50 transition-colors"
-              >
+              <Link href="/auth/register" className="relative block text-center w-full py-3 rounded-xl bg-white font-bold text-blue-600 hover:bg-blue-50 transition-colors shadow-lg">
                 Cuba Pro Percuma 14 Hari
               </Link>
             </div>
@@ -307,69 +284,57 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TESTIMONIAL / TRUST */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Formula Float yang Terbukti</h2>
-            <p className="text-gray-600">Matematik mudah yang ramai tidak gunakan sepenuhnya</p>
-          </div>
+      {/* ─── FORMULA ─── */}
+      <section className="relative py-24 px-4 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+        <div className="mesh-blob-3 top-1/4 right-1/4 opacity-30" />
+        <div className="relative max-w-2xl mx-auto text-center">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Formula</span>
+          <h2 className="text-3xl font-bold text-white mb-4">Formula Float yang Terbukti</h2>
+          <p className="text-slate-400 mb-10">Matematik mudah yang ramai tidak gunakan sepenuhnya</p>
 
-          <div className="bg-white rounded-2xl border p-8 max-w-2xl mx-auto text-center">
-            <div className="text-5xl mb-6">🧮</div>
-            <p className="text-lg font-semibold mb-4 text-gray-700">
-              Float = Tarikh Due − Tarikh Beli
-            </p>
-            <div className="bg-blue-50 rounded-xl p-5 text-sm text-blue-800 text-left space-y-2">
-              <p><strong>Contoh:</strong> Kad statement hari ke-8, due +20 hari</p>
-              <p>• Beli pada <strong>9 Januari</strong> (sehari selepas statement)</p>
-              <p>• Statement seterusnya: <strong>8 Februari</strong></p>
-              <p>• Tarikh due: <strong>28 Februari</strong></p>
-              <p className="text-green-700 font-bold">→ Float = <strong>50 hari!</strong> Wang di tangan hampir 2 bulan.</p>
+          <div className="glass-card rounded-2xl p-8 text-left border border-white/20 bg-white/5 backdrop-blur-xl shadow-2xl">
+            <div className="text-center mb-6">
+              <span className="text-5xl">🧮</span>
+              <p className="text-xl font-bold text-white mt-4">Float = Tarikh Due − Tarikh Beli</p>
             </div>
-            <p className="text-sm text-gray-500 mt-4">
+            <div className="bg-blue-500/10 border border-blue-400/20 rounded-xl p-5 text-sm text-blue-100 space-y-2">
+              <p className="text-blue-300 font-semibold">Contoh: Kad statement hari ke-8, due +20 hari</p>
+              <p>• Beli pada <strong className="text-white">9 Januari</strong> (sehari selepas statement)</p>
+              <p>• Statement seterusnya: <strong className="text-white">8 Februari</strong></p>
+              <p>• Tarikh due: <strong className="text-white">28 Februari</strong></p>
+              <p className="text-emerald-400 font-bold pt-1">→ Float = <strong>50 hari!</strong> Wang di tangan hampir 2 bulan.</p>
+            </div>
+            <p className="text-sm text-slate-400 mt-5 text-center">
               smartcc kira semua ini secara automatik untuk setiap kad anda.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-20 px-4">
-        <div className="max-w-2xl mx-auto">
+      {/* ─── FAQ ─── */}
+      <section className="relative py-24 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+        <div className="relative max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Soalan Lazim</h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">FAQ</span>
+            <h2 className="text-3xl font-bold">Soalan Lazim</h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {[
-              {
-                q: 'Adakah selamat untuk masukkan maklumat kad kredit?',
-                a: 'smartcc tidak simpan nombor penuh kad kredit anda. Kami hanya perlukan maklumat asas seperti had kredit, baki semasa, dan hari statement untuk kira float. Semua data dilindungi dengan penyulitan Supabase.',
-              },
-              {
-                q: 'Apa itu "float" kad kredit?',
-                a: 'Float adalah bilangan hari antara tarikh anda membeli sesuatu dan tarikh anda perlu bayar. Semakin panjang float, semakin lama wang anda ada dalam tangan (atau dalam akaun simpanan yang menjana faedah).',
-              },
-              {
-                q: 'Boleh ke saya guna untuk semua jenis kad kredit?',
-                a: 'Ya! smartcc berfungsi untuk semua kad kredit Malaysia — Visa, Mastercard, dan Amex dari mana-mana bank termasuk Maybank, CIMB, Affin, Al-Rajhi, dan lain-lain.',
-              },
-              {
-                q: 'Adakah pelan Free benar-benar percuma?',
-                a: 'Ya, pelan Free adalah percuma selamanya. Anda boleh tambah sehingga 2 kad kredit dan guna semua ciri asas tanpa had masa. Naik taraf ke Pro hanya jika anda perlukan lebih banyak kad atau ciri lanjutan.',
-              },
-              {
-                q: 'Bagaimana cara bayar untuk Pro?',
-                a: 'Fungsi pembayaran sedang dalam pembangunan. Buat masa ini anda boleh daftar dan guna semua ciri secara percuma. Kami akan maklumkan apabila ia sedia.',
-              },
+              { q: 'Adakah selamat untuk masukkan maklumat kad kredit?', a: 'smartcc tidak simpan nombor penuh kad kredit anda. Kami hanya perlukan maklumat asas seperti had kredit, baki semasa, dan hari statement untuk kira float. Semua data dilindungi dengan penyulitan Supabase.' },
+              { q: 'Apa itu "float" kad kredit?', a: 'Float adalah bilangan hari antara tarikh anda membeli sesuatu dan tarikh anda perlu bayar. Semakin panjang float, semakin lama wang anda ada dalam tangan (atau dalam akaun simpanan yang menjana faedah).' },
+              { q: 'Boleh ke saya guna untuk semua jenis kad kredit?', a: 'Ya! smartcc berfungsi untuk semua kad kredit Malaysia — Visa, Mastercard, dan Amex dari mana-mana bank termasuk Maybank, CIMB, Affin, Al-Rajhi, dan lain-lain.' },
+              { q: 'Adakah pelan Free benar-benar percuma?', a: 'Ya, pelan Free adalah percuma selamanya. Anda boleh tambah sehingga 2 kad kredit dan guna semua ciri asas tanpa had masa. Naik taraf ke Pro hanya jika anda perlukan lebih banyak kad atau ciri lanjutan.' },
+              { q: 'Bagaimana cara bayar untuk Pro?', a: 'Fungsi pembayaran sedang dalam pembangunan. Buat masa ini anda boleh daftar dan guna semua ciri secara percuma. Kami akan maklumkan apabila ia sedia.' },
             ].map((item, i) => (
-              <details key={i} className="group rounded-xl border border-gray-100 bg-white">
-                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer font-medium list-none">
+              <details key={i} className="group glass-card rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                <summary className="flex items-center justify-between px-6 py-4 cursor-pointer font-medium list-none text-gray-800">
                   {item.q}
-                  <ChevronDown className="h-4 w-4 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-2" />
+                  <ChevronDown className="h-4 w-4 text-gray-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0 ml-3" />
                 </summary>
-                <div className="px-6 pb-4 text-sm text-gray-600 leading-relaxed border-t pt-4">
+                <div className="px-6 pb-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
                   {item.a}
                 </div>
               </details>
@@ -378,11 +343,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="py-24 px-4 bg-blue-600">
-        <div className="max-w-3xl mx-auto text-center text-white">
-          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">
-            Jangan bazir float lagi mulai hari ini
+      {/* ─── FINAL CTA ─── */}
+      <section className="relative py-28 px-4 overflow-hidden">
+        {/* Gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-violet-800" />
+        <div className="absolute inset-0 bg-dot-pattern opacity-15" />
+        <div className="mesh-blob-1 -top-20 -left-20 opacity-30" />
+        <div className="mesh-blob-2 -bottom-20 right-0 opacity-20" />
+
+        <div className="relative max-w-3xl mx-auto text-center text-white">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-medium mb-8 backdrop-blur">
+            <Star className="h-3.5 w-3.5 fill-current text-amber-300" />
+            Lebih 50 hari float menanti anda
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold mb-5 leading-tight">
+            Jangan bazir float lagi<br />mulai hari ini
           </h2>
           <p className="text-blue-200 text-lg mb-10 max-w-xl mx-auto">
             Daftar dalam masa 2 minit. Percuma. Tiada kad kredit diperlukan untuk mendaftar.
@@ -390,13 +365,13 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/auth/register"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-base hover:bg-blue-50 transition-colors shadow-lg"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-base hover:bg-blue-50 transition-all shadow-2xl hover:-translate-y-0.5"
             >
               Daftar Percuma Sekarang <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/auth/login"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-xl border-2 border-blue-400 text-white font-semibold text-base hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-white/30 bg-white/10 text-white font-semibold text-base hover:bg-white/20 transition-all backdrop-blur"
             >
               Log Masuk
             </Link>
@@ -404,15 +379,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-8 px-4 border-t bg-white">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-          <Logo size="sm" />
+      {/* ─── FOOTER ─── */}
+      <footer className="py-8 px-4 bg-slate-950 border-t border-white/5">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+          <Logo size="sm" className="[&_span]:text-white" />
           <p>© 2025 smartcc. Hak cipta terpelihara.</p>
-          <div className="flex gap-4">
-            <Link href="/auth/login" className="hover:text-gray-900">Log Masuk</Link>
-            <Link href="/auth/register" className="hover:text-gray-900">Daftar</Link>
-            <Link href="#harga" className="hover:text-gray-900">Harga</Link>
+          <div className="flex gap-5">
+            <Link href="/auth/login" className="hover:text-white transition-colors">Log Masuk</Link>
+            <Link href="/auth/register" className="hover:text-white transition-colors">Daftar</Link>
+            <Link href="#harga" className="hover:text-white transition-colors">Harga</Link>
           </div>
         </div>
       </footer>
@@ -420,4 +395,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
