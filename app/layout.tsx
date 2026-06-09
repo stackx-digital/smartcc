@@ -6,7 +6,7 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'smartcc — Credit Card Float Optimizer',
+  title: 'smartcc — Optimizer Float Kad Kredit',
   description: 'Tahu bila masa terbaik untuk guna kad kredit dan dapatkan sehingga 50 hari float percuma.',
 }
 

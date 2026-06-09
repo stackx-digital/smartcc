@@ -45,7 +45,7 @@ export default function LandingPage() {
 
           <p className="text-lg sm:text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
             Ramai pengguna kad kredit tidak tahu <strong className="text-gray-900">bila masa terbaik untuk berbelanja.</strong>{' '}
-            CardFloat Pro tunjukkan kad mana dan hari bila untuk capai float maksimum — tanpa bayar faedah sesen pun.
+            smartcc tunjukkan kad mana dan hari bila untuk capai float maksimum — tanpa bayar faedah sesen pun.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12">
@@ -328,7 +328,7 @@ export default function LandingPage() {
               <p className="text-green-700 font-bold">→ Float = <strong>50 hari!</strong> Wang di tangan hampir 2 bulan.</p>
             </div>
             <p className="text-sm text-gray-500 mt-4">
-              CardFloat Pro kira semua ini secara automatik untuk setiap kad anda.
+              smartcc kira semua ini secara automatik untuk setiap kad anda.
             </p>
           </div>
         </div>
@@ -345,7 +345,7 @@ export default function LandingPage() {
             {[
               {
                 q: 'Adakah selamat untuk masukkan maklumat kad kredit?',
-                a: 'CardFloat Pro tidak simpan nombor penuh kad kredit anda. Kami hanya perlukan maklumat asas seperti had kredit, baki semasa, dan hari statement untuk kira float. Semua data dilindungi dengan penyulitan Supabase.',
+                a: 'smartcc tidak simpan nombor penuh kad kredit anda. Kami hanya perlukan maklumat asas seperti had kredit, baki semasa, dan hari statement untuk kira float. Semua data dilindungi dengan penyulitan Supabase.',
               },
               {
                 q: 'Apa itu "float" kad kredit?',
@@ -353,7 +353,7 @@ export default function LandingPage() {
               },
               {
                 q: 'Boleh ke saya guna untuk semua jenis kad kredit?',
-                a: 'Ya! CardFloat Pro berfungsi untuk semua kad kredit Malaysia — Visa, Mastercard, dan Amex dari mana-mana bank termasuk Maybank, CIMB, Affin, Al-Rajhi, dan lain-lain.',
+                a: 'Ya! smartcc berfungsi untuk semua kad kredit Malaysia — Visa, Mastercard, dan Amex dari mana-mana bank termasuk Maybank, CIMB, Affin, Al-Rajhi, dan lain-lain.',
               },
               {
                 q: 'Adakah pelan Free benar-benar percuma?',
@@ -408,7 +408,7 @@ export default function LandingPage() {
       <footer className="py-8 px-4 border-t bg-white">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <Logo size="sm" />
-          <p>© 2025 CardFloat Pro. Hak cipta terpelihara.</p>
+          <p>© 2025 smartcc. Hak cipta terpelihara.</p>
           <div className="flex gap-4">
             <Link href="/auth/login" className="hover:text-gray-900">Log Masuk</Link>
             <Link href="/auth/register" className="hover:text-gray-900">Daftar</Link>
