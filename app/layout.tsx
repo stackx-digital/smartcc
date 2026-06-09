@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { Sidebar } from '@/components/layout/Sidebar'
-import { BottomNav } from '@/components/layout/BottomNav'
 import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,13 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <Toaster richColors position="top-right" />
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <main className="flex-1 md:ml-[220px] pb-16 md:pb-0">
-            {children}
-          </main>
-        </div>
-        <BottomNav />
+        {children}
       </body>
     </html>
   )
