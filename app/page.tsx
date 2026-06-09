@@ -177,7 +177,7 @@ export default function LandingPage() {
                   {item.step}
                 </div>
                 <h3 className="font-bold text-lg mb-2 text-white">{item.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -293,17 +293,19 @@ export default function LandingPage() {
           <h2 className="text-3xl font-bold text-white mb-4">Formula Float yang Terbukti</h2>
           <p className="text-slate-400 mb-10">Matematik mudah yang ramai tidak gunakan sepenuhnya</p>
 
-          <div className="glass-card rounded-2xl p-8 text-left border border-white/20 bg-white/5 backdrop-blur-xl shadow-2xl">
+          <div className="rounded-2xl p-8 text-left border border-slate-700 bg-slate-800 shadow-2xl">
             <div className="text-center mb-6">
               <span className="text-5xl">🧮</span>
-              <p className="text-xl font-bold text-white mt-4">Float = Tarikh Due − Tarikh Beli</p>
+              <p className="text-2xl font-bold text-white mt-4">Float = Tarikh Due − Tarikh Beli</p>
             </div>
-            <div className="bg-blue-500/10 border border-blue-400/20 rounded-xl p-5 text-sm text-blue-100 space-y-2">
-              <p className="text-blue-300 font-semibold">Contoh: Kad statement hari ke-8, due +20 hari</p>
-              <p>• Beli pada <strong className="text-white">9 Januari</strong> (sehari selepas statement)</p>
-              <p>• Statement seterusnya: <strong className="text-white">8 Februari</strong></p>
-              <p>• Tarikh due: <strong className="text-white">28 Februari</strong></p>
-              <p className="text-emerald-400 font-bold pt-1">→ Float = <strong>50 hari!</strong> Wang di tangan hampir 2 bulan.</p>
+            <div className="bg-slate-900 border border-slate-700 rounded-xl p-5 text-sm space-y-3">
+              <p className="text-blue-400 font-semibold text-base">Contoh: Kad statement hari ke-8, due +20 hari</p>
+              <p className="text-slate-200">• Beli pada <strong className="text-white font-bold">9 Januari</strong> <span className="text-slate-400">(sehari selepas statement)</span></p>
+              <p className="text-slate-200">• Statement seterusnya: <strong className="text-white font-bold">8 Februari</strong></p>
+              <p className="text-slate-200">• Tarikh due: <strong className="text-white font-bold">28 Februari</strong></p>
+              <div className="pt-2 border-t border-slate-700">
+                <p className="text-emerald-400 font-bold text-base">→ Float = <span className="text-emerald-300">50 hari!</span> Wang di tangan hampir 2 bulan.</p>
+              </div>
             </div>
             <p className="text-sm text-slate-400 mt-5 text-center">
               smartcc kira semua ini secara automatik untuk setiap kad anda.
