@@ -9,12 +9,12 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
-import { Loader2, Check, X } from 'lucide-react'
+import { Loader2, Check } from 'lucide-react'
 
 const FREE_FEATURES = ['Sehingga 2 kad kredit', 'Float calculator', 'Smart Planner', 'Sejarah 30 hari']
 const PRO_FEATURES = ['Kad kredit tanpa had', 'Export CSV', 'Sejarah penuh', 'Priority support', 'Analitik lanjutan']
 
-export function SettingsClient({ profile }: { profile: Profile }) {
+export function SettingsClient({ profile }: { profile: Profile | null }) {
   const router = useRouter()
   const [fullName, setFullName] = useState(profile?.full_name || '')
   const [saving, setSaving] = useState(false)
@@ -28,7 +28,7 @@ export function SettingsClient({ profile }: { profile: Profile }) {
     const { error } = await supabase
       .from('profiles')
       .update({ full_name: fullName })
-      .eq('id', profile.id)
+      .eq('id', profile?.id)
     if (error) toast.error(error.message)
     else toast.success('Profil dikemaskini!')
     setSaving(false)

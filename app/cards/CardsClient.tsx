@@ -44,7 +44,7 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
     } else {
       toast.success('Kad dipadam.')
       setDeleteConfirm(null)
-      refresh()
+      await refresh()
     }
   }
 

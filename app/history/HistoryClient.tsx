@@ -43,7 +43,7 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
         h.purchase_date,
         h.item_name,
         h.amount,
-        (h.credit_cards as any)?.name || '',
+        h.credit_cards?.name || '',
         h.float_days,
         h.due_date,
       ]),
@@ -132,8 +132,8 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full" style={{ background: (h.credit_cards as any)?.color || '#ccc' }} />
-                      {(h.credit_cards as any)?.name || '—'}
+                      <div className="w-2 h-2 rounded-full" style={{ background: h.credit_cards?.color || '#ccc' }} />
+                      {h.credit_cards?.name || '—'}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-center">

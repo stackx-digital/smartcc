@@ -26,7 +26,7 @@ export interface FloatCalculation {
   due_date: string
   was_recommended: boolean
   created_at: string
-  credit_cards?: CreditCard
+  credit_cards?: Pick<CreditCard, 'name' | 'color'> | null
 }
 
 export interface Profile {

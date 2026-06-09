@@ -65,7 +65,8 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       was_recommended: i === 0,
     }))
 
-    await supabase.from('float_calculations').insert(inserts)
+    const { error: insertError } = await supabase.from('float_calculations').insert(inserts)
+    if (insertError) toast.error('Gagal simpan kiraan: ' + insertError.message)
 
     const { data: newHistory } = await supabase
       .from('float_calculations')
@@ -208,7 +209,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                     )}
                     <p className="text-xs text-muted-foreground">
                       {format(new Date(h.purchase_date), 'dd MMM yyyy')} •{' '}
-                      {(h.credit_cards as any)?.name}
+                      {h.credit_cards?.name}
                     </p>
                   </div>
                   <div className="text-right">
