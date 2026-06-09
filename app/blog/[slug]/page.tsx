@@ -88,7 +88,7 @@ function renderMarkdown(md: string): string {
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
     // Unordered lists
     .replace(/^\s*[-*+] (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+    .replace(/(<li>[\s\S]*<\/li>)/, '<ul>$1</ul>')
     // Ordered lists
     .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
     // Blockquote
