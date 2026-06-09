@@ -37,15 +37,10 @@ export default function LandingPage() {
             Percuma selamanya untuk 2 kad kredit
           </div>
 
-          {/* Story hook */}
-          <p className="text-base sm:text-lg font-medium text-blue-700 mb-4 tracking-wide">
-            Ini kisah seseorang yang sangat anda kenali.
-          </p>
-
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
-            Dia guna kad kredit{' '}
+            Guna kad kredit{' '}
             <span className="relative inline-block">
-              <span className="gradient-text">setiap hari.</span>
+              <span className="gradient-text">setiap hari,</span>
               <svg className="absolute -bottom-1 left-0 w-full" height="5" viewBox="0 0 300 5" fill="none" preserveAspectRatio="none">
                 <path d="M0 2.5 Q75 0 150 2.5 Q225 5 300 2.5" stroke="url(#ug)" strokeWidth="3" strokeLinecap="round" fill="none"/>
                 <defs>
@@ -56,11 +51,11 @@ export default function LandingPage() {
                 </defs>
               </svg>
             </span>{' '}
-            Tapi cashback dia sifar.
+            tapi cashback sifar?
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Bukan sebab dia tak berbelanja. Tapi sebab dia{' '}
+            Bukan sebab anda tak berbelanja. Tapi sebab anda{' '}
             <strong className="text-gray-800">tidak tahu satu perkara mudah</strong>{' '}
             — yang kami akan tunjukkan kepada anda hari ini.
           </p>
