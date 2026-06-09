@@ -96,6 +96,61 @@
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
+/* Blog prose overrides */
+.prose p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.9;
+  margin-bottom: 1.25rem;
+  color: #374151;
+}
+
+.prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 0.75rem 1.25rem;
+  font-style: normal;
+  color: #1e40af;
+}
+
+.prose blockquote p {
+  margin: 0;
+  color: #1e40af;
+  text-align: left;
+}
+
+.prose hr {
+  border-color: #e5e7eb;
+  margin: 2.5rem 0;
+}
+
+.prose table {
+  font-size: 0.9rem;
+}
+
+.prose table th {
+  background: #f8fafc;
+  font-weight: 600;
+}
+
+.prose ul li, .prose ol li {
+  line-height: 1.8;
+  margin-bottom: 0.35rem;
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #1d4ed8, #6366f1);
