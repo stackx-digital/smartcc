@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .eq('published', true)
     .single()
 
-  if (!post) return { title: 'Post tidak dijumpai — smartcc' }
+  if (!post) return { title: 'Post not found — smartcc' }
 
-  const description = post.excerpt || `Baca artikel ${post.title} di blog smartcc.`
+  const description = post.excerpt || `Read ${post.title} on the smartcc blog.`
   const url = `${SITE_URL}/blog/${post.slug}`
   const image = post.cover_image || `${SITE_URL}/og-default.png`
 
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'smartcc',
       images: [{ url: image, width: 1200, height: 630, alt: post.title }],
       publishedTime: post.published_at ?? undefined,
-      locale: 'ms_MY',
+      locale: 'en_MY',
     },
     twitter: {
       card: 'summary_large_image',
@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: Props) {
               <ArrowLeft className="h-3.5 w-3.5" /> Blog
             </Link>
             <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-sm">
-              Cuba Percuma
+              Try Free
             </Link>
           </div>
         </div>
@@ -135,13 +135,13 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5" />
                 <time dateTime={post.published_at}>
-                  {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {new Date(post.published_at).toLocaleDateString('en-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </time>
               </span>
             )}
             <span className="flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5" />
-              {readTime} minit bacaan
+              {readTime} min read
             </span>
           </div>
 
@@ -168,17 +168,17 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Footer CTA */}
         <div className="mt-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white text-center shadow-xl shadow-blue-200/50">
-          <p className="font-bold text-xl mb-2">Nak tahu bila masa terbaik nak berbelanja?</p>
-          <p className="text-blue-200 text-sm mb-5">smartcc kira float maksimum untuk setiap kad kredit anda — percuma.</p>
+          <p className="font-bold text-xl mb-2">Want to know the best time to spend?</p>
+          <p className="text-blue-200 text-sm mb-5">smartcc calculates maximum float for every one of your credit cards — for free.</p>
           <Link href="/auth/register" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors text-sm shadow-lg">
-            Cuba Percuma Sekarang →
+            Try Free Now →
           </Link>
         </div>
 
         {/* Back link */}
         <div className="mt-10 pt-8 border-t border-gray-100">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-gray-900 transition-colors">
-            <ArrowLeft className="h-4 w-4" /> Kembali ke Blog
+            <ArrowLeft className="h-4 w-4" /> Back to Blog
           </Link>
         </div>
       </div>

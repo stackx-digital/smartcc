@@ -51,7 +51,7 @@ export function SettingsClient({ profile }: { profile: Profile | null }) {
 
       <Card>
         <CardHeader>
-          <CardTitle>Profil</CardTitle>
+          <CardTitle>Profile</CardTitle>
           <CardDescription>Your account information</CardDescription>
         </CardHeader>
         <CardContent>

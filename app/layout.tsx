@@ -8,12 +8,12 @@ const inter = Inter({ subsets: ['latin'] })
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smartcc.my'
 
 export const metadata: Metadata = {
-  title: 'smartcc — Optimizer Float Kad Kredit',
-  description: 'Tahu bila masa terbaik untuk guna kad kredit dan dapatkan sehingga 50 hari float percuma.',
+  title: 'smartcc — Credit Card Float Optimizer',
+  description: 'Know the best time to use your credit card and get up to 50 days of free float.',
   metadataBase: new URL(SITE_URL),
   openGraph: {
     siteName: 'smartcc',
-    locale: 'ms_MY',
+    locale: 'en_MY',
     type: 'website',
   },
   twitter: { card: 'summary_large_image' },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ms">
+    <html lang="en">
       <body className={inter.className}>
         <Toaster richColors position="top-right" />
         {children}
