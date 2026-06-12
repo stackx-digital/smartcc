@@ -44,22 +44,22 @@ export function getTrafficLight(statementDay: number): TrafficLight {
   if (daysBefore >= 1 && daysBefore <= 3) {
     return {
       status: 'red',
-      label: 'Tahan Dulu!',
-      description: `${daysBefore} hari sebelum statement — float < 25 hari`,
+      label: 'Hold Off!',
+      description: `${daysBefore} days before statement — float < 25 days`,
     }
   }
   if (daysAfter >= 1 && daysAfter <= 5) {
     return {
       status: 'green',
-      label: 'Masa Terbaik!',
-      description: `${daysAfter} hari selepas statement — float > 40 hari`,
+      label: 'Best Time!',
+      description: `${daysAfter} days after statement — float > 40 days`,
     }
   }
   if (floatDays >= 30) {
-    return { status: 'green', label: 'Masa Baik', description: `${floatDays} hari float tersedia` }
+    return { status: 'green', label: 'Good Time', description: `${floatDays} days float available` }
   }
   if (floatDays >= 25) {
-    return { status: 'yellow', label: 'Float Sederhana', description: `${floatDays} hari float` }
+    return { status: 'yellow', label: 'Moderate Float', description: `${floatDays} days float` }
   }
-  return { status: 'red', label: 'Float Rendah', description: `Hanya ${floatDays} hari float` }
+  return { status: 'red', label: 'Low Float', description: `Only ${floatDays} days float` }
 }

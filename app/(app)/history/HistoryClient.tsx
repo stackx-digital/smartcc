@@ -38,7 +38,7 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
   function handleExport() {
     if (plan === 'free') return
     const rows = [
-      ['Tarikh', 'Item', 'Jumlah (RM)', 'Kad', 'Float Days', 'Due Date'],
+      ['Date', 'Item', 'Amount (RM)', 'Card', 'Float Days', 'Due Date'],
       ...filtered.map(h => [
         h.purchase_date,
         h.item_name,
@@ -61,8 +61,8 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
     <div className="p-4 md:p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Sejarah Float</h1>
-          <p className="text-muted-foreground text-sm mt-1">{filtered.length} rekod</p>
+          <h1 className="text-2xl font-bold">Float History</h1>
+          <p className="text-muted-foreground text-sm mt-1">{filtered.length} record{filtered.length !== 1 ? 's' : ''}</p>
         </div>
         <Button
           variant="outline"
@@ -77,13 +77,13 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
 
       <div className="flex flex-wrap gap-4">
         <div className="w-full sm:w-auto min-w-[180px]">
-          <Label className="text-xs text-muted-foreground mb-1.5 block">Tapis Kad</Label>
+          <Label className="text-xs text-muted-foreground mb-1.5 block">Filter by Card</Label>
           <Select value={filterCard} onValueChange={setFilterCard}>
             <SelectTrigger>
-              <SelectValue placeholder="Semua Kad" />
+              <SelectValue placeholder="All Cards" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Semua Kad</SelectItem>
+              <SelectItem value="all">All Cards</SelectItem>
               {cards.map(c => (
                 <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>
               ))}
@@ -91,11 +91,11 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
           </Select>
         </div>
         <div>
-          <Label className="text-xs text-muted-foreground mb-1.5 block">Dari Tarikh</Label>
+          <Label className="text-xs text-muted-foreground mb-1.5 block">From Date</Label>
           <Input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="w-auto" />
         </div>
         <div>
-          <Label className="text-xs text-muted-foreground mb-1.5 block">Hingga Tarikh</Label>
+          <Label className="text-xs text-muted-foreground mb-1.5 block">To Date</Label>
           <Input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="w-auto" />
         </div>
       </div>
@@ -104,10 +104,10 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b bg-muted/50">
-              <th className="px-4 py-3 text-left font-medium text-muted-foreground">Tarikh</th>
+              <th className="px-4 py-3 text-left font-medium text-muted-foreground">Date</th>
               <th className="px-4 py-3 text-left font-medium text-muted-foreground">Item</th>
-              <th className="px-4 py-3 text-right font-medium text-muted-foreground">Jumlah</th>
-              <th className="px-4 py-3 text-left font-medium text-muted-foreground">Kad</th>
+              <th className="px-4 py-3 text-right font-medium text-muted-foreground">Amount</th>
+              <th className="px-4 py-3 text-left font-medium text-muted-foreground">Card</th>
               <th className="px-4 py-3 text-center font-medium text-muted-foreground">Float Days</th>
               <th className="px-4 py-3 text-left font-medium text-muted-foreground">Due Date</th>
             </tr>
@@ -116,7 +116,7 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
             {filtered.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-4 py-8 text-center text-muted-foreground">
-                  Tiada rekod dijumpai.
+                  No records found.
                 </td>
               </tr>
             ) : (
@@ -138,7 +138,7 @@ export function HistoryClient({ initialHistory, cards, plan }: HistoryClientProp
                   </td>
                   <td className="px-4 py-3 text-center">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getFloatClass(h.float_days)}`}>
-                      {h.float_days} hari
+                      {h.float_days} days
                     </span>
                   </td>
                   <td className="px-4 py-3">{format(new Date(h.due_date), 'dd MMM yyyy')}</td>

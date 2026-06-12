@@ -9,7 +9,7 @@ const navItems = [
   { href: '/planner', label: 'Planner', icon: Calculator },
   { href: '/cards', label: 'Cards', icon: CreditCard },
   { href: '/history', label: 'History', icon: History },
-  { href: '/tutorial', label: 'Panduan', icon: BookOpen },
+  { href: '/tutorial', label: 'Guide', icon: BookOpen },
 ]
 
 export function BottomNav() {

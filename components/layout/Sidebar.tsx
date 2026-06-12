@@ -15,7 +15,7 @@ const navItems = [
   { href: '/planner', label: 'Purchase Planner', icon: Calculator },
   { href: '/cards', label: 'My Cards', icon: CreditCard },
   { href: '/history', label: 'History', icon: History },
-  { href: '/tutorial', label: 'Panduan', icon: BookOpen },
+  { href: '/tutorial', label: 'Guide', icon: BookOpen },
 ]
 
 const ADMIN_EMAIL = 'stackxdigital@gmail.com'
@@ -119,7 +119,7 @@ export function Sidebar() {
             {initials}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-white truncate">{userName || 'Pengguna'}</p>
+            <p className="text-xs font-semibold text-white truncate">{userName || 'User'}</p>
             <p className="text-xs text-slate-500 truncate">{userEmail}</p>
           </div>
         </div>
@@ -130,7 +130,7 @@ export function Sidebar() {
           <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-white/5">
             <LogOut className="h-3.5 w-3.5" />
           </span>
-          Log Keluar
+          Sign Out
         </button>
       </div>
     </aside>

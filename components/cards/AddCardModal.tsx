@@ -73,7 +73,7 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success(editCard ? 'Kad dikemaskini!' : 'Kad berjaya ditambah!')
+      toast.success(editCard ? 'Card updated!' : 'Card added successfully!')
       onSuccess()
       onClose()
     }
@@ -84,22 +84,22 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{editCard ? 'Edit Kad' : 'Tambah Kad Baru'}</DialogTitle>
+          <DialogTitle>{editCard ? 'Edit Card' : 'Add New Card'}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label>Nama Kad</Label>
-              <Input placeholder="Contoh: Al-Taslif" value={form.name} onChange={e => update('name', e.target.value)} required />
+              <Label>Card Name</Label>
+              <Input placeholder="e.g. Maybank Visa Gold" value={form.name} onChange={e => update('name', e.target.value)} required />
             </div>
             <div className="space-y-1.5">
               <Label>Bank</Label>
-              <Input placeholder="Contoh: Maybank" value={form.bank} onChange={e => update('bank', e.target.value)} />
+              <Input placeholder="e.g. Maybank" value={form.bank} onChange={e => update('bank', e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label>Jenis Kad</Label>
+              <Label>Card Type</Label>
               <Select value={form.card_type} onValueChange={v => update('card_type', v)}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -110,35 +110,35 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
               </Select>
             </div>
             <div className="space-y-1.5">
-              <Label>4 Digit Terakhir</Label>
+              <Label>Last 4 Digits</Label>
               <Input placeholder="1234" maxLength={4} value={form.last_four} onChange={e => update('last_four', e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <Label>Had Kredit (RM)</Label>
+              <Label>Credit Limit (RM)</Label>
               <Input type="number" placeholder="10000" value={form.credit_limit} onChange={e => update('credit_limit', e.target.value)} required />
             </div>
             <div className="space-y-1.5">
-              <Label>Baki Semasa (RM)</Label>
+              <Label>Current Balance (RM)</Label>
               <Input type="number" placeholder="0" value={form.current_balance} onChange={e => update('current_balance', e.target.value)} />
             </div>
           </div>
           <div className="space-y-1.5">
-            <Label>Hari Statement (1–28)</Label>
+            <Label>Statement Day (1–28)</Label>
             <Input type="number" min={1} max={28} placeholder="8" value={form.statement_day} onChange={e => update('statement_day', e.target.value)} required />
           </div>
           <div className="space-y-1.5">
-            <Label>Kumpulan Limit Dikongsi <span className="text-muted-foreground font-normal">(pilihan)</span></Label>
+            <Label>Shared Credit Limit Group <span className="text-muted-foreground font-normal">(optional)</span></Label>
             <Input
-              placeholder="Contoh: Maybank"
+              placeholder="e.g. Maybank"
               value={form.shared_limit_group}
               onChange={e => update('shared_limit_group', e.target.value)}
             />
-            <p className="text-xs text-muted-foreground">Isi jika kad ini berkongsi limit kredit dengan kad lain dari bank yang sama.</p>
+            <p className="text-xs text-muted-foreground">Fill in if this card shares a credit limit with another card from the same bank.</p>
           </div>
           <div className="space-y-2">
-            <Label>Warna Kad</Label>
+            <Label>Card Color</Label>
             <div className="grid grid-cols-9 gap-2">
               {PRESET_COLORS.map(color => (
                 <button
@@ -152,10 +152,10 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
             </div>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>Batal</Button>
+            <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
             <Button type="submit" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {editCard ? 'Kemaskini' : 'Tambah'}
+              {editCard ? 'Update' : 'Add'}
             </Button>
           </DialogFooter>
         </form>

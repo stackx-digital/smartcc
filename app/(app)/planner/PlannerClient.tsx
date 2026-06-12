@@ -40,7 +40,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (cards.length === 0) {
-      toast.error('Tiada kad aktif. Sila tambah kad dahulu.')
+      toast.error('No active cards. Please add a card first.')
       return
     }
     setLoading(true)
@@ -59,7 +59,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const inserts = cardResults.map((r, i) => ({
       user_id: userId,
       card_id: r.card.id,
-      item_name: itemName || 'Tanpa nama',
+      item_name: itemName || 'Unnamed',
       purchase_date: purchaseDate,
       amount: parseFloat(amount) || 0,
       float_days: r.floatDays,
@@ -69,7 +69,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     }))
 
     const { error: insertError } = await supabase.from('float_calculations').insert(inserts)
-    if (insertError) toast.error('Gagal simpan kiraan: ' + insertError.message)
+    if (insertError) toast.error('Failed to save calculation: ' + insertError.message)
 
     const { data: newHistory } = await supabase
       .from('float_calculations')
@@ -79,7 +79,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       .limit(10)
 
     setHistory(newHistory || [])
-    toast.success(`Gunakan ${best.card.name} untuk float terbaik!`)
+    toast.success(`Use ${best.card.name} for the best float!`)
     setLoading(false)
   }
 
@@ -94,10 +94,10 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const supabase = createClient()
     const { error } = await supabase.from('float_calculations').delete().eq('id', id)
     if (error) {
-      toast.error('Gagal padam: ' + error.message)
+      toast.error('Failed to delete: ' + error.message)
     } else {
       setHistory(prev => prev.filter(h => h.id !== id))
-      toast.success('Rekod dipadam.')
+      toast.success('Record deleted.')
     }
     setDeletingId(null)
   }
@@ -112,13 +112,13 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const supabase = createClient()
     const { error } = await supabase
       .from('float_calculations')
-      .update({ item_name: editItemName || 'Tanpa nama', amount: parseFloat(editAmount) || 0 })
+      .update({ item_name: editItemName || 'Unnamed', amount: parseFloat(editAmount) || 0 })
       .eq('id', id)
     if (error) {
-      toast.error('Gagal kemaskini: ' + error.message)
+      toast.error('Failed to update: ' + error.message)
     } else {
-      setHistory(prev => prev.map(h => h.id === id ? { ...h, item_name: editItemName || 'Tanpa nama', amount: parseFloat(editAmount) || 0 } : h))
-      toast.success('Rekod dikemaskini.')
+      setHistory(prev => prev.map(h => h.id === id ? { ...h, item_name: editItemName || 'Unnamed', amount: parseFloat(editAmount) || 0 } : h))
+      toast.success('Record updated.')
       setEditingId(null)
     }
   }
@@ -133,18 +133,18 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     <div className="p-4 md:p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Smart Purchase Planner</h1>
-        <p className="text-muted-foreground text-sm mt-1">Cari kad terbaik untuk pembelian anda</p>
+        <p className="text-muted-foreground text-sm mt-1">Find the best card for your purchase</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Masukkan Maklumat Pembelian</CardTitle>
+          <CardTitle className="text-base">Enter Purchase Details</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="purchaseDate">Tarikh Pembelian</Label>
+                <Label htmlFor="purchaseDate">Purchase Date</Label>
                 <Input
                   id="purchaseDate"
                   type="date"
@@ -154,16 +154,16 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="itemName">Nama Item</Label>
+                <Label htmlFor="itemName">Item Name</Label>
                 <Input
                   id="itemName"
-                  placeholder="Contoh: Laptop, Telefon..."
+                  placeholder="e.g. Laptop, Phone..."
                   value={itemName}
                   onChange={e => setItemName(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="amount">Jumlah (RM)</Label>
+                <Label htmlFor="amount">Amount (RM)</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -177,7 +177,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
             </div>
             <Button type="submit" disabled={loading || cards.length === 0}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Kira Float
+              Calculate Float
             </Button>
           </form>
         </CardContent>
@@ -188,13 +188,13 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
           <div className="rounded-lg p-4 bg-[#EAF3DE] border border-[#3B6D11]/20">
             <div className="flex items-center gap-2 mb-2">
               <Trophy className="h-5 w-5 text-[#3B6D11]" />
-              <span className="font-bold text-[#3B6D11] text-lg">Cadangan Terbaik!</span>
+              <span className="font-bold text-[#3B6D11] text-lg">Best Recommendation!</span>
             </div>
             <p className="text-[#3B6D11] font-medium">
-              Gunakan <strong>{results[0].card.name}</strong>! Dapat{' '}
-              <strong>{results[0].floatDays} hari float</strong>
+              Use <strong>{results[0].card.name}</strong>! Get{' '}
+              <strong>{results[0].floatDays} days float</strong>
               {results.length > 1 && (
-                <span className="font-normal"> ({results[0].floatDays - results[results.length - 1].floatDays} hari lebih berbanding {results[results.length - 1].card.name})</span>
+                <span className="font-normal"> ({results[0].floatDays - results[results.length - 1].floatDays} days more than {results[results.length - 1].card.name})</span>
               )}
             </p>
             <p className="text-sm text-[#3B6D11]/80 mt-1">
@@ -204,7 +204,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Perbandingan Float Semua Kad</CardTitle>
+              <CardTitle className="text-base">Float Comparison — All Cards</CardTitle>
             </CardHeader>
             <CardContent>
               <FloatBarChart data={chartData} />
@@ -219,7 +219,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                     <div className="flex items-center gap-3 text-sm text-muted-foreground">
                       <span>{format(r.dueDate, 'dd MMM')}</span>
                       <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getFloatBadgeColor(r.floatDays)}`}>
-                        {r.floatDays} hari
+                        {r.floatDays} days
                       </span>
                     </div>
                   </div>
@@ -233,7 +233,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       {history.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Kiraan Terbaru</CardTitle>
+            <CardTitle className="text-base">Recent Calculations</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -244,7 +244,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                       <Input
                         value={editItemName}
                         onChange={e => setEditItemName(e.target.value)}
-                        placeholder="Nama item"
+                        placeholder="Item name"
                         className="h-7 text-xs flex-1"
                       />
                       <Input
@@ -268,7 +268,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                       <div className="flex-1 min-w-0">
                         <span className="font-medium">{h.item_name}</span>
                         {h.was_recommended && (
-                          <span className="ml-2 text-xs text-yellow-600">⭐ Disyorkan</span>
+                          <span className="ml-2 text-xs text-yellow-600">⭐ Recommended</span>
                         )}
                         <p className="text-xs text-muted-foreground">
                           {format(new Date(h.purchase_date), 'dd MMM yyyy')} •{' '}
@@ -278,7 +278,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                       <div className="flex items-center gap-2 ml-2">
                         <div className="text-right">
                           <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getFloatBadgeColor(h.float_days)}`}>
-                            {h.float_days} hari
+                            {h.float_days} days
                           </span>
                           {h.amount > 0 && (
                             <p className="text-xs text-muted-foreground mt-0.5">RM{h.amount.toLocaleString()}</p>
@@ -295,7 +295,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                           onClick={() => handleDelete(h.id)}
                           disabled={deletingId === h.id}
                           className="text-slate-400 hover:text-red-500 transition-colors disabled:opacity-50"
-                          title="Padam"
+                          title="Delete"
                         >
                           {deletingId === h.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
                         </button>
