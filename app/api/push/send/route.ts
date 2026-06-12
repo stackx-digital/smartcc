@@ -3,18 +3,18 @@ import webpush from 'web-push'
 import { createClient } from '@/lib/supabase-server'
 import { calculateFloat } from '@/lib/float'
 
-webpush.setVapidDetails(
-  process.env.VAPID_SUBJECT!,
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
-)
-
 export async function POST(req: NextRequest) {
   const cronSecret = process.env.CRON_SECRET
-  // FIXED: guard against undefined CRON_SECRET making endpoint publicly accessible
   if (!cronSecret || req.headers.get('authorization') !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
+
+  // FIXED: set VAPID details inside handler — env vars not available at module evaluation during build
+  webpush.setVapidDetails(
+    process.env.VAPID_SUBJECT!,
+    process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
+    process.env.VAPID_PRIVATE_KEY!
+  )
 
   const supabase = await createClient()
 
@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
   let sent = 0
 
   for (const card of cards) {
-    // FIXED: use calculateFloat() — same logic as the rest of the app — instead of broken inline calc
     const { dueDate } = calculateFloat(today, card.statement_day, card.due_day_offset)
     const daysUntil = Math.ceil((dueDate.getTime() - today.getTime()) / 86400000)
 
@@ -54,7 +53,6 @@ export async function POST(req: NextRequest) {
         )
         sent++
       } catch {
-        // Subscription expired — remove it
         await supabase.from('push_subscriptions').delete().eq('endpoint', sub.endpoint)
       }
     }
