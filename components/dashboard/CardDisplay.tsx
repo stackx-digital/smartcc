@@ -92,18 +92,42 @@ export function CardDisplay({ card }: CardDisplayProps) {
         <div>
           <div className="flex justify-between items-center mb-1.5">
             <span className="text-xs text-slate-400 font-medium">Penggunaan Kredit</span>
-            <span className="text-xs font-bold" style={{ color: utilColor }}>{utilPct}%</span>
+            <div className="flex items-center gap-1.5">
+              <span
+                className={cn('text-[10px] font-semibold px-1.5 py-0.5 rounded-full',
+                  utilPct <= 30 ? 'bg-green-100 text-green-700' :
+                  utilPct <= 70 ? 'bg-amber-100 text-amber-700' :
+                  'bg-red-100 text-red-700'
+                )}
+              >
+                {utilPct <= 30 ? '✓ Selamat' : utilPct <= 70 ? '⚠ Sederhana' : '✕ Tinggi'}
+              </span>
+              <span className="text-xs font-bold" style={{ color: utilColor }}>{utilPct}%</span>
+            </div>
           </div>
-          <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+          {/* Progress bar with 30% marker */}
+          <div className="relative w-full h-2 rounded-full bg-slate-100 overflow-visible">
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{ width: `${Math.min(utilPct, 100)}%`, background: utilColor }}
             />
+            {/* 30% target marker */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 w-0.5 h-3.5 rounded-full bg-blue-400"
+              style={{ left: '30%' }}
+              title="Had 30% untuk skor kredit baik"
+            />
           </div>
           <div className="flex justify-between text-[11px] text-slate-400 mt-1">
             <span>RM{balance.toLocaleString()}</span>
+            <span className="text-blue-400 font-medium">30% = RM{Math.round(card.credit_limit * 0.3).toLocaleString()}</span>
             <span>RM{card.credit_limit.toLocaleString()}</span>
           </div>
+          {utilPct > 30 && (
+            <p className="text-[10px] text-slate-400 mt-1.5 leading-relaxed">
+              💡 Kurangkan baki ke <span className="text-blue-500 font-semibold">RM{Math.round(card.credit_limit * 0.3).toLocaleString()}</span> untuk skor kredit yang lebih baik.
+            </p>
+          )}
         </div>
 
         {/* Mark paid button */}
