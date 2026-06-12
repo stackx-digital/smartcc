@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Calculator, CreditCard, History, Settings } from 'lucide-react'
+import { LayoutDashboard, Calculator, CreditCard, History, BookOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
@@ -9,7 +9,7 @@ const navItems = [
   { href: '/planner', label: 'Planner', icon: Calculator },
   { href: '/cards', label: 'Cards', icon: CreditCard },
   { href: '/history', label: 'History', icon: History },
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/tutorial', label: 'Panduan', icon: BookOpen },
 ]
 
 export function BottomNav() {
