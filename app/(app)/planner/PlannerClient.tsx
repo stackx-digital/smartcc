@@ -46,17 +46,21 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     setLoading(true)
 
     const date = new Date(purchaseDate + 'T00:00:00')
-    const cardResults: CardResult[] = cards.map(card => {
-      const result = calculateFloat(date, card.statement_day, card.due_day_offset)
-      return { card, ...result }
-    })
-    cardResults.sort((a, b) => b.floatDays - a.floatDays)
+    const cardResults: CardResult[] = cards
+      .map(card => ({ card, ...calculateFloat(date, card.statement_day, card.due_day_offset) }))
+      .sort((a, b) => b.floatDays - a.floatDays)
     setResults(cardResults)
 
-    const best = cardResults[0]
-    const supabase = createClient()
+    await saveCalculations(cardResults)
+    await refreshHistory()
 
-    const inserts = cardResults.map((r, i) => ({
+    toast.success(`Use ${cardResults[0].card.name} for the best float!`)
+    setLoading(false)
+  }
+
+  async function saveCalculations(cardResults: CardResult[]) {
+    const supabase = createClient()
+    const rows = cardResults.map((r, i) => ({
       user_id: userId,
       card_id: r.card.id,
       item_name: itemName || 'Unnamed',
@@ -67,20 +71,18 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       due_date: format(r.dueDate, 'yyyy-MM-dd'),
       was_recommended: i === 0,
     }))
+    const { error } = await createClient().from('float_calculations').insert(rows)
+    if (error) toast.error('Failed to save calculation: ' + error.message)
+  }
 
-    const { error: insertError } = await supabase.from('float_calculations').insert(inserts)
-    if (insertError) toast.error('Failed to save calculation: ' + insertError.message)
-
-    const { data: newHistory } = await supabase
+  async function refreshHistory() {
+    const { data } = await createClient()
       .from('float_calculations')
       .select('*, credit_cards(name, color)')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
       .limit(10)
-
-    setHistory(newHistory || [])
-    toast.success(`Use ${best.card.name} for the best float!`)
-    setLoading(false)
+    setHistory(data || [])
   }
 
   const chartData = results.map(r => ({

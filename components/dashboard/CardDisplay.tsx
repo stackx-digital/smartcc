@@ -25,29 +25,21 @@ const REMINDER_OPTIONS = [
   { label: '7 days', value: 7 },
 ]
 
-export function CardDisplay({ card }: CardDisplayProps) {
-  const [balance, setBalance] = useState(card.current_balance)
-  const [paying, setPaying] = useState(false)
-  const [reminderDays, setReminderDays] = useState<number | null>(card.reminder_days_before ?? null)
-  const [showReminderPicker, setShowReminderPicker] = useState(false)
+interface ReminderPickerProps {
+  cardId: string
+  reminderDays: number | null
+  onUpdate: (days: number | null) => void
+}
 
-  const utilPct = card.credit_limit > 0 ? Math.round((balance / card.credit_limit) * 100) : 0
-  const isUrgent = card.daysUntilDue <= 5
-  const utilColor = utilPct > 70 ? '#ef4444' : utilPct > 30 ? '#f59e0b' : '#22c55e'
-  const isPaid = balance === 0
+function ReminderPicker({ cardId, reminderDays, onUpdate }: ReminderPickerProps) {
+  const [open, setOpen] = useState(false)
 
-  async function handleSetReminder(days: number | null) {
-    const supabase = createClient()
-    const { error } = await supabase
+  async function handleSelect(days: number | null) {
+    const { error } = await createClient()
       .from('credit_cards')
       .update({ reminder_days_before: days })
-      .eq('id', card.id)
-    if (error) {
-      toast.error('Failed to set reminder: ' + error.message)
-      return
-    }
-    setReminderDays(days)
-    setShowReminderPicker(false)
+      .eq('id', cardId)
+    if (error) { toast.error('Failed to set reminder: ' + error.message); return }
     if (days === null) {
       toast.success('Reminder turned off.')
     } else {
@@ -56,7 +48,61 @@ export function CardDisplay({ card }: CardDisplayProps) {
       }
       toast.success(`Reminder set ${days} days before due date.`)
     }
+    onUpdate(days)
+    setOpen(false)
   }
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => setOpen(p => !p)}
+        className={cn(
+          'w-full flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-semibold transition-all border',
+          reminderDays
+            ? 'bg-blue-50 text-blue-600 border-blue-200'
+            : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200'
+        )}
+      >
+        {reminderDays ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />}
+        {reminderDays ? `Reminder: ${reminderDays} days before due` : 'Set Due Date Reminder'}
+      </button>
+      {open && (
+        <div className="absolute bottom-full mb-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg p-2 z-10 flex flex-col gap-1">
+          {REMINDER_OPTIONS.map(opt => (
+            <button
+              key={opt.value}
+              onClick={() => handleSelect(opt.value)}
+              className={cn(
+                'w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
+                reminderDays === opt.value ? 'bg-blue-100 text-blue-700' : 'hover:bg-slate-50 text-slate-700'
+              )}
+            >
+              🔔 {opt.label} before due date
+            </button>
+          ))}
+          {reminderDays && (
+            <button
+              onClick={() => handleSelect(null)}
+              className="w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors"
+            >
+              🔕 Turn off reminder
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export function CardDisplay({ card }: CardDisplayProps) {
+  const [balance, setBalance] = useState(card.current_balance)
+  const [paying, setPaying] = useState(false)
+  const [reminderDays, setReminderDays] = useState<number | null>(card.reminder_days_before ?? null)
+
+  const utilPct = card.credit_limit > 0 ? Math.round((balance / card.credit_limit) * 100) : 0
+  const isUrgent = card.daysUntilDue <= 5
+  const utilColor = utilPct > 70 ? '#ef4444' : utilPct > 30 ? '#f59e0b' : '#22c55e'
+  const isPaid = balance === 0
 
   async function handleMarkPaid() {
     if (isPaid) return
@@ -180,47 +226,11 @@ export function CardDisplay({ card }: CardDisplayProps) {
           {isPaid ? 'Bill Paid' : 'Mark as Paid'}
         </button>
 
-        {/* Reminder */}
-        <div className="relative">
-          <button
-            onClick={() => setShowReminderPicker(p => !p)}
-            className={cn(
-              'w-full flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-semibold transition-all border',
-              reminderDays
-                ? 'bg-blue-50 text-blue-600 border-blue-200'
-                : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200'
-            )}
-          >
-            {reminderDays ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />}
-            {reminderDays ? `Reminder: ${reminderDays} days before due` : 'Set Due Date Reminder'}
-          </button>
-          {showReminderPicker && (
-            <div className="absolute bottom-full mb-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg p-2 z-10 flex flex-col gap-1">
-              {REMINDER_OPTIONS.map(opt => (
-                <button
-                  key={opt.value}
-                  onClick={() => handleSetReminder(opt.value)}
-                  className={cn(
-                    'w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
-                    reminderDays === opt.value
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'hover:bg-slate-50 text-slate-700'
-                  )}
-                >
-                  🔔 {opt.label} before due date
-                </button>
-              ))}
-              {reminderDays && (
-                <button
-                  onClick={() => handleSetReminder(null)}
-                  className="w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium text-red-500 hover:bg-red-50 transition-colors"
-                >
-                  🔕 Turn off reminder
-                </button>
-              )}
-            </div>
-          )}
-        </div>
+        <ReminderPicker
+          cardId={card.id}
+          reminderDays={reminderDays}
+          onUpdate={setReminderDays}
+        />
 
         {/* Stats row */}
         <div className="grid grid-cols-2 gap-3">
