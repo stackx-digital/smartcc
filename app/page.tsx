@@ -208,40 +208,40 @@ export default function LandingPage() {
 
           <div className="space-y-6">
             <div className="glass-card rounded-2xl p-7 shadow-lg border border-blue-50">
-              <h3 className="font-bold text-lg mb-3 text-gray-900">Bayangkan ini:</h3>
+              <h3 className="font-bold text-lg mb-3 text-gray-900">Imagine this:</h3>
               <p className="text-gray-600 leading-relaxed">
-                Anda beli sesuatu hari ini dengan kad kredit. Tapi anda <em>sebenarnya</em> tak perlu bayar balik
-                selama <strong className="text-blue-700">50 hari</strong> — tanpa faedah sesen pun.
-                Selama 50 hari tu, wang anda masih ada dalam akaun anda. Menjana faedah. Boleh digunakan untuk keperluan lain.
+                You buy something today on your credit card. But you <em>actually</em> don&apos;t need to pay it back
+                for <strong className="text-blue-700">50 days</strong> — interest-free.
+                For those 50 days, your money stays in your account. Earning interest. Available for other needs.
               </p>
             </div>
 
             <div className="glass-card rounded-2xl p-7 shadow-lg border border-emerald-50">
-              <h3 className="font-bold text-lg mb-3 text-gray-900">Tapi hanya jika anda tahu <em>bila</em> nak beli:</h3>
+              <h3 className="font-bold text-lg mb-3 text-gray-900">But only if you know <em>when</em> to buy:</h3>
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div className="rounded-xl bg-red-50 border border-red-100 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <X className="h-4 w-4 text-red-500" />
-                    <span className="font-semibold text-red-700 text-sm">Beli masa salah</span>
+                    <span className="font-semibold text-red-700 text-sm">Wrong timing</span>
                   </div>
-                  <p className="text-red-600 text-sm">3 hari sebelum statement → hanya <strong>22 hari</strong> float</p>
+                  <p className="text-red-600 text-sm">3 days before statement → only <strong>22 days</strong> float</p>
                 </div>
                 <div className="rounded-xl bg-emerald-50 border border-emerald-100 p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                    <span className="font-semibold text-emerald-700 text-sm">Beli masa betul</span>
+                    <span className="font-semibold text-emerald-700 text-sm">Right timing</span>
                   </div>
-                  <p className="text-emerald-600 text-sm">Sehari selepas statement → sehingga <strong>50 hari</strong> float</p>
+                  <p className="text-emerald-600 text-sm">One day after statement → up to <strong>50 days</strong> float</p>
                 </div>
               </div>
             </div>
 
             <div className="rounded-2xl bg-blue-600 p-7 text-white shadow-xl shadow-blue-200/60">
-              <p className="text-lg font-semibold mb-2">Perbezaan = 28 hari.</p>
+              <p className="text-lg font-semibold mb-2">The difference = 28 days.</p>
               <p className="text-blue-200 leading-relaxed">
-                Untuk pembelian RM10,000 — itu bermakna RM10,000 ada dalam akaun simpanan anda
-                selama <strong className="text-white">28 hari lebih</strong>. Dengan kadar faedah 3.5% setahun,
-                itu lebih RM26 anda dapat percuma. Setiap pembelian besar.
+                For a RM10,000 purchase — that means RM10,000 stays in your savings account
+                for <strong className="text-white">28 extra days</strong>. At 3.5% annual interest,
+                that&apos;s over RM26 you get for free. On every big purchase.
               </p>
             </div>
           </div>
@@ -253,11 +253,11 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-dot-pattern opacity-30" />
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Strategi Pro</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Strategi 3 Kad — Perisai Kewangan Anda</h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Pro Strategy</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">The 3-Card Strategy — Your Financial Shield</h2>
             <p className="text-gray-500 max-w-xl mx-auto">
-              Orang yang bijak guna kad kredit tidak bergantung pada satu kad sahaja.
-              Mereka ada sistem — dan sistem itu ada tiga peringkat.
+              Smart credit card users don&apos;t rely on just one card.
+              They have a system — and that system has three layers.
             </p>
           </div>
 
@@ -267,28 +267,28 @@ export default function LandingPage() {
                 num: '1',
                 color: 'from-blue-500 to-blue-600',
                 badge: 'bg-blue-100 text-blue-700',
-                title: 'Kad Harian (Rewards)',
-                role: 'Penjana Ganjaran',
-                desc: 'Kad untuk kegunaan harian — makan, minyak, groceries. Pilih kad yang bagi cashback atau points terbaik. Guna konsisten, bayar PENUH setiap penyata.',
-                tip: 'Tip: Capai threshold cashback setiap bulan. Jangan bayar tiap transaksi!',
+                title: 'Daily Card (Rewards)',
+                role: 'Rewards Generator',
+                desc: 'Your everyday card — dining, fuel, groceries. Pick the one with the best cashback or points. Use it consistently, pay the FULL balance each statement.',
+                tip: 'Tip: Hit the cashback threshold every month. Don\'t pay after every transaction!',
               },
               {
                 num: '2',
                 color: 'from-amber-500 to-orange-500',
                 badge: 'bg-amber-100 text-amber-700',
-                title: 'Kad Balance Transfer',
-                role: 'Pelan Backup',
-                desc: 'Kad dengan kemudahan balance transfer pada kadar faedah rendah (0–5%). Guna hanya dalam kecemasan. Ini "jaring keselamatan" kewangan anda.',
-                tip: 'Tip: Jangan guna untuk pembelian biasa. Simpan untuk keadaan terdesak.',
+                title: 'Balance Transfer Card',
+                role: 'Backup Plan',
+                desc: 'A card with balance transfer facility at low interest (0–5%). Use only in emergencies. This is your financial safety net.',
+                tip: 'Tip: Don\'t use for everyday purchases. Save it for urgent situations.',
               },
               {
                 num: '3',
                 color: 'from-emerald-500 to-teal-600',
                 badge: 'bg-emerald-100 text-emerald-700',
-                title: 'Kad 0% EPP / FPP',
-                role: 'Pembelian Besar',
-                desc: 'Untuk pembelian besar seperti elektronik, perabot, perjalanan. Bahagi kepada 12–24 bulan tanpa faedah. Wang anda kekal lebih lama.',
-                tip: 'Tip: Selalu semak minimum pembelian dan terma sebelum apply.',
+                title: '0% EPP / FPP Card',
+                role: 'Big Purchases',
+                desc: 'For large purchases like electronics, furniture, travel. Split into 12–24 months interest-free. Your money stays in your hands longer.',
+                tip: 'Tip: Always check minimum purchase requirements and terms before applying.',
               },
             ].map((card, i) => (
               <div key={i} className="glass-card rounded-2xl p-6 shadow-lg border border-gray-100 hover:-translate-y-1 transition-transform duration-200">
@@ -307,7 +307,7 @@ export default function LandingPage() {
 
           <div className="mt-10 text-center">
             <p className="text-gray-500 text-sm">
-              smartcc membantu anda urus semua 3 kad ini dalam satu dashboard — dan tahu <em>kad mana</em> nak guna <em>hari ini.</em>
+              smartcc helps you manage all 3 cards in one dashboard — and know <em>which card</em> to use <em>today.</em>
             </p>
           </div>
         </div>
@@ -318,19 +318,19 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-dot-pattern opacity-10" />
         <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">Penyelesaian</span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">The Solution</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              smartcc buat semua pengiraan ini untuk anda
+              smartcc does all the math for you
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto">Dalam masa 2 minit, anda tahu tepat — kad mana, hari bila.</p>
+            <p className="text-slate-400 max-w-xl mx-auto">In 2 minutes, you know exactly — which card, which day.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             <div className="hidden md:block absolute top-8 left-[calc(33%+2rem)] right-[calc(33%+2rem)] h-px bg-gradient-to-r from-blue-500/50 to-indigo-500/50" />
             {[
-              { step: '01', title: 'Daftar & Tambah Kad', desc: 'Masukkan maklumat asas kad kredit anda — had kredit, baki, dan hari statement. Tiada nombor kad penuh diperlukan.' },
-              { step: '02', title: 'Dashboard Sekilas Pandang', desc: 'Traffic light hijau/kuning/merah tunjukkan status setiap kad. Hijau = masa terbaik beli sekarang. Merah = tahan dulu.' },
-              { step: '03', title: 'Plan & Optimize', desc: 'Masukkan tarikh belanja yang dirancang. Sistem cari kad dengan float terpanjang dan cadangkan masa terbaik.' },
+              { step: '01', title: 'Sign Up & Add Cards', desc: 'Enter your basic credit card details — credit limit, balance, and statement day. No full card numbers required.' },
+              { step: '02', title: 'At-a-Glance Dashboard', desc: 'Green/yellow/red traffic lights show the status of each card. Green = best time to buy now. Red = hold off.' },
+              { step: '03', title: 'Plan & Optimize', desc: 'Enter your planned purchase date. The system finds the card with the longest float and recommends the best timing.' },
             ].map((item, i) => (
               <div key={i} className="relative z-10 text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white text-xl font-black mb-5 shadow-2xl shadow-blue-900/60 group-hover:scale-105 transition-transform">
@@ -350,19 +350,19 @@ export default function LandingPage() {
         <div className="mesh-blob-2 top-0 right-0 opacity-50" />
         <div className="relative max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Ciri-ciri</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Semua yang anda perlukan</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">Direka khas untuk pengguna kad kredit Malaysia</p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Features</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Everything you need</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">Built specifically for Malaysian credit card users</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: BarChart3, title: 'Float Calculator', desc: 'Kira tepat bilangan hari float untuk mana-mana tarikh pembelian dan kad kredit anda.', accent: 'from-blue-500 to-blue-600' },
-              { icon: Zap, title: 'Traffic Light System', desc: 'Status hijau/kuning/merah pada setiap kad — tahu sekilas pandang sama ada hari ini masa terbaik.', accent: 'from-amber-400 to-orange-500' },
-              { icon: Calculator, title: 'Smart Purchase Planner', desc: 'Bandingkan semua kad anda dan dapatkan cadangan kad terbaik untuk tarikh pembelian yang dipilih.', accent: 'from-indigo-500 to-violet-600' },
-              { icon: CreditCard, title: 'Pengurusan Pelbagai Kad', desc: 'Uruskan semua kad kredit dalam satu tempat. Pantau baki, had kredit, dan penggunaan setiap kad.', accent: 'from-pink-500 to-rose-500' },
-              { icon: TrendingUp, title: 'Sejarah Float', desc: 'Rekod semua kiraan float anda. Tapis mengikut kad atau tarikh dan eksport ke CSV (Pro).', accent: 'from-emerald-500 to-teal-600' },
-              { icon: Shield, title: 'Selamat & Peribadi', desc: 'Data anda disulitkan dan dilindungi oleh Supabase. Kami tidak simpan maklumat sensitif kad kredit.', accent: 'from-slate-600 to-slate-700' },
+              { icon: BarChart3, title: 'Float Calculator', desc: 'Calculate exactly how many float days you get for any purchase date and credit card.', accent: 'from-blue-500 to-blue-600' },
+              { icon: Zap, title: 'Traffic Light System', desc: 'Green/yellow/red status on every card — know at a glance whether today is the best time to buy.', accent: 'from-amber-400 to-orange-500' },
+              { icon: Calculator, title: 'Smart Purchase Planner', desc: 'Compare all your cards and get the best card recommendation for any chosen purchase date.', accent: 'from-indigo-500 to-violet-600' },
+              { icon: CreditCard, title: 'Multi-Card Management', desc: 'Manage all your credit cards in one place. Track balances, credit limits, and utilization for each card.', accent: 'from-pink-500 to-rose-500' },
+              { icon: TrendingUp, title: 'Float History', desc: 'Record all your float calculations. Filter by card or date and export to CSV (Pro).', accent: 'from-emerald-500 to-teal-600' },
+              { icon: Shield, title: 'Safe & Private', desc: 'Your data is encrypted and protected by Supabase. We never store sensitive credit card information.', accent: 'from-slate-600 to-slate-700' },
             ].map((f, i) => (
               <div key={i} className="glass-card rounded-2xl p-6 shadow-lg shadow-blue-50 hover:shadow-xl hover:shadow-blue-100 hover:-translate-y-1 transition-all duration-200 group">
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${f.accent} mb-4 shadow-md group-hover:scale-110 transition-transform`}>
@@ -377,13 +377,13 @@ export default function LandingPage() {
       </section>
 
       {/* ─── PRICING ─── */}
-      <section className="relative py-24 px-4 bg-white overflow-hidden" id="harga">
+      <section className="relative py-24 px-4 bg-white overflow-hidden" id="pricing">
         <div className="absolute inset-0 bg-dot-pattern opacity-25" />
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Harga</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Harga yang berpatutan</h2>
-            <p className="text-gray-500">Mula percuma. Naik taraf bila anda bersedia.</p>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Pricing</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Simple, affordable pricing</h2>
+            <p className="text-gray-500">Start free. Upgrade when you&apos;re ready.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -391,21 +391,21 @@ export default function LandingPage() {
             <div className="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm hover:shadow-md transition-shadow">
               <div className="mb-6">
                 <h3 className="text-xl font-bold mb-1">Free</h3>
-                <p className="text-gray-400 text-sm">Untuk bermula</p>
+                <p className="text-gray-400 text-sm">To get started</p>
                 <div className="mt-4 flex items-end gap-1">
                   <span className="text-4xl font-extrabold text-gray-900">RM0</span>
-                  <span className="text-gray-400 mb-1">/bulan</span>
+                  <span className="text-gray-400 mb-1">/month</span>
                 </div>
               </div>
               <ul className="space-y-3 mb-8">
-                {['Sehingga 2 kad kredit', 'Float calculator', 'Traffic light dashboard', 'Smart Purchase Planner', 'Sejarah 30 hari'].map(f => (
+                {['Up to 2 credit cards', 'Float calculator', 'Traffic light dashboard', 'Smart Purchase Planner', '30-day history'].map(f => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-gray-700">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
               <Link href="/auth/register" className="block text-center w-full py-3 rounded-xl border-2 border-gray-200 font-semibold text-gray-700 hover:border-blue-300 hover:text-blue-600 transition-all">
-                Mula Percuma
+                Start Free
               </Link>
             </div>
 
@@ -417,26 +417,26 @@ export default function LandingPage() {
 
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
                 <span className="bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                  ⭐ PALING POPULAR
+                  ⭐ MOST POPULAR
                 </span>
               </div>
               <div className="relative mb-6 pt-2">
                 <h3 className="text-xl font-bold mb-1">Pro</h3>
-                <p className="text-blue-200 text-sm">Untuk pengguna serius</p>
+                <p className="text-blue-200 text-sm">For serious users</p>
                 <div className="mt-4 flex items-end gap-1">
                   <span className="text-4xl font-extrabold">RM9</span>
-                  <span className="text-blue-200 mb-1">/bulan</span>
+                  <span className="text-blue-200 mb-1">/month</span>
                 </div>
               </div>
               <ul className="relative space-y-3 mb-8">
-                {['Semua ciri Free', 'Kad kredit tanpa had', 'Export sejarah ke CSV', 'Sejarah penuh (tiada had)', 'Analitik lanjutan', 'Priority support'].map(f => (
+                {['Everything in Free', 'Unlimited credit cards', 'Export history to CSV', 'Full history (no limit)', 'Advanced analytics', 'Priority support'].map(f => (
                   <li key={f} className="flex items-center gap-2.5 text-sm">
                     <CheckCircle2 className="h-4 w-4 text-blue-200 flex-shrink-0" /> {f}
                   </li>
                 ))}
               </ul>
               <Link href="/auth/register" className="relative block text-center w-full py-3 rounded-xl bg-white font-bold text-blue-600 hover:bg-blue-50 transition-colors shadow-lg">
-                Cuba Pro Percuma 14 Hari
+                Try Pro Free for 14 Days
               </Link>
             </div>
           </div>
@@ -449,25 +449,25 @@ export default function LandingPage() {
         <div className="mesh-blob-3 top-1/4 right-1/4 opacity-30" />
         <div className="relative max-w-2xl mx-auto text-center">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">Formula</span>
-          <h2 className="text-3xl font-bold text-white mb-4">Formula Float yang Terbukti</h2>
-          <p className="text-slate-400 mb-10">Matematik mudah yang ramai tidak gunakan sepenuhnya</p>
+          <h2 className="text-3xl font-bold text-white mb-4">The Proven Float Formula</h2>
+          <p className="text-slate-400 mb-10">Simple math that most people never fully use</p>
 
           <div className="rounded-2xl p-8 text-left border border-slate-700 bg-slate-800 shadow-2xl">
             <div className="text-center mb-6">
               <span className="text-5xl">🧮</span>
-              <p className="text-2xl font-bold text-white mt-4">Float = Tarikh Due − Tarikh Beli</p>
+              <p className="text-2xl font-bold text-white mt-4">Float = Due Date − Purchase Date</p>
             </div>
             <div className="bg-slate-900 border border-slate-700 rounded-xl p-5 text-sm space-y-3">
-              <p className="text-blue-400 font-semibold text-base">Contoh: Kad statement hari ke-8, due +20 hari</p>
-              <p className="text-slate-200">• Beli pada <strong className="text-white font-bold">9 Januari</strong> <span className="text-slate-400">(sehari selepas statement)</span></p>
-              <p className="text-slate-200">• Statement seterusnya: <strong className="text-white font-bold">8 Februari</strong></p>
-              <p className="text-slate-200">• Tarikh due: <strong className="text-white font-bold">28 Februari</strong></p>
+              <p className="text-blue-400 font-semibold text-base">Example: Card statement on the 8th, due +20 days</p>
+              <p className="text-slate-200">• Buy on <strong className="text-white font-bold">January 9</strong> <span className="text-slate-400">(one day after statement)</span></p>
+              <p className="text-slate-200">• Next statement: <strong className="text-white font-bold">February 8</strong></p>
+              <p className="text-slate-200">• Due date: <strong className="text-white font-bold">February 28</strong></p>
               <div className="pt-2 border-t border-slate-700">
-                <p className="text-emerald-400 font-bold text-base">→ Float = <span className="text-emerald-300">50 hari!</span> Wang di tangan hampir 2 bulan.</p>
+                <p className="text-emerald-400 font-bold text-base">→ Float = <span className="text-emerald-300">50 days!</span> Money in hand for nearly 2 months.</p>
               </div>
             </div>
             <p className="text-sm text-slate-400 mt-5 text-center">
-              smartcc kira semua ini secara automatik untuk setiap kad anda.
+              smartcc calculates all of this automatically for every card you have.
             </p>
           </div>
         </div>
@@ -479,17 +479,17 @@ export default function LandingPage() {
         <div className="relative max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">FAQ</span>
-            <h2 className="text-3xl font-bold">Soalan Lazim</h2>
+            <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
           </div>
 
           <div className="space-y-3">
             {[
-              { q: 'Adakah selamat untuk masukkan maklumat kad kredit?', a: 'smartcc tidak simpan nombor penuh kad kredit anda. Kami hanya perlukan maklumat asas seperti had kredit, baki semasa, dan hari statement untuk kira float. Semua data dilindungi dengan penyulitan Supabase.' },
-              { q: 'Apa beza "statement balance" dan "outstanding balance"?', a: '"Statement balance" adalah amaun yang tertera dalam penyata bulanan anda — inilah yang anda perlu bayar untuk elak faedah. "Outstanding balance" adalah jumlah semasa termasuk transaksi yang belum masuk penyata. Ramai orang keliru antara dua ini dan membayar amaun yang salah.' },
-              { q: 'Apa itu "float" kad kredit?', a: 'Float adalah bilangan hari antara tarikh anda membeli sesuatu dan tarikh anda perlu bayar. Semakin panjang float, semakin lama wang anda ada dalam tangan atau dalam akaun simpanan yang menjana faedah.' },
-              { q: 'Boleh ke saya guna untuk semua jenis kad kredit?', a: 'Ya! smartcc berfungsi untuk semua kad kredit Malaysia — Visa, Mastercard, dan Amex dari mana-mana bank termasuk Maybank, CIMB, Affin, Al-Rajhi, dan lain-lain.' },
-              { q: 'Adakah pelan Free benar-benar percuma?', a: 'Ya, pelan Free adalah percuma selamanya. Anda boleh tambah sehingga 2 kad kredit dan guna semua ciri asas tanpa had masa. Naik taraf ke Pro hanya jika anda perlukan lebih banyak kad atau ciri lanjutan.' },
-              { q: 'Bagaimana cara bayar untuk Pro?', a: 'Fungsi pembayaran sedang dalam pembangunan. Buat masa ini anda boleh daftar dan guna semua ciri secara percuma. Kami akan maklumkan apabila ia sedia.' },
+              { q: 'Is it safe to enter my credit card details?', a: 'smartcc never stores your full credit card number. We only need basic information like credit limit, current balance, and statement day to calculate float. All data is protected with Supabase encryption.' },
+              { q: 'What\'s the difference between "statement balance" and "outstanding balance"?', a: '"Statement balance" is the amount shown on your monthly statement — this is what you need to pay to avoid interest. "Outstanding balance" is your current total including transactions not yet on the statement. Many people confuse the two and end up paying the wrong amount.' },
+              { q: 'What is credit card "float"?', a: 'Float is the number of days between when you make a purchase and when you need to pay for it. The longer the float, the longer your money stays in your hands — or in a savings account earning interest.' },
+              { q: 'Does this work with all types of credit cards?', a: 'Yes! smartcc works with all Malaysian credit cards — Visa, Mastercard, and Amex from any bank including Maybank, CIMB, Affin, Al-Rajhi, and more.' },
+              { q: 'Is the Free plan really free?', a: 'Yes, the Free plan is free forever. You can add up to 2 credit cards and use all core features with no time limit. Upgrade to Pro only if you need more cards or advanced features.' },
+              { q: 'How do I pay for Pro?', a: 'Payment functionality is currently in development. For now, you can register and use all features for free. We\'ll notify you when it\'s ready.' },
             ].map((item, i) => (
               <details key={i} className="group glass-card rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
                 <summary className="flex items-center justify-between px-6 py-4 cursor-pointer font-medium list-none text-gray-800">
@@ -515,26 +515,26 @@ export default function LandingPage() {
         <div className="relative max-w-3xl mx-auto text-center text-white">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-sm font-medium mb-8 backdrop-blur">
             <Star className="h-3.5 w-3.5 fill-current text-amber-300" />
-            Ahmad dah daftar. Giliran anda sekarang.
+            Ahmad already signed up. Now it&apos;s your turn.
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold mb-5 leading-tight">
-            Jangan biar tahun depan<br />cashback anda sifar lagi.
+            Don&apos;t let next year end<br />with zero cashback again.
           </h2>
           <p className="text-blue-200 text-lg mb-10 max-w-xl mx-auto">
-            Daftar dalam masa 2 minit. Percuma. Mula optimize float anda hari ini.
+            Sign up in 2 minutes. Free. Start optimizing your float today.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/auth/register"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-blue-600 font-bold text-base hover:bg-blue-50 transition-all shadow-2xl hover:-translate-y-0.5"
             >
-              Daftar Percuma Sekarang <ArrowRight className="h-4 w-4" />
+              Sign Up Free Now <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/auth/login"
               className="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-white/30 bg-white/10 text-white font-semibold text-base hover:bg-white/20 transition-all backdrop-blur"
             >
-              Log Masuk
+              Log In
             </Link>
           </div>
         </div>
@@ -544,11 +544,11 @@ export default function LandingPage() {
       <footer className="py-8 px-4 bg-slate-950 border-t border-white/5">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <Logo size="sm" className="[&_span]:text-white" />
-          <p>© 2026 smartcc. Hak cipta terpelihara.</p>
+          <p>© 2026 smartcc. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="/auth/login" className="hover:text-white transition-colors">Log Masuk</Link>
-            <Link href="/auth/register" className="hover:text-white transition-colors">Daftar</Link>
-            <Link href="#harga" className="hover:text-white transition-colors">Harga</Link>
+            <Link href="/auth/login" className="hover:text-white transition-colors">Log In</Link>
+            <Link href="/auth/register" className="hover:text-white transition-colors">Sign Up</Link>
+            <Link href="#pricing" className="hover:text-white transition-colors">Pricing</Link>
           </div>
         </div>
       </footer>

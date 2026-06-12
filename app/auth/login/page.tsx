@@ -25,7 +25,7 @@ export default function LoginPage() {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Login berjaya!')
+      toast.success('Login successful!')
       router.push('/dashboard')
       router.refresh()
     }
@@ -37,7 +37,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center items-center">
           <Logo size="md" className="mb-2" />
-          <CardDescription>Log masuk ke akaun anda</CardDescription>
+          <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
@@ -53,7 +53,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Kata Laluan</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -67,12 +67,12 @@ export default function LoginPage() {
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Log Masuk
+              Log In
             </Button>
             <p className="text-sm text-muted-foreground text-center">
-              Belum ada akaun?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/auth/register" className="text-primary hover:underline font-medium">
-                Daftar di sini
+                Sign up here
               </Link>
             </p>
           </CardFooter>

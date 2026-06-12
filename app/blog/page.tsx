@@ -9,21 +9,21 @@ export const revalidate = 60
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://smartcc.my'
 
 export const metadata: Metadata = {
-  title: 'Blog — Ilmu Kad Kredit | smartcc',
-  description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda. Dapatkan float maksimum dan cashback terbaik.',
+  title: 'Blog — Credit Card Knowledge | smartcc',
+  description: 'Tips, strategies, and guides to optimize your credit card usage. Get maximum float and the best cashback.',
   alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
     type: 'website',
-    title: 'Blog — Ilmu Kad Kredit | smartcc',
-    description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda.',
+    title: 'Blog — Credit Card Knowledge | smartcc',
+    description: 'Tips, strategies, and guides to optimize your credit card usage.',
     url: `${SITE_URL}/blog`,
     siteName: 'smartcc',
-    locale: 'ms_MY',
+    locale: 'en_MY',
   },
   twitter: {
     card: 'summary',
-    title: 'Blog — Ilmu Kad Kredit | smartcc',
-    description: 'Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda.',
+    title: 'Blog — Credit Card Knowledge | smartcc',
+    description: 'Tips, strategies, and guides to optimize your credit card usage.',
   },
 }
 

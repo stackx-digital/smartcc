@@ -30,7 +30,7 @@ export default function RegisterPage() {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Akaun berjaya dicipta! Sila semak email untuk pengesahan.')
+      toast.success('Account created! Please check your email for confirmation.')
       router.push('/dashboard')
       router.refresh()
     }
@@ -42,17 +42,17 @@ export default function RegisterPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center items-center">
           <Logo size="md" className="mb-2" />
-          <CardTitle className="text-2xl">Daftar Akaun</CardTitle>
-          <CardDescription>Mulakan perjalanan float optimum anda</CardDescription>
+          <CardTitle className="text-2xl">Create Account</CardTitle>
+          <CardDescription>Start your float optimization journey</CardDescription>
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Nama Penuh</Label>
+              <Label htmlFor="fullName">Full Name</Label>
               <Input
                 id="fullName"
                 type="text"
-                placeholder="Nama anda"
+                placeholder="Your name"
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
                 required
@@ -70,11 +70,11 @@ export default function RegisterPage() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Kata Laluan</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="Minimum 6 aksara"
+                placeholder="Minimum 6 characters"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 minLength={6}
@@ -85,12 +85,12 @@ export default function RegisterPage() {
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Daftar
+              Sign Up
             </Button>
             <p className="text-sm text-muted-foreground text-center">
-              Sudah ada akaun?{' '}
+              Already have an account?{' '}
               <Link href="/auth/login" className="text-primary hover:underline font-medium">
-                Log masuk di sini
+                Log in here
               </Link>
             </p>
           </CardFooter>

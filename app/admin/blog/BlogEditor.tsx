@@ -32,7 +32,7 @@ export default function BlogEditor({ post }: { post?: Post }) {
 
   async function save(publish?: boolean) {
     if (!title.trim() || !slug.trim() || !content.trim()) {
-      toast.error('Title, slug, dan content wajib diisi')
+      toast.error('Title, slug, and content are required')
       return
     }
     setSaving(true)
@@ -56,7 +56,7 @@ export default function BlogEditor({ post }: { post?: Post }) {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success(publish ? 'Diterbitkan!' : 'Disimpan sebagai draft')
+      toast.success(publish ? 'Published!' : 'Saved as draft')
       router.push('/admin/blog')
       router.refresh()
     }
@@ -71,8 +71,8 @@ export default function BlogEditor({ post }: { post?: Post }) {
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">{post ? 'Edit Artikel' : 'Artikel Baru'}</h1>
-            <p className="text-sm text-gray-400">{post ? `Edit: ${post.title}` : 'Tulis dan terbitkan artikel baru'}</p>
+            <h1 className="text-xl font-bold text-gray-900">{post ? 'Edit Article' : 'New Article'}</h1>
+            <p className="text-sm text-gray-400">{post ? `Edit: ${post.title}` : 'Write and publish a new article'}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -83,14 +83,14 @@ export default function BlogEditor({ post }: { post?: Post }) {
             <Save className="h-4 w-4" /> Draft
           </button>
           <button onClick={() => save(true)} disabled={saving} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50">
-            <Send className="h-4 w-4" /> Terbitkan
+            <Send className="h-4 w-4" /> Publish
           </button>
         </div>
       </div>
 
       {preview ? (
         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-8">
-          <h1 className="text-3xl font-extrabold text-gray-900 mb-3">{title || 'Tajuk artikel'}</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 mb-3">{title || 'Article title'}</h1>
           {excerpt && <p className="text-lg text-gray-500 mb-6 leading-relaxed">{excerpt}</p>}
           {coverImage && <img src={coverImage} alt={title} className="w-full rounded-xl mb-8 object-cover max-h-64" />}
           <div className="prose prose-slate max-w-none">
@@ -101,12 +101,12 @@ export default function BlogEditor({ post }: { post?: Post }) {
         <div className="space-y-5">
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Tajuk</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={e => handleTitleChange(e.target.value)}
-                placeholder="Tajuk artikel anda..."
+                placeholder="Your article title..."
                 className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 text-gray-900 font-medium"
               />
             </div>
@@ -124,17 +124,17 @@ export default function BlogEditor({ post }: { post?: Post }) {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Ringkasan (Excerpt)</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Summary (Excerpt)</label>
               <input
                 type="text"
                 value={excerpt}
                 onChange={e => setExcerpt(e.target.value)}
-                placeholder="Ringkasan pendek untuk listing..."
+                placeholder="Short summary for listing..."
                 className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cover Image URL (pilihan)</label>
+              <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Cover Image URL (optional)</label>
               <input
                 type="url"
                 value={coverImage}
@@ -147,16 +147,16 @@ export default function BlogEditor({ post }: { post?: Post }) {
 
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-              Kandungan (Markdown)
+              Content (Markdown)
             </label>
             <textarea
               value={content}
               onChange={e => setContent(e.target.value)}
-              placeholder={`# Tajuk\n\nTulis kandungan artikel anda di sini menggunakan Markdown.\n\n**Bold**, *italic*, [link](url)\n\n## Subtajuk\n\n- Senarai item\n- Item kedua`}
+              placeholder={`# Title\n\nWrite your article content here using Markdown.\n\n**Bold**, *italic*, [link](url)\n\n## Subtitle\n\n- List item\n- Second item`}
               rows={24}
               className="w-full px-3 py-3 border border-gray-200 rounded-lg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 resize-y"
             />
-            <p className="text-xs text-gray-400 mt-2">Sokong Markdown: # tajuk, **bold**, *italic*, [link](url), - senarai, ```kod```</p>
+            <p className="text-xs text-gray-400 mt-2">Supports Markdown: # heading, **bold**, *italic*, [link](url), - list, ```code```</p>
           </div>
         </div>
       )}

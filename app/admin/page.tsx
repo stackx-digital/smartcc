@@ -23,19 +23,19 @@ export default async function AdminDashboard() {
   ])
 
   const stats = [
-    { label: 'Jumlah User', value: totalUsers ?? 0, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Total Users', value: totalUsers ?? 0, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
     { label: 'Free Plan', value: freeUsers ?? 0, icon: Users, color: 'text-gray-600', bg: 'bg-gray-50' },
     { label: 'Pro Plan', value: proUsers ?? 0, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { label: 'Jumlah Kad', value: totalCards ?? 0, icon: CreditCard, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-    { label: 'Float Dikira', value: totalCalcs ?? 0, icon: TrendingUp, color: 'text-violet-600', bg: 'bg-violet-50' },
-    { label: 'Blog Aktif', value: publishedPosts ?? 0, icon: FileText, color: 'text-amber-600', bg: 'bg-amber-50' },
+    { label: 'Total Cards', value: totalCards ?? 0, icon: CreditCard, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+    { label: 'Floats Calculated', value: totalCalcs ?? 0, icon: TrendingUp, color: 'text-violet-600', bg: 'bg-violet-50' },
+    { label: 'Published Posts', value: publishedPosts ?? 0, icon: FileText, color: 'text-amber-600', bg: 'bg-amber-50' },
   ]
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 text-sm mt-1">Gambaran keseluruhan smartcc</p>
+        <p className="text-gray-500 text-sm mt-1">smartcc overview</p>
       </div>
 
       {/* Stats */}
@@ -56,16 +56,16 @@ export default async function AdminDashboard() {
       {/* Recent signups */}
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-50">
-          <h2 className="font-semibold text-gray-900">Signup Terbaru</h2>
+          <h2 className="font-semibold text-gray-900">Recent Signups</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-50 bg-gray-50/50">
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Nama</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Plan</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Daftar</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Joined</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -78,11 +78,11 @@ export default async function AdminDashboard() {
                       {u.plan}
                     </span>
                   </td>
-                  <td className="px-6 py-3 text-gray-400">{new Date(u.created_at).toLocaleDateString('ms-MY')}</td>
+                  <td className="px-6 py-3 text-gray-400">{new Date(u.created_at).toLocaleDateString('en-MY')}</td>
                 </tr>
               ))}
               {(recentUsers ?? []).length === 0 && (
-                <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">Tiada user lagi</td></tr>
+                <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-400">No users yet</td></tr>
               )}
             </tbody>
           </table>

@@ -17,18 +17,18 @@ export default function AdminBlogClient({ posts: initial }: { posts: Post[] }) {
       published_at: !post.published ? new Date().toISOString() : null,
     }
     const { error } = await supabase.from('blog_posts').update(updates).eq('id', post.id)
-    if (error) { toast.error('Gagal kemaskini'); return }
+    if (error) { toast.error('Failed to update'); return }
     setPosts(prev => prev.map(p => p.id === post.id ? { ...p, ...updates } : p))
-    toast.success(!post.published ? 'Post diterbitkan' : 'Post disembunyikan')
+    toast.success(!post.published ? 'Post published' : 'Post hidden')
   }
 
   async function deletePost(post: Post) {
-    if (!confirm(`Padam "${post.title}"?`)) return
+    if (!confirm(`Delete "${post.title}"?`)) return
     const supabase = createClient()
     const { error } = await supabase.from('blog_posts').delete().eq('id', post.id)
-    if (error) { toast.error('Gagal padam'); return }
+    if (error) { toast.error('Failed to delete'); return }
     setPosts(prev => prev.filter(p => p.id !== post.id))
-    toast.success('Post dipadam')
+    toast.success('Post deleted')
   }
 
   return (
@@ -39,7 +39,7 @@ export default function AdminBlogClient({ posts: initial }: { posts: Post[] }) {
           <p className="text-gray-500 text-sm mt-1">{posts.length} artikel</p>
         </div>
         <Link href="/admin/blog/new" className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
-          <Plus className="h-4 w-4" /> Artikel Baru
+          <Plus className="h-4 w-4" /> New Article
         </Link>
       </div>
 
@@ -56,23 +56,23 @@ export default function AdminBlogClient({ posts: initial }: { posts: Post[] }) {
               <p className="text-sm text-gray-400 truncate">{post.excerpt || post.slug}</p>
               <p className="text-xs text-gray-300 mt-1">
                 {post.published && post.published_at
-                  ? `Diterbitkan ${new Date(post.published_at).toLocaleDateString('ms-MY')}`
-                  : `Dicipta ${new Date(post.created_at).toLocaleDateString('ms-MY')}`}
+                  ? `Published ${new Date(post.published_at).toLocaleDateString('en-MY')}`
+                  : `Created ${new Date(post.created_at).toLocaleDateString('en-MY')}`}
               </p>
             </div>
             <div className="flex items-center gap-2 flex-shrink-0">
               {post.published && (
-                <Link href={`/blog/${post.slug}`} target="_blank" className="p-2 text-gray-400 hover:text-blue-600 transition-colors" title="Lihat post">
+                <Link href={`/blog/${post.slug}`} target="_blank" className="p-2 text-gray-400 hover:text-blue-600 transition-colors" title="View post">
                   <Eye className="h-4 w-4" />
                 </Link>
               )}
-              <button onClick={() => togglePublish(post)} className="p-2 text-gray-400 hover:text-emerald-600 transition-colors" title={post.published ? 'Sembunyikan' : 'Terbitkan'}>
+              <button onClick={() => togglePublish(post)} className="p-2 text-gray-400 hover:text-emerald-600 transition-colors" title={post.published ? 'Hide' : 'Publish'}>
                 {post.published ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
               <Link href={`/admin/blog/${post.id}/edit`} className="p-2 text-gray-400 hover:text-indigo-600 transition-colors" title="Edit">
                 <Pencil className="h-4 w-4" />
               </Link>
-              <button onClick={() => deletePost(post)} className="p-2 text-gray-400 hover:text-red-500 transition-colors" title="Padam">
+              <button onClick={() => deletePost(post)} className="p-2 text-gray-400 hover:text-red-500 transition-colors" title="Delete">
                 <Trash2 className="h-4 w-4" />
               </button>
             </div>
@@ -81,8 +81,8 @@ export default function AdminBlogClient({ posts: initial }: { posts: Post[] }) {
         {posts.length === 0 && (
           <div className="bg-white rounded-xl border border-gray-100 p-12 text-center text-gray-400">
             <FileTextIcon />
-            <p className="mt-3 font-medium">Tiada artikel lagi</p>
-            <p className="text-sm mt-1">Klik &ldquo;Artikel Baru&rdquo; untuk mula menulis</p>
+            <p className="mt-3 font-medium">No articles yet</p>
+            <p className="text-sm mt-1">Click &ldquo;New Article&rdquo; to start writing</p>
           </div>
         )}
       </div>

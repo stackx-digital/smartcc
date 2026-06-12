@@ -7,6 +7,7 @@ import { SummaryStats } from '@/components/dashboard/SummaryStats'
 import { CardDisplay } from '@/components/dashboard/CardDisplay'
 import { TrafficLightSection } from '@/components/dashboard/TrafficLight'
 import { DueReminder } from '@/components/dashboard/DueReminder'
+import { PushSubscriber } from '@/components/PushSubscriber'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -48,10 +49,12 @@ export default async function DashboardPage() {
           <h1 className="text-2xl font-bold text-gray-900">
             Welcome{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}! 👋
           </h1>
+
           <p className="text-gray-400 text-sm mt-0.5">
             {today.toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
+        <PushSubscriber />
       </div>
 
       <SummaryStats cards={cardsWithFloat} />
