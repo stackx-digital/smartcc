@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   // Configure marked for clean HTML
   marked.setOptions({ breaks: true })
-  const rendered = await marked.parse(post.content)
+  const rendered = marked.parse(post.content) as string
 
   const readTime = estimateReadTime(post.content)
   const url = `${SITE_URL}/blog/${post.slug}`

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { LayoutDashboard, Calculator, CreditCard, History, Lightbulb, Settings, LogOut, ShieldCheck } from 'lucide-react'
@@ -22,10 +22,10 @@ export function Sidebar() {
   const router = useRouter()
   const [userEmail, setUserEmail] = useState<string | null>(null)
 
-  useState(() => {
+  useEffect(() => {
     const supabase = createClient()
     supabase.auth.getUser().then(({ data }) => setUserEmail(data.user?.email ?? null))
-  })
+  }, [])
 
   async function handleLogout() {
     const supabase = createClient()
