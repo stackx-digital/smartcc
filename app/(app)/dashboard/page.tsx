@@ -36,14 +36,17 @@ export default async function DashboardPage() {
     .single()
 
   return (
-    <div className="p-4 md:p-6 space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold">
-          Selamat datang{profile?.full_name ? `, ${profile.full_name}` : ''}! 👋
-        </h1>
-        <p className="text-muted-foreground text-sm mt-1">
-          {today.toLocaleDateString('ms-MY', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-        </p>
+    <div className="p-5 md:p-8 space-y-7">
+      {/* Page header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Selamat datang{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}! 👋
+          </h1>
+          <p className="text-gray-400 text-sm mt-0.5">
+            {today.toLocaleDateString('ms-MY', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+        </div>
       </div>
 
       <SummaryStats cards={cardsWithFloat} />
@@ -51,7 +54,7 @@ export default async function DashboardPage() {
       {cardsWithFloat.length > 0 ? (
         <>
           <div className="space-y-3">
-            <h2 className="text-lg font-semibold">Kad Kredit Saya</h2>
+            <h2 className="text-base font-semibold text-gray-700">Kad Kredit Saya</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {cardsWithFloat.map(card => (
                 <CardDisplay key={card.id} card={card} />
@@ -71,9 +74,9 @@ export default async function DashboardPage() {
       )}
 
       {/* Tip Banner */}
-      <div className="rounded-lg p-4 bg-[#E6F1FB] text-[#185FA5] text-sm flex gap-2">
-        <span className="text-lg">💡</span>
-        <p>
+      <div className="rounded-2xl p-4 bg-blue-50 border border-blue-100 text-blue-800 text-sm flex gap-3 items-start">
+        <span className="text-xl mt-0.5">💡</span>
+        <p className="leading-relaxed">
           <strong>Tips:</strong> Sentiasa bayar <em>Statement Balance</em> (bukan Outstanding Balance) untuk elak faedah.
         </p>
       </div>
