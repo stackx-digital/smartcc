@@ -11,6 +11,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid subscription' }, { status: 400 })
   }
 
+  // FIXED: validate endpoint is a well-formed HTTPS URL before storing
+  try {
+    const url = new URL(endpoint)
+    if (url.protocol !== 'https:') throw new Error('Not HTTPS')
+  } catch {
+    return NextResponse.json({ error: 'Invalid endpoint URL' }, { status: 400 })
+  }
+
   const { error } = await supabase.from('push_subscriptions').upsert({
     user_id: user.id,
     endpoint,
@@ -28,8 +36,12 @@ export async function DELETE(req: NextRequest) {
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const { endpoint } = await req.json()
-  await supabase.from('push_subscriptions').delete()
+  if (!endpoint) return NextResponse.json({ error: 'Missing endpoint' }, { status: 400 })
+
+  // FIXED: check and surface delete errors instead of silently ignoring
+  const { error } = await supabase.from('push_subscriptions').delete()
     .eq('user_id', user.id).eq('endpoint', endpoint)
 
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json({ ok: true })
 }

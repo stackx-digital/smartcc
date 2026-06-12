@@ -62,6 +62,8 @@ export function PushSubscriber() {
         toast.success('Push notifications enabled! You\'ll be reminded before due dates.')
       }
     } catch (err) {
+      // FIXED: log error for debugging while showing user-friendly message
+      console.error('[PushSubscriber]', err)
       toast.error('Failed to update notification settings.')
     } finally {
       setLoading(false)

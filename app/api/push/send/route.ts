@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import webpush from 'web-push'
 import { createClient } from '@/lib/supabase-server'
+import { calculateFloat } from '@/lib/float'
 
 webpush.setVapidDetails(
   process.env.VAPID_SUBJECT!,
@@ -9,15 +10,14 @@ webpush.setVapidDetails(
 )
 
 export async function POST(req: NextRequest) {
-  // Only callable server-side or from admin
-  const authHeader = req.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const cronSecret = process.env.CRON_SECRET
+  // FIXED: guard against undefined CRON_SECRET making endpoint publicly accessible
+  if (!cronSecret || req.headers.get('authorization') !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const supabase = await createClient()
 
-  // Get all cards with reminders set
   const { data: cards } = await supabase
     .from('credit_cards')
     .select('id, name, due_day_offset, statement_day, current_balance, user_id, reminder_days_before')
@@ -30,10 +30,8 @@ export async function POST(req: NextRequest) {
   let sent = 0
 
   for (const card of cards) {
-    // Calculate next due date
-    const dueDate = new Date(today)
-    dueDate.setDate(card.statement_day + card.due_day_offset)
-    if (dueDate < today) dueDate.setMonth(dueDate.getMonth() + 1)
+    // FIXED: use calculateFloat() — same logic as the rest of the app — instead of broken inline calc
+    const { dueDate } = calculateFloat(today, card.statement_day, card.due_day_offset)
     const daysUntil = Math.ceil((dueDate.getTime() - today.getTime()) / 86400000)
 
     if (daysUntil > (card.reminder_days_before ?? 3)) continue
