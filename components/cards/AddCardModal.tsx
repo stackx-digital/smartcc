@@ -10,7 +10,11 @@ import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 import { CreditCard } from '@/types'
 
-const PRESET_COLORS = ['#378ADD', '#E24B4A', '#2ECC71', '#F39C12', '#9B59B6', '#1ABC9C']
+const PRESET_COLORS = [
+  '#378ADD', '#E24B4A', '#2ECC71', '#F39C12', '#9B59B6', '#1ABC9C',
+  '#E91E8C', '#FF6B35', '#00BCD4', '#8BC34A', '#FF5722', '#607D8B',
+  '#3F51B5', '#009688', '#FFC107', '#795548', '#F06292', '#26C6DA',
+]
 
 interface AddCardModalProps {
   open: boolean
@@ -135,12 +139,12 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
           </div>
           <div className="space-y-2">
             <Label>Warna Kad</Label>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-9 gap-2">
               {PRESET_COLORS.map(color => (
                 <button
                   key={color}
                   type="button"
-                  className={`w-8 h-8 rounded-full transition-all ${form.color === color ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' : ''}`}
+                  className={`w-8 h-8 rounded-full transition-all ${form.color === color ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' : 'hover:scale-105'}`}
                   style={{ background: color }}
                   onClick={() => update('color', color)}
                 />
