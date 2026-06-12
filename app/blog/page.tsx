@@ -42,10 +42,10 @@ export default async function BlogPage() {
           <Link href="/"><Logo size="sm" /></Link>
           <div className="flex items-center gap-3">
             <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
-              Log Masuk
+              Log In
             </Link>
             <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200/60">
-              Cuba Percuma
+              Try Free
             </Link>
           </div>
         </div>
@@ -54,13 +54,13 @@ export default async function BlogPage() {
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center mb-14">
           <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Blog</span>
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Ilmu Kad Kredit</h1>
-          <p className="text-gray-500 max-w-xl mx-auto">Tips, strategi, dan panduan untuk optimize penggunaan kad kredit anda</p>
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">Credit Card Knowledge</h1>
+          <p className="text-gray-500 max-w-xl mx-auto">Tips, strategies, and guides to optimize your credit card usage</p>
         </div>
 
         {(posts ?? []).length === 0 ? (
           <div className="text-center py-20 text-gray-400">
-            <p className="font-medium">Tiada artikel lagi. Nantikan!</p>
+            <p className="font-medium">No articles yet. Stay tuned!</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -78,11 +78,11 @@ export default async function BlogPage() {
                     {post.published_at && (
                       <div className="flex items-center gap-1.5 text-xs text-gray-400">
                         <Calendar className="h-3.5 w-3.5" />
-                        {new Date(post.published_at).toLocaleDateString('ms-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
+                        {new Date(post.published_at).toLocaleDateString('en-MY', { day: 'numeric', month: 'long', year: 'numeric' })}
                       </div>
                     )}
                     <span className="text-sm font-medium text-blue-600 flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Baca <ArrowRight className="h-3.5 w-3.5" />
+                      Read <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </div>
                 </div>
