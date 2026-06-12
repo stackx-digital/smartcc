@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { format } from 'date-fns'
-import { Trophy, Loader2, Calendar } from 'lucide-react'
+import { Trophy, Loader2, Pencil, Trash2, Check, X } from 'lucide-react'
 import { calculateFloat } from '@/lib/float'
 import { createClient } from '@/lib/supabase'
 import { CreditCard, FloatCalculation } from '@/types'
@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { FloatBarChart } from '@/components/planner/FloatBarChart'
 import { toast } from 'sonner'
 
@@ -33,6 +32,10 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<CardResult[]>([])
   const [history, setHistory] = useState<FloatCalculation[]>(initialHistory)
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editItemName, setEditItemName] = useState('')
+  const [editAmount, setEditAmount] = useState('')
+  const [deletingId, setDeletingId] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -85,6 +88,40 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     floatDays: r.floatDays,
     color: r.card.color,
   }))
+
+  async function handleDelete(id: string) {
+    setDeletingId(id)
+    const supabase = createClient()
+    const { error } = await supabase.from('float_calculations').delete().eq('id', id)
+    if (error) {
+      toast.error('Gagal padam: ' + error.message)
+    } else {
+      setHistory(prev => prev.filter(h => h.id !== id))
+      toast.success('Rekod dipadam.')
+    }
+    setDeletingId(null)
+  }
+
+  function startEdit(h: FloatCalculation) {
+    setEditingId(h.id)
+    setEditItemName(h.item_name)
+    setEditAmount(h.amount > 0 ? String(h.amount) : '')
+  }
+
+  async function handleEditSave(id: string) {
+    const supabase = createClient()
+    const { error } = await supabase
+      .from('float_calculations')
+      .update({ item_name: editItemName || 'Tanpa nama', amount: parseFloat(editAmount) || 0 })
+      .eq('id', id)
+    if (error) {
+      toast.error('Gagal kemaskini: ' + error.message)
+    } else {
+      setHistory(prev => prev.map(h => h.id === id ? { ...h, item_name: editItemName || 'Tanpa nama', amount: parseFloat(editAmount) || 0 } : h))
+      toast.success('Rekod dikemaskini.')
+      setEditingId(null)
+    }
+  }
 
   function getFloatBadgeColor(days: number) {
     if (days >= 35) return 'bg-[#EAF3DE] text-[#3B6D11]'
@@ -201,25 +238,70 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
           <CardContent>
             <div className="space-y-2">
               {history.map(h => (
-                <div key={h.id} className="flex items-center justify-between py-2 border-b last:border-0 text-sm">
-                  <div>
-                    <span className="font-medium">{h.item_name}</span>
-                    {h.was_recommended && (
-                      <span className="ml-2 text-xs text-yellow-600">⭐ Disyorkan</span>
-                    )}
-                    <p className="text-xs text-muted-foreground">
-                      {format(new Date(h.purchase_date), 'dd MMM yyyy')} •{' '}
-                      {h.credit_cards?.name}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getFloatBadgeColor(h.float_days)}`}>
-                      {h.float_days} hari
-                    </span>
-                    {h.amount > 0 && (
-                      <p className="text-xs text-muted-foreground mt-0.5">RM{h.amount.toLocaleString()}</p>
-                    )}
-                  </div>
+                <div key={h.id} className="py-2 border-b last:border-0 text-sm">
+                  {editingId === h.id ? (
+                    <div className="flex items-center gap-2">
+                      <Input
+                        value={editItemName}
+                        onChange={e => setEditItemName(e.target.value)}
+                        placeholder="Nama item"
+                        className="h-7 text-xs flex-1"
+                      />
+                      <Input
+                        value={editAmount}
+                        onChange={e => setEditAmount(e.target.value)}
+                        placeholder="RM"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        className="h-7 text-xs w-24"
+                      />
+                      <button onClick={() => handleEditSave(h.id)} className="text-green-600 hover:text-green-700">
+                        <Check className="h-4 w-4" />
+                      </button>
+                      <button onClick={() => setEditingId(null)} className="text-slate-400 hover:text-slate-600">
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1 min-w-0">
+                        <span className="font-medium">{h.item_name}</span>
+                        {h.was_recommended && (
+                          <span className="ml-2 text-xs text-yellow-600">⭐ Disyorkan</span>
+                        )}
+                        <p className="text-xs text-muted-foreground">
+                          {format(new Date(h.purchase_date), 'dd MMM yyyy')} •{' '}
+                          {h.credit_cards?.name}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 ml-2">
+                        <div className="text-right">
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${getFloatBadgeColor(h.float_days)}`}>
+                            {h.float_days} hari
+                          </span>
+                          {h.amount > 0 && (
+                            <p className="text-xs text-muted-foreground mt-0.5">RM{h.amount.toLocaleString()}</p>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => startEdit(h)}
+                          className="text-slate-400 hover:text-blue-500 transition-colors"
+                          title="Edit"
+                        >
+                          <Pencil className="h-3.5 w-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(h.id)}
+                          disabled={deletingId === h.id}
+                          className="text-slate-400 hover:text-red-500 transition-colors disabled:opacity-50"
+                          title="Padam"
+                        >
+                          {deletingId === h.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Trash2 className="h-3.5 w-3.5" />}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
