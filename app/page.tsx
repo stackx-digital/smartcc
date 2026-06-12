@@ -18,10 +18,10 @@ export default function LandingPage() {
               Blog
             </Link>
             <Link href="/auth/login" className="text-sm font-medium text-gray-600 hover:text-gray-900 hidden sm:block px-3 py-1.5 rounded-lg hover:bg-gray-100 transition-colors">
-              Log Masuk
+              Log In
             </Link>
             <Link href="/auth/register" className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200/60">
-              Cuba Percuma
+              Try for Free
             </Link>
           </div>
         </div>
@@ -37,13 +37,13 @@ export default function LandingPage() {
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-200 text-blue-700 text-sm font-medium mb-8 shadow-sm">
             <Sparkles className="h-3.5 w-3.5" />
-            Percuma selamanya untuk 2 kad kredit
+            Free forever for 2 credit cards
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
-            Guna kad kredit{' '}
+            Using your credit card{' '}
             <span className="relative inline-block">
-              <span className="gradient-text">setiap hari,</span>
+              <span className="gradient-text">every day,</span>
               <svg className="absolute -bottom-1 left-0 w-full" height="5" viewBox="0 0 300 5" fill="none" preserveAspectRatio="none">
                 <path d="M0 2.5 Q75 0 150 2.5 Q225 5 300 2.5" stroke="url(#ug)" strokeWidth="3" strokeLinecap="round" fill="none"/>
                 <defs>
@@ -54,13 +54,13 @@ export default function LandingPage() {
                 </defs>
               </svg>
             </span>{' '}
-            tapi cashback sifar?
+            but zero cashback?
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Bukan sebab anda tak berbelanja. Tapi sebab anda{' '}
-            <strong className="text-gray-800">tidak tahu satu perkara mudah</strong>{' '}
-            — yang kami akan tunjukkan kepada anda hari ini.
+            Not because you don&apos;t spend. But because you{' '}
+            <strong className="text-gray-800">don&apos;t know one simple thing</strong>{' '}
+            — that we&apos;re going to show you today.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-14">
@@ -68,18 +68,18 @@ export default function LandingPage() {
               href="/auth/register"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-blue-600 text-white font-semibold text-base hover:bg-blue-700 transition-all shadow-xl shadow-blue-300/40 hover:shadow-blue-400/40 hover:-translate-y-0.5"
             >
-              Tunjukkan Saya <ArrowRight className="h-4 w-4" />
+              Show Me How <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/dashboard"
               className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl border border-gray-200 bg-white/80 text-gray-700 font-semibold text-base hover:bg-white hover:border-gray-300 transition-all shadow-sm backdrop-blur"
             >
-              Lihat Demo
+              View Demo
             </Link>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-500">
-            {['Tiada kad kredit diperlukan', 'Persediaan dalam 2 minit', 'Selamat & peribadi'].map(t => (
+            {['No credit card required', 'Set up in 2 minutes', 'Safe & private'].map(t => (
               <div key={t} className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" />
                 {t}
@@ -89,9 +89,9 @@ export default function LandingPage() {
 
           <div className="mt-16 grid grid-cols-3 gap-4 max-w-lg mx-auto">
             {[
-              { value: '50', label: 'Hari Float Max', color: 'text-blue-600' },
-              { value: 'RM0', label: 'Kos Bermula', color: 'text-emerald-600' },
-              { value: '2min', label: 'Setup Masa', color: 'text-violet-600' },
+              { value: '50', label: 'Max Float Days', color: 'text-blue-600' },
+              { value: 'RM0', label: 'Starting Cost', color: 'text-emerald-600' },
+              { value: '2min', label: 'Setup Time', color: 'text-violet-600' },
             ].map(s => (
               <div key={s.label} className="glass-card rounded-2xl p-4 shadow-lg shadow-blue-100/50">
                 <div className={`text-2xl font-extrabold ${s.color}`}>{s.value}</div>
@@ -107,23 +107,23 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-dot-pattern opacity-30" />
         <div className="relative max-w-3xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-red-500 mb-3">Kisah Sebenar</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Adakah ini anda?</h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-red-500 mb-3">Real Story</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Does this sound like you?</h2>
           </div>
 
           {/* Story card */}
           <div className="rounded-3xl bg-gradient-to-br from-slate-50 to-blue-50 border border-blue-100 p-8 sm:p-10 shadow-lg mb-10">
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              Ahmad, 35 tahun. Bergaji RM5,000 sebulan. Pegang dua kad kredit.
-              Berbelanja RM300 di sini, RM500 di sana — makan, minyak, groceries, online shopping.
+              Ahmad, 35. Earns RM5,000 a month. Holds two credit cards.
+              Spends RM300 here, RM500 there — food, fuel, groceries, online shopping.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed mb-6">
-              Setiap bulan bila ada bil masuk, dia <strong className="text-gray-900">terus bayar</strong>.
-              Dia rasa dia bijak — &ldquo;bayar cepat, elak faedah.&rdquo;
+              Every time a bill comes in, he <strong className="text-gray-900">pays immediately</strong>.
+              He thinks he&apos;s being smart — &ldquo;pay fast, avoid interest.&rdquo;
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Hujung tahun dia check cashback: <strong className="text-red-600 text-xl">RM0.</strong>{' '}
-              Walhal dia dah guna kad kredit lebih RM6,000 setahun.
+              At year end he checks his cashback: <strong className="text-red-600 text-xl">RM0.</strong>{' '}
+              Even though he charged over RM6,000 to his cards that year.
             </p>
           </div>
 
@@ -132,12 +132,12 @@ export default function LandingPage() {
             <div className="flex gap-3">
               <AlertTriangle className="h-5 w-5 text-red-500 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-gray-900 mb-2">Apa yang Ahmad buat salah?</p>
+                <p className="font-bold text-gray-900 mb-2">What did Ahmad do wrong?</p>
                 <p className="text-gray-700 text-sm leading-relaxed">
-                  Setiap kali dia berbelanja RM300, dia terus bayar. Jadi baki di penyata dia sentiasa rendah.
-                  Kad cashback dia ada syarat: kena capai <strong>RM4,000 dalam satu penyata</strong> baru dapat cashback.
-                  Sebab dia bayar tiap kali, penyata dia tak pernah sampai RM4,000 — walaupun dia dah guna RM6,000 setahun.{' '}
-                  <strong className="text-red-700">RM0 cashback. Setiap tahun.</strong>
+                  Every time he spent RM300, he paid it off immediately. So his statement balance was always low.
+                  His cashback card had a condition: you need to hit <strong>RM4,000 in a single statement</strong> to earn cashback.
+                  Because he paid after every transaction, his statement never reached RM4,000 — even though he spent RM6,000 that year.{' '}
+                  <strong className="text-red-700">RM0 cashback. Every year.</strong>
                 </p>
               </div>
             </div>
@@ -152,12 +152,12 @@ export default function LandingPage() {
 
         <div className="relative max-w-4xl mx-auto">
           <div className="text-center mb-14">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-red-400 mb-3">Kebenaran Pahit</span>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-red-400 mb-3">The Hard Truth</span>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-              Musuh sebenar bukan faedah kad kredit.
+              The real enemy isn&apos;t credit card interest.
             </h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-              Musuh sebenar adalah <strong className="text-white">kejahilan tentang cara kad kredit sebenarnya berfungsi.</strong>
+              The real enemy is <strong className="text-white">not knowing how credit cards actually work.</strong>
             </p>
           </div>
 
@@ -165,18 +165,18 @@ export default function LandingPage() {
             {[
               {
                 icon: '😶',
-                title: 'Ramai orang keliru',
-                desc: 'Antara "statement balance" dan "outstanding balance". Ini beza yang boleh kos anda ratusan ringgit setiap tahun.',
+                title: 'Most people are confused',
+                desc: 'Between "statement balance" and "outstanding balance". This difference can cost you hundreds of ringgit every year.',
               },
               {
                 icon: '💸',
-                title: 'Bayar masa salah',
-                desc: 'Bayar terlalu awal membunuh peluang cashback. Bayar terlalu lambat kena faedah. Ada masa yang tepat — dan ramai tak tahu bila.',
+                title: 'Paying at the wrong time',
+                desc: 'Paying too early kills your cashback chances. Paying too late means interest charges. There is a right time — and most people don\'t know when.',
               },
               {
                 icon: '🃏',
-                title: 'Satu kad sahaja',
-                desc: 'Guna satu kad untuk semua benda = tiada strategi. Kad kredit ada kelebihan berbeza. Gunakan strategi 3-kad untuk lindungi diri anda.',
+                title: 'Only one card',
+                desc: 'Using one card for everything = no strategy. Credit cards have different strengths. Use the 3-card strategy to protect yourself.',
               },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl bg-white/5 border border-white/10 p-7 hover:bg-white/10 transition-colors">
@@ -189,9 +189,9 @@ export default function LandingPage() {
 
           <div className="mt-12 rounded-2xl border border-blue-500/30 bg-blue-500/10 p-8 text-center">
             <p className="text-blue-200 text-lg leading-relaxed">
-              &ldquo;Hutang bukan takdir. Ia adalah pilihan — yang bermula daripada kurang ilmu.&rdquo;
+              &ldquo;Debt isn&apos;t destiny. It&apos;s a choice — one that starts with a lack of knowledge.&rdquo;
             </p>
-            <p className="text-blue-400 text-sm mt-3">— Prinsip pengurusan kad kredit bijak</p>
+            <p className="text-blue-400 text-sm mt-3">— Smart credit card management principle</p>
           </div>
         </div>
       </section>
@@ -202,8 +202,8 @@ export default function LandingPage() {
         <div className="mesh-blob-2 top-0 right-0 opacity-40" />
         <div className="relative max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Penyelesaian</span>
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Apa itu "Float" — dan kenapa ia penting?</h2>
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">The Solution</span>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">What is "Float" — and why does it matter?</h2>
           </div>
 
           <div className="space-y-6">
