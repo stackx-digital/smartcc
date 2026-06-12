@@ -32,6 +32,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<CardResult[]>([])
   const [history, setHistory] = useState<FloatCalculation[]>(initialHistory)
+  const [selectedCardIds, setSelectedCardIds] = useState<Set<string>>(new Set(cards.map(c => c.id)))
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editItemName, setEditItemName] = useState('')
   const [editAmount, setEditAmount] = useState('')
@@ -46,7 +47,13 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     setLoading(true)
 
     const date = new Date(purchaseDate + 'T00:00:00')
-    const cardResults: CardResult[] = cards
+    const selectedCards = cards.filter(c => selectedCardIds.has(c.id))
+    if (selectedCards.length === 0) {
+      toast.error('Please select at least one card.')
+      setLoading(false)
+      return
+    }
+    const cardResults: CardResult[] = selectedCards
       .map(card => ({ card, ...calculateFloat(date, card.statement_day, card.due_day_offset) }))
       .sort((a, b) => b.floatDays - a.floatDays)
     setResults(cardResults)
@@ -177,7 +184,46 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                 />
               </div>
             </div>
-            <Button type="submit" disabled={loading || cards.length === 0}>
+            {/* Card selector */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label>Cards to Compare</Label>
+                <div className="flex gap-2 text-xs">
+                  <button type="button" onClick={() => setSelectedCardIds(new Set(cards.map(c => c.id)))} className="text-blue-500 hover:underline">All</button>
+                  <span className="text-slate-300">|</span>
+                  <button type="button" onClick={() => setSelectedCardIds(new Set())} className="text-slate-400 hover:underline">None</button>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {cards.map(card => {
+                  const selected = selectedCardIds.has(card.id)
+                  return (
+                    <button
+                      key={card.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedCardIds(prev => {
+                          const next = new Set(prev)
+                          selected ? next.delete(card.id) : next.add(card.id)
+                          return next
+                        })
+                      }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                        selected
+                          ? 'border-transparent text-white'
+                          : 'bg-white border-slate-200 text-slate-400'
+                      }`}
+                      style={selected ? { background: card.color } : undefined}
+                    >
+                      <span className="w-2 h-2 rounded-full" style={{ background: selected ? 'rgba(255,255,255,0.6)' : card.color }} />
+                      {card.name}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            <Button type="submit" disabled={loading || cards.length === 0 || selectedCardIds.size === 0}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Calculate Float
             </Button>
