@@ -17,7 +17,7 @@ export function TrafficLightSection({ cards }: TrafficLightProps) {
 
   return (
     <div className="space-y-3">
-      <h2 className="text-lg font-semibold">Status Kad Hari Ini</h2>
+      <h2 className="text-lg font-semibold">Card Status Today</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {activeCards.map(card => {
           const { status, label, description } = card.trafficLight

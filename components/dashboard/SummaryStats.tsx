@@ -30,15 +30,15 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Tarikh Due Terdekat</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Nearest Due Date</CardTitle>
         </CardHeader>
         <CardContent>
           {nextDue ? (
             <>
               <div className={cn('text-2xl font-bold', nextDue.daysUntilDue <= 5 ? 'due-urgent' : '')}>
-                {nextDue.daysUntilDue} hari lagi
+                {nextDue.daysUntilDue} days left
               </div>
-              <p className="text-xs text-muted-foreground mt-1">{nextDue.name} — {nextDue.dueDate.toLocaleDateString('ms-MY')}</p>
+              <p className="text-xs text-muted-foreground mt-1">{nextDue.name} — {nextDue.dueDate.toLocaleDateString('en-MY')}</p>
             </>
           ) : (
             <div className="text-2xl font-bold text-muted-foreground">—</div>
@@ -48,7 +48,7 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Jumlah Penggunaan Kredit</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Total Credit Utilization</CardTitle>
         </CardHeader>
         <CardContent>
           <div className={cn('text-2xl font-bold', totalUtilization > 70 ? 'text-red-600' : totalUtilization > 30 ? 'text-amber-600' : 'text-green-600')}>
@@ -64,12 +64,12 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Float Maksimum Hari Ini</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Maximum Float Today</CardTitle>
         </CardHeader>
         <CardContent>
           {maxFloat ? (
             <>
-              <div className="text-2xl font-bold text-green-600">{maxFloat.floatDays} hari</div>
+              <div className="text-2xl font-bold text-green-600">{maxFloat.floatDays} days</div>
               <p className="text-xs text-muted-foreground mt-1">{maxFloat.name} — {maxFloat.bank}</p>
             </>
           ) : (

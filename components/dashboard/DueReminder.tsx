@@ -16,8 +16,8 @@ export function DueReminder({ cards }: DueReminderProps) {
     const check = () => {
       cardsWithReminder.forEach(card => {
         if (card.daysUntilDue <= (card.reminder_days_before ?? 3) && card.daysUntilDue >= 0) {
-          new Notification(`💳 ${card.name} — Due dalam ${card.daysUntilDue} hari`, {
-            body: `Bayar RM${card.current_balance.toLocaleString()} sebelum tarikh due.`,
+          new Notification(`💳 ${card.name} — Due in ${card.daysUntilDue} days`, {
+            body: `Pay RM${card.current_balance.toLocaleString()} before the due date.`,
             icon: '/icon-192.png',
             tag: `due-${card.id}`,
           })
