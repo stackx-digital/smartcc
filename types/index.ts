@@ -12,6 +12,7 @@ export interface CreditCard {
   color: string
   is_active: boolean
   shared_limit_group: string | null
+  reminder_days_before: number | null
   created_at: string
 }
 

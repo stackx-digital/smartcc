@@ -6,7 +6,7 @@ import { CreditCard, CardWithFloat } from '@/types'
 import { SummaryStats } from '@/components/dashboard/SummaryStats'
 import { CardDisplay } from '@/components/dashboard/CardDisplay'
 import { TrafficLightSection } from '@/components/dashboard/TrafficLight'
-import { Skeleton } from '@/components/ui/skeleton'
+import { DueReminder } from '@/components/dashboard/DueReminder'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -41,6 +41,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="p-5 md:p-8 space-y-7">
+      <DueReminder cards={cardsWithFloat} />
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>
