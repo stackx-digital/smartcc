@@ -83,7 +83,12 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {cards.map(card => {
-            const utilPct = Math.round((card.current_balance / card.credit_limit) * 100)
+            const groupCards = card.shared_limit_group
+              ? cards.filter(c => c.shared_limit_group === card.shared_limit_group)
+              : [card]
+            const groupBalance = groupCards.reduce((sum, c) => sum + c.current_balance, 0)
+            const utilPct = Math.round((groupBalance / card.credit_limit) * 100)
+            const isShared = groupCards.length > 1
             return (
               <Card key={card.id} className="overflow-hidden">
                 <div className="h-2" style={{ background: card.color }} />
@@ -103,7 +108,9 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
 
                   <div>
                     <div className="flex justify-between text-sm mb-1">
-                      <span className="text-muted-foreground">Penggunaan</span>
+                      <span className="text-muted-foreground">
+                        {isShared ? `Penggunaan (Dikongsi)` : 'Penggunaan'}
+                      </span>
                       <span className={cn('font-medium', utilPct > 70 ? 'text-red-600' : utilPct > 30 ? 'text-amber-600' : 'text-green-600')}>
                         {utilPct}%
                       </span>
@@ -113,7 +120,7 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
                       className={cn('h-1.5', utilPct > 70 ? '[&>div]:bg-red-500' : utilPct > 30 ? '[&>div]:bg-amber-500' : '[&>div]:bg-green-500')}
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                      <span>RM{card.current_balance.toLocaleString()}</span>
+                      <span>RM{(isShared ? groupBalance : card.current_balance).toLocaleString()}{isShared ? ' (gabungan)' : ''}</span>
                       <span>RM{card.credit_limit.toLocaleString()}</span>
                     </div>
                   </div>

@@ -21,10 +21,14 @@ export default async function DashboardPage() {
     .order('created_at', { ascending: true })
 
   const today = new Date()
-  const cardsWithFloat: CardWithFloat[] = (cards || []).map((card: CreditCard) => {
+  const allCards = cards || []
+  const cardsWithFloat: CardWithFloat[] = allCards.map((card: CreditCard) => {
     const { floatDays, nextStatementDate, dueDate } = calculateFloat(today, card.statement_day, card.due_day_offset)
     const trafficLight = getTrafficLight(card.statement_day)
-    const utilizationPct = Math.round((card.current_balance / card.credit_limit) * 100)
+    const groupBalance = card.shared_limit_group
+      ? allCards.filter((c: CreditCard) => c.shared_limit_group === card.shared_limit_group).reduce((s: number, c: CreditCard) => s + c.current_balance, 0)
+      : card.current_balance
+    const utilizationPct = Math.round((groupBalance / card.credit_limit) * 100)
     const daysUntilDue = differenceInDays(dueDate, today)
     return { ...card, floatDays, nextStatementDate, dueDate, trafficLight, utilizationPct, daysUntilDue }
   })

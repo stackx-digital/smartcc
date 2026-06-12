@@ -31,6 +31,7 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
     current_balance: editCard?.current_balance?.toString() || '',
     statement_day: editCard?.statement_day?.toString() || '',
     color: editCard?.color || '#378ADD',
+    shared_limit_group: editCard?.shared_limit_group || '',
   })
 
   function update(key: string, value: string) {
@@ -53,6 +54,7 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
       due_day_offset: 20,
       color: form.color,
       is_active: true,
+      shared_limit_group: form.shared_limit_group.trim() || null,
     }
 
     let error
@@ -121,6 +123,15 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
           <div className="space-y-1.5">
             <Label>Hari Statement (1–28)</Label>
             <Input type="number" min={1} max={28} placeholder="8" value={form.statement_day} onChange={e => update('statement_day', e.target.value)} required />
+          </div>
+          <div className="space-y-1.5">
+            <Label>Kumpulan Limit Dikongsi <span className="text-muted-foreground font-normal">(pilihan)</span></Label>
+            <Input
+              placeholder="Contoh: Maybank"
+              value={form.shared_limit_group}
+              onChange={e => update('shared_limit_group', e.target.value)}
+            />
+            <p className="text-xs text-muted-foreground">Isi jika kad ini berkongsi limit kredit dengan kad lain dari bank yang sama.</p>
           </div>
           <div className="space-y-2">
             <Label>Warna Kad</Label>

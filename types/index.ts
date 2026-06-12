@@ -11,6 +11,7 @@ export interface CreditCard {
   due_day_offset: number
   color: string
   is_active: boolean
+  shared_limit_group: string | null
   created_at: string
 }
 
