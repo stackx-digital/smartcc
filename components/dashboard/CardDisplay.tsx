@@ -1,73 +1,96 @@
 'use client'
 import { CardWithFloat } from '@/types'
 import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
-import { Progress } from '@/components/ui/progress'
 
 interface CardDisplayProps {
   card: CardWithFloat
 }
 
+function lightenColor(hex: string, amount: number) {
+  const num = parseInt(hex.replace('#', ''), 16)
+  const r = Math.min(255, (num >> 16) + amount)
+  const g = Math.min(255, ((num >> 8) & 0xff) + amount)
+  const b = Math.min(255, (num & 0xff) + amount)
+  return `rgb(${r},${g},${b})`
+}
+
 export function CardDisplay({ card }: CardDisplayProps) {
-  const utilPct = Math.round((card.current_balance / card.credit_limit) * 100)
+  const utilPct = card.utilizationPct
   const isUrgent = card.daysUntilDue <= 5
+  const utilColor = utilPct > 70 ? '#ef4444' : utilPct > 30 ? '#f59e0b' : '#22c55e'
 
   return (
-    <div className="rounded-xl overflow-hidden shadow-md border">
-      {/* Card visual */}
+    <div className="rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white flex flex-col">
+      {/* Card face */}
       <div
-        className="relative p-5 text-white"
-        style={{ background: `linear-gradient(135deg, ${card.color}, ${card.color}dd)` }}
+        className="relative p-5 pb-6 overflow-hidden"
+        style={{ background: `linear-gradient(135deg, ${card.color} 0%, ${lightenColor(card.color, 40)} 100%)` }}
       >
-        {/* Chip */}
-        <div className="absolute top-4 right-4 w-8 h-6 rounded bg-yellow-300/80 flex items-center justify-center">
-          <div className="w-6 h-4 rounded border border-yellow-500/50 grid grid-cols-2 gap-px p-0.5">
-            <div className="bg-yellow-400/60 rounded-sm" />
-            <div className="bg-yellow-400/60 rounded-sm" />
-            <div className="bg-yellow-400/60 rounded-sm" />
-            <div className="bg-yellow-400/60 rounded-sm" />
+        {/* Decorative circles */}
+        <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full opacity-20" style={{ background: 'white' }} />
+        <div className="absolute -right-2 top-10 w-16 h-16 rounded-full opacity-10" style={{ background: 'white' }} />
+
+        {/* Top row: bank + chip */}
+        <div className="flex justify-between items-start relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-widest text-white/80">{card.bank}</p>
+          {/* EMV Chip */}
+          <div className="w-9 h-7 rounded-md bg-gradient-to-br from-yellow-200 to-yellow-400 shadow-inner flex items-center justify-center">
+            <div className="w-6 h-4 rounded border border-yellow-600/40 grid grid-cols-3 grid-rows-2 gap-px p-0.5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="bg-yellow-500/50 rounded-sm" />
+              ))}
+            </div>
           </div>
         </div>
-        <p className="text-sm font-medium opacity-90">{card.bank}</p>
-        <p className="text-lg font-bold mt-1">{card.name}</p>
-        <p className="text-sm opacity-75 mt-2">•••• •••• •••• {card.last_four}</p>
-        <div className="flex items-center justify-between mt-3">
-          <Badge variant="outline" className="text-white border-white/50 bg-white/10 text-xs">
+
+        {/* Card name */}
+        <p className="mt-4 text-base font-bold text-white leading-tight relative z-10 drop-shadow-sm">{card.name}</p>
+
+        {/* Card number */}
+        <p className="mt-2 text-sm text-white/70 tracking-widest font-mono relative z-10">•••• •••• •••• {card.last_four}</p>
+
+        {/* Bottom row */}
+        <div className="flex items-center justify-between mt-4 relative z-10">
+          <span className="text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white px-2 py-0.5 rounded-full border border-white/30">
             {card.card_type}
-          </Badge>
-          <span className="text-xs opacity-75">Float: {card.floatDays}h</span>
+          </span>
+          <div className="text-right">
+            <p className="text-[10px] text-white/60 uppercase tracking-wide">Float</p>
+            <p className="text-sm font-bold text-white">{card.floatDays} hari</p>
+          </div>
         </div>
       </div>
 
-      {/* Card details */}
-      <div className="p-4 bg-background space-y-3">
+      {/* Details section */}
+      <div className="p-4 space-y-4 flex-1 bg-white">
+        {/* Utilization */}
         <div>
-          <div className="flex justify-between text-sm mb-1">
-            <span className="text-muted-foreground">Baki / Had</span>
-            <span className={cn('font-medium', utilPct > 70 ? 'text-red-600' : utilPct > 30 ? 'text-amber-600' : 'text-green-600')}>
-              {utilPct}%
-            </span>
+          <div className="flex justify-between items-center mb-1.5">
+            <span className="text-xs text-slate-400 font-medium">Penggunaan Kredit</span>
+            <span className="text-xs font-bold" style={{ color: utilColor }}>{utilPct}%</span>
           </div>
-          <Progress
-            value={utilPct}
-            className={cn('h-1.5', utilPct > 70 ? '[&>div]:bg-red-500' : utilPct > 30 ? '[&>div]:bg-amber-500' : '[&>div]:bg-green-500')}
-          />
-          <div className="flex justify-between text-xs text-muted-foreground mt-1">
+          <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{ width: `${Math.min(utilPct, 100)}%`, background: utilColor }}
+            />
+          </div>
+          <div className="flex justify-between text-[11px] text-slate-400 mt-1">
             <span>RM{card.current_balance.toLocaleString()}</span>
             <span>RM{card.credit_limit.toLocaleString()}</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div>
-            <p className="text-muted-foreground text-xs">Statement Hari</p>
-            <p className="font-medium">{card.statement_day}</p>
+        {/* Stats row */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="rounded-xl bg-slate-50 px-3 py-2.5">
+            <p className="text-[10px] text-slate-400 uppercase tracking-wide mb-0.5">Statement</p>
+            <p className="text-sm font-bold text-slate-700">Hari {card.statement_day}</p>
           </div>
-          <div>
-            <p className="text-muted-foreground text-xs">Bayaran Due</p>
-            <p className={cn('font-medium', isUrgent ? 'due-urgent' : '')}>
-              {isUrgent && '⚠ '}
-              {card.daysUntilDue} hari lagi
+          <div className={cn('rounded-xl px-3 py-2.5', isUrgent ? 'bg-red-50' : 'bg-slate-50')}>
+            <p className="text-[10px] text-slate-400 uppercase tracking-wide mb-0.5">Due</p>
+            <p className={cn('text-sm font-bold', isUrgent ? 'text-red-600' : 'text-slate-700')}>
+              {isUrgent && '⚠ '}{card.daysUntilDue} hari lagi
             </p>
           </div>
         </div>
