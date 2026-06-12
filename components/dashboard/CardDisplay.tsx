@@ -1,6 +1,10 @@
 'use client'
+import { useState } from 'react'
 import { CardWithFloat } from '@/types'
 import { cn } from '@/lib/utils'
+import { createClient } from '@/lib/supabase'
+import { CheckCircle2, Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface CardDisplayProps {
   card: CardWithFloat
@@ -15,9 +19,30 @@ function lightenColor(hex: string, amount: number) {
 }
 
 export function CardDisplay({ card }: CardDisplayProps) {
-  const utilPct = card.utilizationPct
+  const [balance, setBalance] = useState(card.current_balance)
+  const [paying, setPaying] = useState(false)
+
+  const utilPct = card.credit_limit > 0 ? Math.round((balance / card.credit_limit) * 100) : 0
   const isUrgent = card.daysUntilDue <= 5
   const utilColor = utilPct > 70 ? '#ef4444' : utilPct > 30 ? '#f59e0b' : '#22c55e'
+  const isPaid = balance === 0
+
+  async function handleMarkPaid() {
+    if (isPaid) return
+    setPaying(true)
+    const supabase = createClient()
+    const { error } = await supabase
+      .from('credit_cards')
+      .update({ current_balance: 0 })
+      .eq('id', card.id)
+    if (error) {
+      toast.error('Gagal kemaskini: ' + error.message)
+    } else {
+      setBalance(0)
+      toast.success(`${card.name} — bil ditanda sudah bayar!`)
+    }
+    setPaying(false)
+  }
 
   return (
     <div className="rounded-2xl overflow-hidden shadow-lg border border-white/60 bg-white flex flex-col">
@@ -76,10 +101,29 @@ export function CardDisplay({ card }: CardDisplayProps) {
             />
           </div>
           <div className="flex justify-between text-[11px] text-slate-400 mt-1">
-            <span>RM{card.current_balance.toLocaleString()}</span>
+            <span>RM{balance.toLocaleString()}</span>
             <span>RM{card.credit_limit.toLocaleString()}</span>
           </div>
         </div>
+
+        {/* Mark paid button */}
+        <button
+          onClick={handleMarkPaid}
+          disabled={isPaid || paying}
+          className={cn(
+            'w-full flex items-center justify-center gap-2 rounded-xl py-2 text-xs font-semibold transition-all',
+            isPaid
+              ? 'bg-green-50 text-green-600 border border-green-200 cursor-default'
+              : 'bg-slate-50 text-slate-500 border border-slate-200 hover:bg-green-50 hover:text-green-600 hover:border-green-200'
+          )}
+        >
+          {paying ? (
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          ) : (
+            <CheckCircle2 className="h-3.5 w-3.5" />
+          )}
+          {isPaid ? 'Bil Sudah Dibayar' : 'Tandai Sudah Bayar'}
+        </button>
 
         {/* Stats row */}
         <div className="grid grid-cols-2 gap-3">
