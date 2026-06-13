@@ -10,27 +10,75 @@ const SORT_OPTIONS = [
   { value: 'fee', label: 'No Annual Fee First' },
 ]
 
+function lighten(hex: string, amount: number) {
+  const n = parseInt(hex.replace('#', ''), 16)
+  const r = Math.min(255, (n >> 16) + amount)
+  const g = Math.min(255, ((n >> 8) & 0xff) + amount)
+  const b = Math.min(255, (n & 0xff) + amount)
+  return `rgb(${r},${g},${b})`
+}
+
+function CardFace({ offer }: { offer: CardOffer }) {
+  return (
+    <div
+      className="relative w-full aspect-[1.586/1] rounded-2xl overflow-hidden shadow-lg select-none"
+      style={{ background: `linear-gradient(135deg, ${offer.color} 0%, ${lighten(offer.color, 55)} 100%)` }}
+    >
+      {/* Decorative circles */}
+      <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/15" />
+      <div className="absolute -right-2 top-14 w-20 h-20 rounded-full bg-white/10" />
+      <div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
+
+      <div className="absolute inset-0 p-5 flex flex-col justify-between">
+        {/* Top row */}
+        <div className="flex items-start justify-between">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-white/80 drop-shadow">{offer.bank}</p>
+          {/* EMV chip */}
+          <div className="w-9 h-7 rounded-md bg-gradient-to-br from-yellow-200 to-yellow-400 shadow flex items-center justify-center">
+            <div className="w-6 h-4 rounded border border-yellow-600/40 grid grid-cols-3 grid-rows-2 gap-px p-0.5">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="bg-yellow-500/50 rounded-sm" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom row */}
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-white/60 text-[10px] tracking-widest font-mono mb-1">•••• •••• •••• ••••</p>
+            <p className="text-white font-bold text-sm leading-tight drop-shadow-sm max-w-[160px] truncate">{offer.name}</p>
+          </div>
+          {/* Card network badge */}
+          <div className="shrink-0">
+            {offer.cardType === 'Visa' && (
+              <span className="text-white font-black text-lg italic tracking-tight drop-shadow">VISA</span>
+            )}
+            {offer.cardType === 'Mastercard' && (
+              <div className="flex items-center">
+                <div className="w-7 h-7 rounded-full bg-red-500 opacity-90" />
+                <div className="w-7 h-7 rounded-full bg-yellow-400 opacity-90 -ml-3.5" />
+              </div>
+            )}
+            {offer.cardType === 'AmEx' && (
+              <span className="text-white font-black text-xs tracking-widest drop-shadow">AMEX</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function CardOfferCard({ offer }: { offer: CardOffer }) {
   return (
     <div className="rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
-      {/* Header strip */}
-      <div
-        className="h-2 w-full"
-        style={{ background: offer.color }}
-      />
+      {/* Card visual */}
+      <div className="p-4 pb-2">
+        <CardFace offer={offer} />
+      </div>
 
-      <div className="p-4 flex-1 flex flex-col gap-3">
-        {/* Bank + name */}
-        <div className="flex items-start justify-between gap-2">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-400">{offer.bank}</p>
-            <p className="text-sm font-bold text-slate-800 leading-snug mt-0.5">{offer.name}</p>
-          </div>
-          <span className="text-[10px] font-bold px-2 py-1 rounded-full bg-slate-100 text-slate-500 shrink-0">
-            {offer.cardType}
-          </span>
-        </div>
-
+      <div className="px-4 pb-4 flex-1 flex flex-col gap-3">
         {/* Key stat */}
         <div className="flex items-center gap-2">
           {offer.cashbackRate !== null ? (
@@ -66,7 +114,7 @@ function CardOfferCard({ offer }: { offer: CardOffer }) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+        <div className="flex items-center justify-between border-t border-slate-100 pt-2">
           <div className="text-xs text-slate-500 flex items-center gap-1">
             <Wallet className="h-3 w-3" />
             {offer.annualFee === 0
@@ -139,14 +187,12 @@ export function HubClient() {
         </p>
       </div>
 
-      {/* Affiliate disclaimer */}
       <div className="text-[11px] text-slate-400 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2">
         ℹ️ Links below are affiliate links via RinggitPlus. We may earn a small commission at no extra cost to you.
       </div>
 
       {/* Filters */}
       <div className="space-y-3">
-        {/* Tag filter */}
         <div className="flex flex-wrap gap-2">
           {ALL_TAGS.map(tag => (
             <button
@@ -164,7 +210,6 @@ export function HubClient() {
           ))}
         </div>
 
-        {/* Sort + fee toggle */}
         <div className="flex flex-wrap gap-2 items-center">
           <div className="flex items-center gap-1 bg-slate-100 rounded-xl p-1">
             {SORT_OPTIONS.map(opt => (
@@ -195,10 +240,8 @@ export function HubClient() {
         </div>
       </div>
 
-      {/* Result count */}
       <p className="text-xs text-slate-400">{filtered.length} card{filtered.length !== 1 ? 's' : ''} found</p>
 
-      {/* Grid */}
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-slate-400 text-sm">
           No cards match your filters. Try removing some.
