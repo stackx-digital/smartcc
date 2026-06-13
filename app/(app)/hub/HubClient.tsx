@@ -1,5 +1,6 @@
 'use client'
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { ExternalLink, BadgeCheck, Tag, Wallet, TrendingUp } from 'lucide-react'
 import { CARD_OFFERS, ALL_TAGS, CardOffer } from '@/lib/card-offers'
 import { cn } from '@/lib/utils'
@@ -19,21 +20,35 @@ function lighten(hex: string, amount: number) {
 }
 
 function CardFace({ offer }: { offer: CardOffer }) {
+  const [imgError, setImgError] = useState(false)
+
+  if (!imgError) {
+    return (
+      <div className="relative w-full aspect-[1.586/1] rounded-2xl overflow-hidden shadow-lg bg-slate-100">
+        <Image
+          src={offer.imageUrl}
+          alt={offer.name}
+          fill
+          className="object-cover"
+          unoptimized
+          onError={() => setImgError(true)}
+        />
+      </div>
+    )
+  }
+
+  // Fallback CSS mockup if image fails to load
   return (
     <div
       className="relative w-full aspect-[1.586/1] rounded-2xl overflow-hidden shadow-lg select-none"
       style={{ background: `linear-gradient(135deg, ${offer.color} 0%, ${lighten(offer.color, 55)} 100%)` }}
     >
-      {/* Decorative circles */}
       <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/15" />
       <div className="absolute -right-2 top-14 w-20 h-20 rounded-full bg-white/10" />
       <div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
-
       <div className="absolute inset-0 p-5 flex flex-col justify-between">
-        {/* Top row */}
         <div className="flex items-start justify-between">
           <p className="text-[11px] font-bold uppercase tracking-widest text-white/80 drop-shadow">{offer.bank}</p>
-          {/* EMV chip */}
           <div className="w-9 h-7 rounded-md bg-gradient-to-br from-yellow-200 to-yellow-400 shadow flex items-center justify-center">
             <div className="w-6 h-4 rounded border border-yellow-600/40 grid grid-cols-3 grid-rows-2 gap-px p-0.5">
               {Array.from({ length: 6 }).map((_, i) => (
@@ -42,14 +57,11 @@ function CardFace({ offer }: { offer: CardOffer }) {
             </div>
           </div>
         </div>
-
-        {/* Bottom row */}
         <div className="flex items-end justify-between">
           <div>
             <p className="text-white/60 text-[10px] tracking-widest font-mono mb-1">•••• •••• •••• ••••</p>
             <p className="text-white font-bold text-sm leading-tight drop-shadow-sm max-w-[160px] truncate">{offer.name}</p>
           </div>
-          {/* Card network badge */}
           <div className="shrink-0">
             {offer.cardType === 'Visa' && (
               <span className="text-white font-black text-lg italic tracking-tight drop-shadow">VISA</span>
