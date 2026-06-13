@@ -1,6 +1,5 @@
 'use client'
 import { useState, useMemo } from 'react'
-import Image from 'next/image'
 import { ExternalLink, BadgeCheck, Tag, Wallet, TrendingUp } from 'lucide-react'
 import { CARD_OFFERS, ALL_TAGS, CardOffer } from '@/lib/card-offers'
 import { cn } from '@/lib/utils'
@@ -20,24 +19,6 @@ function lighten(hex: string, amount: number) {
 }
 
 function CardFace({ offer }: { offer: CardOffer }) {
-  const [imgError, setImgError] = useState(false)
-
-  if (!imgError) {
-    return (
-      <div className="relative w-full aspect-[1.586/1] rounded-2xl overflow-hidden shadow-lg bg-slate-100">
-        <Image
-          src={offer.imageUrl}
-          alt={offer.name}
-          fill
-          className="object-cover"
-          unoptimized
-          onError={() => setImgError(true)}
-        />
-      </div>
-    )
-  }
-
-  // Fallback CSS mockup if image fails to load
   return (
     <div
       className="relative w-full aspect-[1.586/1] rounded-2xl overflow-hidden shadow-lg select-none"
@@ -46,6 +27,7 @@ function CardFace({ offer }: { offer: CardOffer }) {
       <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-white/15" />
       <div className="absolute -right-2 top-14 w-20 h-20 rounded-full bg-white/10" />
       <div className="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
+
       <div className="absolute inset-0 p-5 flex flex-col justify-between">
         <div className="flex items-start justify-between">
           <p className="text-[11px] font-bold uppercase tracking-widest text-white/80 drop-shadow">{offer.bank}</p>
@@ -85,13 +67,11 @@ function CardFace({ offer }: { offer: CardOffer }) {
 function CardOfferCard({ offer }: { offer: CardOffer }) {
   return (
     <div className="rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
-      {/* Card visual */}
       <div className="p-4 pb-2">
         <CardFace offer={offer} />
       </div>
 
       <div className="px-4 pb-4 flex-1 flex flex-col gap-3">
-        {/* Key stat */}
         <div className="flex items-center gap-2">
           {offer.cashbackRate !== null ? (
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-green-50 text-green-700">
@@ -106,7 +86,6 @@ function CardOfferCard({ offer }: { offer: CardOffer }) {
           )}
         </div>
 
-        {/* Highlights */}
         <ul className="space-y-1">
           {offer.highlights.map((h, i) => (
             <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
@@ -116,7 +95,6 @@ function CardOfferCard({ offer }: { offer: CardOffer }) {
           ))}
         </ul>
 
-        {/* Tags */}
         <div className="flex flex-wrap gap-1 mt-auto pt-1">
           {offer.tags.map(tag => (
             <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-medium">
@@ -125,7 +103,6 @@ function CardOfferCard({ offer }: { offer: CardOffer }) {
           ))}
         </div>
 
-        {/* Footer */}
         <div className="flex items-center justify-between border-t border-slate-100 pt-2">
           <div className="text-xs text-slate-500 flex items-center gap-1">
             <Wallet className="h-3 w-3" />
@@ -141,7 +118,6 @@ function CardOfferCard({ offer }: { offer: CardOffer }) {
         </div>
       </div>
 
-      {/* CTA */}
       <a
         href={offer.affiliateUrl}
         target="_blank"
@@ -171,22 +147,18 @@ export function HubClient() {
 
   const filtered = useMemo(() => {
     let list = [...CARD_OFFERS]
-
     if (selectedTags.size > 0) {
       list = list.filter(c => [...selectedTags].every(t => c.tags.includes(t)))
     }
-
     if (feeFilter === 'free') {
       list = list.filter(c => c.annualFee === 0)
     }
-
     list.sort((a, b) => {
       if (sort === 'cashback') return (b.cashbackRate ?? 0) - (a.cashbackRate ?? 0)
       if (sort === 'income') return a.minAnnualIncome - b.minAnnualIncome
       if (sort === 'fee') return a.annualFee - b.annualFee
       return 0
     })
-
     return list
   }, [selectedTags, sort, feeFilter])
 
@@ -203,7 +175,6 @@ export function HubClient() {
         ℹ️ Links below are affiliate links via RinggitPlus. We may earn a small commission at no extra cost to you.
       </div>
 
-      {/* Filters */}
       <div className="space-y-3">
         <div className="flex flex-wrap gap-2">
           {ALL_TAGS.map(tag => (

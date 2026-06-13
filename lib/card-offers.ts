@@ -11,7 +11,6 @@ export interface CardOffer {
   tags: string[]
   highlights: string[]
   affiliateUrl: string
-  imageUrl: string
   color: string
   applyLabel: string
 }
@@ -34,7 +33,6 @@ export const CARD_OFFERS: CardOffer[] = [
       'Up to 12% cashback at Maybank partner merchants',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/Maybank-2-Gold-and-Platinum-Visa-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/Maybank_2_Gold_and_Platinum_Visa_Credit_Card.png',
     color: '#FFB300',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -55,7 +53,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '0.2% unlimited cashback on all other spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/CIMB-Cash-Rebate-Platinum-Mastercard.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/CIMB_Cash_Rebate_Platinum_Mastercard.png',
     color: '#E53935',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -76,7 +73,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '0.2% base cashback on all spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/Hong-Leong-Cashback-Card-Mastercard.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/Hong_Leong_Cashback_Card_Mastercard.png',
     color: '#1565C0',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -97,7 +93,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '0.5% cashback on all other spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/Public-Bank-Quantum-Visa-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/Public_Bank_Quantum_Visa_Credit_Card.png',
     color: '#2E7D32',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -118,7 +113,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '2x BonusLink Points on all other spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/AmBank-BonusLink-Visa-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/AmBank_BonusLink_Visa_Credit_Card.png',
     color: '#F4511E',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -139,7 +133,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '0.5% cashback on all other spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/RHB-Smart-Value-Mastercard-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/RHB_Smart_Value_Mastercard_Credit_Card.png',
     color: '#5E35B1',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -160,7 +153,6 @@ export const CARD_OFFERS: CardOffer[] = [
       'Complimentary travel insurance up to RM1M',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/HSBC-Advance-Visa-Platinum-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/HSBC_Advance_Visa_Platinum_Credit_Card.png',
     color: '#D32F2F',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -181,7 +173,6 @@ export const CARD_OFFERS: CardOffer[] = [
       '1x VOYAGE Miles on all other spend',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/OCBC-Titanium-Mastercard-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/OCBC_Titanium_Mastercard_Credit_Card.png',
     color: '#00695C',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -202,7 +193,6 @@ export const CARD_OFFERS: CardOffer[] = [
       'No minimum spend required',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/Standard-Chartered-Simply-Cash-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/Standard_Chartered_Simply_Cash_Credit_Card.png',
     color: '#0277BD',
     applyLabel: 'Apply via RinggitPlus',
   },
@@ -223,7 +213,6 @@ export const CARD_OFFERS: CardOffer[] = [
       'Auto-switch to highest cashback category monthly',
     ],
     affiliateUrl: 'https://ringgitplus.com/en/credit-card/Alliance-Bank-YOU-Visa-Credit-Card.html',
-    imageUrl: 'https://ringgitplus.com/assets/img/credit-card/Alliance_Bank_YOU_Visa_Credit_Card.png',
     color: '#E91E63',
     applyLabel: 'Apply via RinggitPlus',
   },
