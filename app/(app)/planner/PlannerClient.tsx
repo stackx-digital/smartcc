@@ -78,7 +78,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       due_date: format(r.dueDate, 'yyyy-MM-dd'),
       was_recommended: i === 0,
     }))
-    const { error } = await createClient().from('float_calculations').insert(rows)
+    const { error } = await supabase.from('float_calculations').insert(rows)
     if (error) toast.error('Failed to save calculation: ' + error.message)
   }
 

@@ -27,14 +27,17 @@ export async function POST(req: NextRequest) {
   if (!cards?.length) return NextResponse.json({ sent: 0 })
 
   const today = new Date()
+  // Strip time for stable day-difference arithmetic (no DST or time-of-day issues)
+  const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate())
   let sent = 0
 
   for (const card of cards) {
     // Skip cards already paid
     if (card.current_balance === 0) continue
 
-    const { dueDate } = calculateFloat(today, card.statement_day, card.due_day_offset)
-    const daysUntil = Math.ceil((dueDate.getTime() - today.getTime()) / 86400000)
+    const { dueDate } = calculateFloat(todayMidnight, card.statement_day, card.due_day_offset)
+    const dueMidnight = new Date(dueDate.getFullYear(), dueDate.getMonth(), dueDate.getDate())
+    const daysUntil = Math.round((dueMidnight.getTime() - todayMidnight.getTime()) / 86400000)
 
     // Skip if due date already passed or not yet within reminder window
     if (daysUntil < 0 || daysUntil > (card.reminder_days_before ?? 3)) continue
