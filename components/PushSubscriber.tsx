@@ -33,11 +33,12 @@ export function PushSubscriber() {
       if (subscribed) {
         const sub = await reg.pushManager.getSubscription()
         if (sub) {
-          await fetch('/api/push/subscribe', {
+          const res = await fetch('/api/push/subscribe', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ endpoint: sub.endpoint }),
           })
+          if (!res.ok) throw new Error('Server failed to remove subscription.')
           await sub.unsubscribe()
           setSubscribed(false)
           toast.success('Push notifications disabled.')
@@ -53,11 +54,15 @@ export function PushSubscriber() {
           applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
         })
         const json = sub.toJSON()
-        await fetch('/api/push/subscribe', {
+        const res = await fetch('/api/push/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ endpoint: sub.endpoint, keys: json.keys }),
         })
+        if (!res.ok) {
+          await sub.unsubscribe()
+          throw new Error('Server failed to save subscription.')
+        }
         setSubscribed(true)
         toast.success('Push notifications enabled! You\'ll be reminded before due dates.')
       }

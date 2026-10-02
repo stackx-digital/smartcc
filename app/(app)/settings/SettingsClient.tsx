@@ -23,12 +23,16 @@ export function SettingsClient({ profile }: { profile: Profile | null }) {
 
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
+    if (!profile?.id) {
+      toast.error('Profile not loaded. Please refresh.')
+      return
+    }
     setSaving(true)
     const supabase = createClient()
     const { error } = await supabase
       .from('profiles')
       .update({ full_name: fullName })
-      .eq('id', profile?.id)
+      .eq('id', profile.id)
     if (error) toast.error(error.message)
     else toast.success('Profile updated!')
     setSaving(false)
@@ -36,11 +40,18 @@ export function SettingsClient({ profile }: { profile: Profile | null }) {
 
   async function handleDeleteAccount() {
     setDeleting(true)
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    toast.success('Account deleted.')
-    router.push('/')
-    setDeleting(false)
+    try {
+      const res = await fetch('/api/account/delete', { method: 'DELETE' })
+      if (!res.ok) throw new Error(await res.text())
+      const supabase = createClient()
+      await supabase.auth.signOut()
+      toast.success('Account deleted.')
+      router.push('/')
+    } catch {
+      toast.error('Failed to delete account. Please contact support.')
+    } finally {
+      setDeleting(false)
+    }
   }
 
   const isPro = profile?.plan === 'pro'

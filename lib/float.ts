@@ -16,8 +16,11 @@ export interface TrafficLight {
 
 export function getNextStatementDate(purchaseDate: Date, statementDay: number): Date {
   const d = new Date(purchaseDate)
+  // Compare calendar dates only (strip time) so a purchase on the statement day
+  // itself uses the current month's statement date, not next month's.
+  const todayMidnight = new Date(d.getFullYear(), d.getMonth(), d.getDate())
   let result = new Date(d.getFullYear(), d.getMonth(), statementDay)
-  if (result <= d) {
+  if (result < todayMidnight) {
     result = new Date(d.getFullYear(), d.getMonth() + 1, statementDay)
   }
   return result
@@ -37,8 +40,9 @@ export function calculateFloat(purchaseDate: Date, statementDay: number, dueDayO
 export function getTrafficLight(statementDay: number): TrafficLight {
   const today = new Date()
   const dayOfMonth = today.getDate()
-  const daysBefore = (statementDay - dayOfMonth + 30) % 30
-  const daysAfter = ((dayOfMonth - statementDay) % 30 + 30) % 30
+  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
+  const daysBefore = (statementDay - dayOfMonth + daysInMonth) % daysInMonth
+  const daysAfter = ((dayOfMonth - statementDay) % daysInMonth + daysInMonth) % daysInMonth
   const { floatDays } = calculateFloat(today, statementDay)
 
   if (daysBefore >= 1 && daysBefore <= 3) {
