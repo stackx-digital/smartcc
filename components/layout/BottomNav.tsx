@@ -1,14 +1,14 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Calculator, CreditCard, History, BookOpen } from 'lucide-react'
+import { LayoutDashboard, Calculator, CreditCard, Receipt, BookOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   { href: '/dashboard', label: 'Home', icon: LayoutDashboard },
   { href: '/planner', label: 'Planner', icon: Calculator },
   { href: '/cards', label: 'Cards', icon: CreditCard },
-  { href: '/history', label: 'History', icon: History },
+  { href: '/transactions', label: 'Transaksi', icon: Receipt },
   { href: '/tutorial', label: 'Guide', icon: BookOpen },
 ]
 
