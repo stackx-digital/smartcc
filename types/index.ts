@@ -39,6 +39,19 @@ export interface Profile {
   created_at: string
 }
 
+export interface Transaction {
+  id: string
+  user_id: string
+  card_id: string
+  description: string
+  amount: number
+  category: string
+  type: 'debit' | 'payment'
+  transaction_date: string
+  created_at: string
+  credit_cards?: Pick<CreditCard, 'name' | 'color' | 'bank'> | null
+}
+
 export interface CardWithFloat extends CreditCard {
   floatDays: number
   nextStatementDate: Date

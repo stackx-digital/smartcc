@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
-  LayoutDashboard, Calculator, CreditCard, History,
+  LayoutDashboard, Calculator, CreditCard, Receipt,
   BookOpen, Settings, LogOut, ShieldCheck, ChevronRight
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -14,7 +14,7 @@ const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/planner', label: 'Purchase Planner', icon: Calculator },
   { href: '/cards', label: 'My Cards', icon: CreditCard },
-  { href: '/history', label: 'History', icon: History },
+  { href: '/transactions', label: 'Transaksi', icon: Receipt },
   { href: '/tutorial', label: 'Guide', icon: BookOpen },
 ]
 
