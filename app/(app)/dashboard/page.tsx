@@ -40,9 +40,24 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
+  const highUtilCards = cardsWithFloat.filter(c => c.utilizationPct >= 80)
+
   return (
     <div className="p-5 md:p-8 space-y-7">
       <DueReminder cards={cardsWithFloat} />
+      {highUtilCards.length > 0 && (
+        <div className="rounded-2xl p-4 bg-red-50 border border-red-200 space-y-1">
+          {highUtilCards.map(c => (
+            <div key={c.id} className="flex items-center gap-2 text-sm text-red-700 font-medium">
+              <span>⚠️</span>
+              <span>
+                <strong>{c.name}</strong> hampir mencapai had kredit
+                {c.utilizationPct >= 100 ? ' — had kredit penuh!' : ` (${c.utilizationPct}%)`}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       {/* Page header */}
       <div className="flex items-center justify-between">
         <div>

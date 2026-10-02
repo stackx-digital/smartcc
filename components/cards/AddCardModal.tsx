@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,6 +16,21 @@ const PRESET_COLORS = [
   '#3F51B5', '#009688', '#FFC107', '#795548', '#F06292', '#26C6DA',
 ]
 
+const BANK_PRESETS: { name: string; color: string }[] = [
+  { name: 'Maybank', color: '#F6C000' },
+  { name: 'CIMB', color: '#C8102E' },
+  { name: 'Public Bank', color: '#003087' },
+  { name: 'Hong Leong', color: '#00843D' },
+  { name: 'RHB', color: '#005BAA' },
+  { name: 'AmBank', color: '#E31837' },
+  { name: 'HSBC', color: '#DB0011' },
+  { name: 'OCBC', color: '#DA3A2E' },
+  { name: 'Standard Chartered', color: '#0072AA' },
+  { name: 'Alliance', color: '#C8102E' },
+  { name: 'BSN', color: '#005EB8' },
+  { name: 'Agrobank', color: '#006747' },
+]
+
 interface AddCardModalProps {
   open: boolean
   onClose: () => void
@@ -26,6 +41,8 @@ interface AddCardModalProps {
 
 export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: AddCardModalProps) {
   const [loading, setLoading] = useState(false)
+  const [bankFocused, setBankFocused] = useState(false)
+  const bankRef = useRef<HTMLInputElement>(null)
   const [form, setForm] = useState({
     name: editCard?.name || '',
     bank: editCard?.bank || '',
@@ -40,6 +57,15 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
 
   function update(key: string, value: string) {
     setForm(prev => ({ ...prev, [key]: value }))
+  }
+
+  const bankSuggestions = bankFocused && form.bank.length > 0
+    ? BANK_PRESETS.filter(p => p.name.toLowerCase().includes(form.bank.toLowerCase()))
+    : []
+
+  function selectBankPreset(preset: { name: string; color: string }) {
+    setForm(prev => ({ ...prev, bank: preset.name, color: preset.color }))
+    setBankFocused(false)
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -92,9 +118,32 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
               <Label>Card Name</Label>
               <Input placeholder="e.g. Maybank Visa Gold" value={form.name} onChange={e => update('name', e.target.value)} required />
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 relative">
               <Label>Bank</Label>
-              <Input placeholder="e.g. Maybank" value={form.bank} onChange={e => update('bank', e.target.value)} />
+              <Input
+                ref={bankRef}
+                placeholder="e.g. Maybank"
+                value={form.bank}
+                onChange={e => update('bank', e.target.value)}
+                onFocus={() => setBankFocused(true)}
+                onBlur={() => setTimeout(() => setBankFocused(false), 150)}
+                autoComplete="off"
+              />
+              {bankSuggestions.length > 0 && (
+                <div className="absolute z-20 top-full left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 flex flex-wrap gap-1.5 mt-1">
+                  {bankSuggestions.map(preset => (
+                    <button
+                      key={preset.name}
+                      type="button"
+                      className="flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium border border-slate-200 hover:border-slate-400 transition-colors bg-white"
+                      onMouseDown={() => selectBankPreset(preset)}
+                    >
+                      <span className="w-3 h-3 rounded-full inline-block flex-shrink-0" style={{ background: preset.color }} />
+                      {preset.name}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -150,6 +199,13 @@ export function AddCardModal({ open, onClose, onSuccess, userId, editCard }: Add
                 />
               ))}
             </div>
+            {/* Show currently selected color if it's a bank preset color not in the swatches */}
+            {!PRESET_COLORS.includes(form.color) && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span className="w-6 h-6 rounded-full inline-block border border-slate-200" style={{ background: form.color }} />
+                Bank preset: {form.color}
+              </div>
+            )}
           </div>
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>

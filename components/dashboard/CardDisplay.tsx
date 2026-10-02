@@ -101,6 +101,7 @@ export function CardDisplay({ card }: CardDisplayProps) {
 
   const utilPct = card.credit_limit > 0 ? Math.round((balance / card.credit_limit) * 100) : 0
   const isUrgent = card.daysUntilDue <= 5
+  // utilPct used both in card face badge and utilization bar below
   const utilColor = utilPct > 70 ? '#ef4444' : utilPct > 30 ? '#f59e0b' : '#22c55e'
   const isPaid = balance === 0
 
@@ -134,7 +135,15 @@ export function CardDisplay({ card }: CardDisplayProps) {
 
         {/* Top row: bank + chip */}
         <div className="flex justify-between items-start relative z-10">
-          <p className="text-xs font-semibold uppercase tracking-widest text-white/80">{card.bank}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/80">{card.bank}</p>
+            {utilPct >= 100 && (
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-red-600 text-white border border-red-800">Had Penuh</span>
+            )}
+            {utilPct >= 80 && utilPct < 100 && (
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-orange-500 text-white border border-orange-700">Hampir Penuh</span>
+            )}
+          </div>
           {/* EMV Chip */}
           <div className="w-9 h-7 rounded-md bg-gradient-to-br from-yellow-200 to-yellow-400 shadow-inner flex items-center justify-center">
             <div className="w-6 h-4 rounded border border-yellow-600/40 grid grid-cols-3 grid-rows-2 gap-px p-0.5">
