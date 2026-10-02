@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+// Note: modal form uses native <select> to avoid Radix portal z-index issues
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 
@@ -115,31 +116,29 @@ function AddTransactionModal({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <Label>Kad Kredit</Label>
-            <Select value={form.card_id} onValueChange={v => update('card_id', v)}>
-              <SelectTrigger><SelectValue placeholder="Pilih kad..." /></SelectTrigger>
-              <SelectContent position="popper" className="z-[200]">
-                {cards.map(c => (
-                  <SelectItem key={c.id} value={c.id}>
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full inline-block" style={{ background: c.color }} />
-                      {c.name}
-                    </span>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <select
+              value={form.card_id}
+              onChange={e => update('card_id', e.target.value)}
+              className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+            >
+              <option value="">Pilih kad...</option>
+              {cards.map(c => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
               <Label>Jenis</Label>
-              <Select value={form.type} onValueChange={v => update('type', v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent position="popper" className="z-[200]">
-                  <SelectItem value="debit">Perbelanjaan</SelectItem>
-                  <SelectItem value="payment">Bayaran Kad</SelectItem>
-                </SelectContent>
-              </Select>
+              <select
+                value={form.type}
+                onChange={e => update('type', e.target.value)}
+                className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                <option value="debit">Perbelanjaan</option>
+                <option value="payment">Bayaran Kad</option>
+              </select>
             </div>
             <div className="space-y-1.5">
               <Label>Amaun (RM)</Label>
@@ -155,14 +154,15 @@ function AddTransactionModal({
           {form.type === 'debit' && (
             <div className="space-y-1.5">
               <Label>Kategori</Label>
-              <Select value={form.category} onValueChange={v => update('category', v)}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent position="popper" className="z-[200]">
-                  {CATEGORIES.filter(c => c.value !== 'payment').map(c => (
-                    <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <select
+                value={form.category}
+                onChange={e => update('category', e.target.value)}
+                className="w-full h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+              >
+                {CATEGORIES.filter(c => c.value !== 'payment').map(c => (
+                  <option key={c.value} value={c.value}>{c.label}</option>
+                ))}
+              </select>
             </div>
           )}
 
@@ -284,14 +284,14 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
         </div>
         <Select value={filterCard} onValueChange={setFilterCard}>
           <SelectTrigger className="h-8 text-xs w-auto min-w-[120px]"><SelectValue placeholder="Semua Kad" /></SelectTrigger>
-          <SelectContent position="popper" className="z-[200]">
+          <SelectContent position="item-aligned" className="z-[9999]">
             <SelectItem value="all">Semua Kad</SelectItem>
             {cards.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
           </SelectContent>
         </Select>
         <Select value={filterType} onValueChange={setFilterType}>
           <SelectTrigger className="h-8 text-xs w-auto min-w-[120px]"><SelectValue placeholder="Semua Jenis" /></SelectTrigger>
-          <SelectContent position="popper" className="z-[200]">
+          <SelectContent position="item-aligned" className="z-[9999]">
             <SelectItem value="all">Semua Jenis</SelectItem>
             <SelectItem value="debit">Perbelanjaan</SelectItem>
             <SelectItem value="payment">Bayaran Kad</SelectItem>
