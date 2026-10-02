@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Transaction, CreditCard } from '@/types'
 import { toast } from 'sonner'
-import { Plus, Trash2, CreditCard as CardIcon, TrendingDown, TrendingUp, Filter } from 'lucide-react'
+import { Plus, Trash2, CreditCard as CardIcon, TrendingDown, TrendingUp, Filter, Pencil, Download } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -46,23 +46,24 @@ interface Props {
   userId: string
 }
 
-function AddTransactionModal({
-  open, onClose, onSuccess, cards, userId,
+function TransactionModal({
+  open, onClose, onSuccess, cards, userId, editTx,
 }: {
   open: boolean
   onClose: () => void
-  onSuccess: (tx: Transaction) => void
+  onSuccess: (tx: Transaction, oldTx?: Transaction) => void
   cards: Props['cards']
   userId: string
+  editTx?: Transaction
 }) {
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    card_id: '',
-    description: '',
-    amount: '',
-    category: 'others',
-    type: 'debit' as 'debit' | 'payment',
-    transaction_date: new Date().toISOString().split('T')[0],
+    card_id: editTx?.card_id ?? '',
+    description: editTx?.description ?? '',
+    amount: editTx?.amount?.toString() ?? '',
+    category: editTx?.category ?? 'others',
+    type: (editTx?.type ?? 'debit') as 'debit' | 'payment',
+    transaction_date: editTx?.transaction_date ?? new Date().toISOString().split('T')[0],
   })
 
   function update(key: string, value: string) {
@@ -75,35 +76,93 @@ function AddTransactionModal({
     setLoading(true)
     const supabase = createClient()
     const amount = parseFloat(form.amount)
+    const category = form.type === 'payment' ? 'payment' : form.category
 
-    const { data: tx, error } = await supabase
-      .from('transactions')
-      .insert({
-        user_id: userId,
-        card_id: form.card_id,
-        description: form.description,
-        amount,
-        category: form.type === 'payment' ? 'payment' : form.category,
-        type: form.type,
-        transaction_date: form.transaction_date,
-      })
-      .select('*, credit_cards(name, color, bank)')
-      .single()
+    if (editTx) {
+      // Edit mode
+      const { data: tx, error } = await supabase
+        .from('transactions')
+        .update({
+          card_id: form.card_id,
+          description: form.description,
+          amount,
+          category,
+          type: form.type,
+          transaction_date: form.transaction_date,
+        })
+        .eq('id', editTx.id)
+        .select('*, credit_cards(name, color, bank)')
+        .single()
 
-    if (error) { toast.error(error.message); setLoading(false); return }
+      if (error) { toast.error(error.message); setLoading(false); return }
 
-    // Update card balance
-    const card = cards.find(c => c.id === form.card_id)
-    if (card) {
-      const newBalance = form.type === 'payment'
-        ? Math.max(0, card.current_balance - amount)
-        : card.current_balance + amount
-      await supabase.from('credit_cards').update({ current_balance: newBalance }).eq('id', form.card_id)
+      // Recalculate balance: reverse old, apply new
+      // If card changed, need to update both cards
+      const oldCard = cards.find(c => c.id === editTx.card_id)
+      const newCard = cards.find(c => c.id === form.card_id)
+
+      if (oldCard) {
+        // Reverse old transaction on old card
+        const { data: oldCardData } = await supabase.from('credit_cards').select('current_balance').eq('id', editTx.card_id).single()
+        const oldBalance = oldCardData?.current_balance ?? oldCard.current_balance
+        const reversedBalance = editTx.type === 'payment'
+          ? oldBalance + editTx.amount
+          : Math.max(0, oldBalance - editTx.amount)
+
+        if (form.card_id === editTx.card_id) {
+          // Same card: apply new transaction on reversed balance
+          const finalBalance = form.type === 'payment'
+            ? Math.max(0, reversedBalance - amount)
+            : reversedBalance + amount
+          await supabase.from('credit_cards').update({ current_balance: finalBalance }).eq('id', editTx.card_id)
+        } else {
+          // Different card: update old card with reversed balance
+          await supabase.from('credit_cards').update({ current_balance: reversedBalance }).eq('id', editTx.card_id)
+          // Apply new transaction to new card
+          if (newCard) {
+            const { data: newCardData } = await supabase.from('credit_cards').select('current_balance').eq('id', form.card_id).single()
+            const newBalance = newCardData?.current_balance ?? newCard.current_balance
+            const finalBalance = form.type === 'payment'
+              ? Math.max(0, newBalance - amount)
+              : newBalance + amount
+            await supabase.from('credit_cards').update({ current_balance: finalBalance }).eq('id', form.card_id)
+          }
+        }
+      }
+
+      toast.success('Transaksi dikemaskini!')
+      onSuccess(tx, editTx)
+      onClose()
+    } else {
+      // Add mode
+      const { data: tx, error } = await supabase
+        .from('transactions')
+        .insert({
+          user_id: userId,
+          card_id: form.card_id,
+          description: form.description,
+          amount,
+          category,
+          type: form.type,
+          transaction_date: form.transaction_date,
+        })
+        .select('*, credit_cards(name, color, bank)')
+        .single()
+
+      if (error) { toast.error(error.message); setLoading(false); return }
+
+      const card = cards.find(c => c.id === form.card_id)
+      if (card) {
+        const newBalance = form.type === 'payment'
+          ? Math.max(0, card.current_balance - amount)
+          : card.current_balance + amount
+        await supabase.from('credit_cards').update({ current_balance: newBalance }).eq('id', form.card_id)
+      }
+
+      toast.success('Transaksi direkod!')
+      onSuccess(tx)
+      onClose()
     }
-
-    toast.success('Transaksi direkod!')
-    onSuccess(tx)
-    onClose()
     setLoading(false)
   }
 
@@ -111,7 +170,7 @@ function AddTransactionModal({
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-md overflow-visible">
         <DialogHeader>
-          <DialogTitle>Tambah Transaksi</DialogTitle>
+          <DialogTitle>{editTx ? 'Edit Transaksi' : 'Tambah Transaksi'}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
@@ -187,6 +246,7 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
     Object.fromEntries(cards.map(c => [c.id, c.current_balance]))
   )
   const [showAdd, setShowAdd] = useState(false)
+  const [editTx, setEditTx] = useState<Transaction | undefined>(undefined)
   const [filterCard, setFilterCard] = useState('all')
   const [filterType, setFilterType] = useState('all')
 
@@ -204,7 +264,6 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
 
   function handleAdded(tx: Transaction) {
     setTransactions(prev => [tx, ...prev])
-    // Update local balance display
     const card = cards.find(c => c.id === tx.card_id)
     if (card) {
       setCardBalances(prev => ({
@@ -216,12 +275,16 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
     }
   }
 
+  function handleEdited(tx: Transaction, oldTx?: Transaction) {
+    setTransactions(prev => prev.map(t => t.id === tx.id ? tx : t))
+    // Refresh card balances from DB would require a page reload; for now reflect local change
+  }
+
   async function handleDelete(tx: Transaction) {
     const supabase = createClient()
     const { error } = await supabase.from('transactions').delete().eq('id', tx.id)
     if (error) { toast.error(error.message); return }
 
-    // Reverse balance
     const card = cards.find(c => c.id === tx.card_id)
     if (card) {
       const current = cardBalances[tx.card_id] ?? card.current_balance
@@ -232,6 +295,26 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
 
     setTransactions(prev => prev.filter(t => t.id !== tx.id))
     toast.success('Transaksi dipadam.')
+  }
+
+  function handleExportCSV() {
+    const headers = ['Date', 'Description', 'Category', 'Type', 'Amount', 'Card']
+    const rows = filtered.map(tx => [
+      tx.transaction_date,
+      `"${tx.description.replace(/"/g, '""')}"`,
+      tx.category,
+      tx.type,
+      tx.amount.toFixed(2),
+      `"${(tx.credit_cards?.name ?? '').replace(/"/g, '""')}"`,
+    ])
+    const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n')
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `transactions-${new Date().toISOString().split('T')[0]}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
   }
 
   // Group by date
@@ -256,9 +339,14 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
           <h1 className="text-2xl font-bold">Transaksi</h1>
           <p className="text-muted-foreground text-sm mt-0.5">Rekod perbelanjaan kad kredit anda</p>
         </div>
-        <Button onClick={() => setShowAdd(true)} size="sm" className="gap-1.5">
-          <Plus className="h-4 w-4" /> Tambah
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={handleExportCSV} size="sm" variant="outline" className="gap-1.5">
+            <Download className="h-4 w-4" /> Export CSV
+          </Button>
+          <Button onClick={() => setShowAdd(true)} size="sm" className="gap-1.5">
+            <Plus className="h-4 w-4" /> Tambah
+          </Button>
+        </div>
       </div>
 
       {/* Summary */}
@@ -339,12 +427,20 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
                         <p className={cn('text-sm font-semibold', tx.type === 'payment' ? 'text-green-600' : 'text-red-600')}>
                           {tx.type === 'payment' ? '-' : '+'}RM{tx.amount.toLocaleString('ms-MY', { minimumFractionDigits: 2 })}
                         </p>
-                        <button
-                          onClick={() => handleDelete(tx)}
-                          className="text-muted-foreground/40 hover:text-red-400 transition-colors mt-0.5"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
+                        <div className="flex items-center gap-1.5 justify-end mt-0.5">
+                          <button
+                            onClick={() => setEditTx(tx)}
+                            className="text-muted-foreground/40 hover:text-blue-400 transition-colors"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(tx)}
+                            className="text-muted-foreground/40 hover:text-red-400 transition-colors"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )
@@ -355,13 +451,24 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
         </div>
       )}
 
-      <AddTransactionModal
+      <TransactionModal
         open={showAdd}
         onClose={() => setShowAdd(false)}
         onSuccess={handleAdded}
         cards={cards}
         userId={userId}
       />
+
+      {editTx && (
+        <TransactionModal
+          open={!!editTx}
+          onClose={() => setEditTx(undefined)}
+          onSuccess={handleEdited}
+          cards={cards}
+          userId={userId}
+          editTx={editTx}
+        />
+      )}
     </div>
   )
 }

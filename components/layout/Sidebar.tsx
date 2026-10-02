@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, Calculator, CreditCard, Receipt,
-  BookOpen, Settings, LogOut, ShieldCheck, ChevronRight
+  BookOpen, Settings, LogOut, ShieldCheck, ChevronRight, BarChart2
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase'
@@ -15,6 +15,7 @@ const navItems = [
   { href: '/planner', label: 'Purchase Planner', icon: Calculator },
   { href: '/cards', label: 'My Cards', icon: CreditCard },
   { href: '/transactions', label: 'Transaksi', icon: Receipt },
+  { href: '/analytics', label: 'Analytics', icon: BarChart2 },
   { href: '/tutorial', label: 'Guide', icon: BookOpen },
 ]
 
