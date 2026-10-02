@@ -9,6 +9,7 @@ import {
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase'
 import { Logo } from '@/components/brand/Logo'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -124,6 +125,7 @@ export function Sidebar() {
             <p className="text-xs text-slate-500 truncate">{userEmail}</p>
           </div>
         </div>
+        <ThemeToggle />
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-500 hover:text-red-400 hover:bg-red-400/5 transition-all duration-150"
