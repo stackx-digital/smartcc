@@ -108,7 +108,7 @@ function AddTransactionModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md overflow-visible">
         <DialogHeader>
           <DialogTitle>Tambah Transaksi</DialogTitle>
         </DialogHeader>
@@ -117,7 +117,7 @@ function AddTransactionModal({
             <Label>Kad Kredit</Label>
             <Select value={form.card_id} onValueChange={v => update('card_id', v)}>
               <SelectTrigger><SelectValue placeholder="Pilih kad..." /></SelectTrigger>
-              <SelectContent>
+              <SelectContent position="popper" className="z-[200]">
                 {cards.map(c => (
                   <SelectItem key={c.id} value={c.id}>
                     <span className="flex items-center gap-2">
@@ -135,7 +135,7 @@ function AddTransactionModal({
               <Label>Jenis</Label>
               <Select value={form.type} onValueChange={v => update('type', v)}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
+                <SelectContent position="popper" className="z-[200]">
                   <SelectItem value="debit">Perbelanjaan</SelectItem>
                   <SelectItem value="payment">Bayaran Kad</SelectItem>
                 </SelectContent>
@@ -157,7 +157,7 @@ function AddTransactionModal({
               <Label>Kategori</Label>
               <Select value={form.category} onValueChange={v => update('category', v)}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
-                <SelectContent>
+                <SelectContent position="popper" className="z-[200]">
                   {CATEGORIES.filter(c => c.value !== 'payment').map(c => (
                     <SelectItem key={c.value} value={c.value}>{c.label}</SelectItem>
                   ))}
@@ -284,14 +284,14 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
         </div>
         <Select value={filterCard} onValueChange={setFilterCard}>
           <SelectTrigger className="h-8 text-xs w-auto min-w-[120px]"><SelectValue placeholder="Semua Kad" /></SelectTrigger>
-          <SelectContent>
+          <SelectContent position="popper" className="z-[200]">
             <SelectItem value="all">Semua Kad</SelectItem>
             {cards.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
           </SelectContent>
         </Select>
         <Select value={filterType} onValueChange={setFilterType}>
           <SelectTrigger className="h-8 text-xs w-auto min-w-[120px]"><SelectValue placeholder="Semua Jenis" /></SelectTrigger>
-          <SelectContent>
+          <SelectContent position="popper" className="z-[200]">
             <SelectItem value="all">Semua Jenis</SelectItem>
             <SelectItem value="debit">Perbelanjaan</SelectItem>
             <SelectItem value="payment">Bayaran Kad</SelectItem>
