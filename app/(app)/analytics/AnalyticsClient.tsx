@@ -126,7 +126,7 @@ export function AnalyticsClient({ transactions, cards }: Props) {
             <XAxis dataKey="label" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={60}
               tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
-            <Tooltip formatter={(v: number) => [fmt(v), 'Perbelanjaan']} />
+            <Tooltip formatter={(v) => [fmt(Number(v)), 'Perbelanjaan']} />
             <Bar dataKey="total" radius={[6, 6, 0, 0]}>
               {monthlyTrend.map((_, i) => (
                 <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
@@ -147,7 +147,7 @@ export function AnalyticsClient({ transactions, cards }: Props) {
               <XAxis type="number" tick={{ fontSize: 11 }} axisLine={false} tickLine={false}
                 tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
               <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={90} />
-              <Tooltip formatter={(v: number) => [fmt(v), 'Jumlah']} />
+              <Tooltip formatter={(v) => [fmt(Number(v)), 'Jumlah']} />
               <Bar dataKey="total" radius={[0, 6, 6, 0]}>
                 {byCategory.map((_, i) => (
                   <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
@@ -169,7 +169,7 @@ export function AnalyticsClient({ transactions, cards }: Props) {
               <XAxis type="number" tick={{ fontSize: 11 }} axisLine={false} tickLine={false}
                 tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
               <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={100} />
-              <Tooltip formatter={(v: number) => [fmt(v), 'Jumlah']} />
+              <Tooltip formatter={(v) => [fmt(Number(v)), 'Jumlah']} />
               <Bar dataKey="total" radius={[0, 6, 6, 0]}>
                 {byCard.map((_, i) => (
                   <Cell key={i} fill={BAR_COLORS[(i + 3) % BAR_COLORS.length]} />
