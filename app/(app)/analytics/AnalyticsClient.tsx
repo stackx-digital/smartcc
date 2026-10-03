@@ -3,8 +3,10 @@ import { useMemo } from 'react'
 import { Transaction, CreditCard } from '@/types'
 import { TrendingDown, TrendingUp, BarChart2 } from 'lucide-react'
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
+  AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
+  XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer,
 } from 'recharts'
+import { useLang } from '@/components/LanguageProvider'
 
 const CATEGORIES = [
   { value: 'food', label: 'Makan & Minum' },
@@ -35,19 +37,20 @@ function fmt(n: number) {
 }
 
 export function AnalyticsClient({ transactions, cards }: Props) {
+  const { t } = useLang()
   const now = new Date()
   const thisMonth = now.toISOString().slice(0, 7)
 
   const thisMonthTxs = useMemo(() =>
-    transactions.filter(t => t.transaction_date.startsWith(thisMonth)), [transactions, thisMonth])
+    transactions.filter(tx => tx.transaction_date.startsWith(thisMonth)), [transactions, thisMonth])
 
   const totalSpentThisMonth = useMemo(() =>
-    thisMonthTxs.filter(t => t.type === 'debit').reduce((s, t) => s + t.amount, 0), [thisMonthTxs])
+    thisMonthTxs.filter(tx => tx.type === 'debit').reduce((s, tx) => s + tx.amount, 0), [thisMonthTxs])
 
   const totalPaidThisMonth = useMemo(() =>
-    thisMonthTxs.filter(t => t.type === 'payment').reduce((s, t) => s + t.amount, 0), [thisMonthTxs])
+    thisMonthTxs.filter(tx => tx.type === 'payment').reduce((s, tx) => s + tx.amount, 0), [thisMonthTxs])
 
-  // Spending by category (all 90 days, debit only)
+  // Spending by category (all 180 days, debit only)
   const byCategory = useMemo(() => {
     const map: Record<string, number> = {}
     for (const tx of transactions) {
@@ -63,7 +66,7 @@ export function AnalyticsClient({ transactions, cards }: Props) {
       .slice(0, 8)
   }, [transactions])
 
-  // Spending by card (all 90 days, debit only)
+  // Spending by card (all 180 days, debit only)
   const byCard = useMemo(() => {
     const map: Record<string, { name: string; total: number }> = {}
     for (const tx of transactions) {
@@ -76,10 +79,10 @@ export function AnalyticsClient({ transactions, cards }: Props) {
     return Object.values(map).sort((a, b) => b.total - a.total)
   }, [transactions])
 
-  // Monthly trend: last 3 months
+  // Monthly trend: last 6 months
   const monthlyTrend = useMemo(() => {
     const months: { label: string; key: string }[] = []
-    for (let i = 2; i >= 0; i--) {
+    for (let i = 5; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
       const key = d.toISOString().slice(0, 7)
       const label = d.toLocaleDateString('ms-MY', { month: 'short', year: '2-digit' })
@@ -88,8 +91,8 @@ export function AnalyticsClient({ transactions, cards }: Props) {
     return months.map(({ key, label }) => ({
       label,
       total: transactions
-        .filter(t => t.type === 'debit' && t.transaction_date.startsWith(key))
-        .reduce((s, t) => s + t.amount, 0),
+        .filter(tx => tx.type === 'debit' && tx.transaction_date.startsWith(key))
+        .reduce((s, tx) => s + tx.amount, 0),
     }))
   }, [transactions])
 
@@ -97,80 +100,101 @@ export function AnalyticsClient({ transactions, cards }: Props) {
     <div className="p-4 md:p-6 space-y-6 max-w-3xl mx-auto">
       <div>
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <BarChart2 className="h-6 w-6 text-blue-500" /> Analytics
+          <BarChart2 className="h-6 w-6 text-blue-500" /> {t('analyticsTitle')}
         </h1>
-        <p className="text-muted-foreground text-sm mt-0.5">Analisis perbelanjaan 90 hari lepas</p>
+        <p className="text-muted-foreground text-sm mt-0.5">{t('analyticsSubtitle')}</p>
       </div>
 
       {/* This month summary */}
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-            <TrendingDown className="h-4 w-4 text-red-500" /> Perbelanjaan Bulan Ini
+            <TrendingDown className="h-4 w-4 text-red-500" /> {t('spentThisMonth')}
           </div>
           <p className="text-xl font-bold text-red-600">{fmt(totalSpentThisMonth)}</p>
         </div>
         <div className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-            <TrendingUp className="h-4 w-4 text-green-500" /> Bayaran Bulan Ini
+            <TrendingUp className="h-4 w-4 text-green-500" /> {t('paidThisMonth')}
           </div>
           <p className="text-xl font-bold text-green-600">{fmt(totalPaidThisMonth)}</p>
         </div>
       </div>
 
-      {/* Monthly trend */}
+      {/* 6-month trend — AreaChart with gradient */}
       <div className="rounded-xl border bg-card p-4">
-        <h2 className="text-sm font-semibold mb-4">Trend 3 Bulan</h2>
-        <ResponsiveContainer width="100%" height={160}>
-          <BarChart data={monthlyTrend} barCategoryGap="30%">
+        <h2 className="text-sm font-semibold mb-4">{t('trend6Month')}</h2>
+        <ResponsiveContainer width="100%" height={200}>
+          <AreaChart data={monthlyTrend} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+            <defs>
+              <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.08} vertical={false} />
             <XAxis dataKey="label" tick={{ fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={60}
               tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
-            <Tooltip formatter={(v) => [fmt(Number(v)), 'Perbelanjaan']} />
-            <Bar dataKey="total" radius={[6, 6, 0, 0]}>
-              {monthlyTrend.map((_, i) => (
-                <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
-              ))}
-            </Bar>
-          </BarChart>
+            <Tooltip formatter={(v) => [fmt(Number(v)), t('spending')]} />
+            <Legend />
+            <Area
+              type="monotone"
+              dataKey="total"
+              name={t('spending')}
+              stroke="#3b82f6"
+              strokeWidth={2}
+              fill="url(#colorTotal)"
+              dot={{ r: 3, fill: '#3b82f6' }}
+              activeDot={{ r: 5 }}
+            />
+          </AreaChart>
         </ResponsiveContainer>
       </div>
 
-      {/* By category */}
+      {/* By category — PieChart donut */}
       <div className="rounded-xl border bg-card p-4">
-        <h2 className="text-sm font-semibold mb-4">Perbelanjaan Mengikut Kategori</h2>
+        <h2 className="text-sm font-semibold mb-4">{t('byCategory')}</h2>
         {byCategory.length === 0 ? (
-          <p className="text-sm text-muted-foreground text-center py-6">Tiada data</p>
+          <p className="text-sm text-muted-foreground text-center py-6">{t('noData')}</p>
         ) : (
-          <ResponsiveContainer width="100%" height={Math.max(180, byCategory.length * 36)}>
-            <BarChart data={byCategory} layout="vertical" barCategoryGap="20%">
-              <XAxis type="number" tick={{ fontSize: 11 }} axisLine={false} tickLine={false}
-                tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
-              <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={90} />
-              <Tooltip formatter={(v) => [fmt(Number(v)), 'Jumlah']} />
-              <Bar dataKey="total" radius={[0, 6, 6, 0]}>
+          <ResponsiveContainer width="100%" height={260}>
+            <PieChart>
+              <Pie
+                data={byCategory}
+                dataKey="total"
+                nameKey="name"
+                innerRadius={60}
+                outerRadius={100}
+                paddingAngle={2}
+                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                labelLine={false}
+              >
                 {byCategory.map((_, i) => (
                   <Cell key={i} fill={BAR_COLORS[i % BAR_COLORS.length]} />
                 ))}
-              </Bar>
-            </BarChart>
+              </Pie>
+              <Tooltip formatter={(v) => [fmt(Number(v)), t('total')]} />
+              <Legend />
+            </PieChart>
           </ResponsiveContainer>
         )}
       </div>
 
-      {/* By card */}
+      {/* By card — horizontal BarChart */}
       <div className="rounded-xl border bg-card p-4">
-        <h2 className="text-sm font-semibold mb-4">Perbelanjaan Mengikut Kad</h2>
+        <h2 className="text-sm font-semibold mb-4">{t('byCard')}</h2>
         {byCard.length === 0 ? (
-          <p className="text-sm text-muted-foreground text-center py-6">Tiada data</p>
+          <p className="text-sm text-muted-foreground text-center py-6">{t('noData')}</p>
         ) : (
           <ResponsiveContainer width="100%" height={Math.max(120, byCard.length * 44)}>
             <BarChart data={byCard} layout="vertical" barCategoryGap="20%">
+              <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.08} horizontal={false} />
               <XAxis type="number" tick={{ fontSize: 11 }} axisLine={false} tickLine={false}
                 tickFormatter={v => 'RM' + (v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v)} />
               <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} width={100} />
-              <Tooltip formatter={(v) => [fmt(Number(v)), 'Jumlah']} />
-              <Bar dataKey="total" radius={[0, 6, 6, 0]}>
+              <Tooltip formatter={(v) => [fmt(Number(v)), t('total')]} />
+              <Bar dataKey="total" name={t('total')} radius={[0, 6, 6, 0]}>
                 {byCard.map((_, i) => (
                   <Cell key={i} fill={BAR_COLORS[(i + 3) % BAR_COLORS.length]} />
                 ))}

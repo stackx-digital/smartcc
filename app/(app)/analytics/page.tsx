@@ -8,7 +8,7 @@ export default async function AnalyticsPage() {
   if (!user) redirect('/auth/login')
 
   const ninetyDaysAgo = new Date()
-  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90)
+  ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 180)
   const since = ninetyDaysAgo.toISOString().split('T')[0]
 
   const [{ data: transactions }, { data: cards }] = await Promise.all([
