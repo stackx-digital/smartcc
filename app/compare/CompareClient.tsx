@@ -355,7 +355,7 @@ export function CompareClient() {
                                 <h3 className="font-semibold text-white text-sm leading-tight">{card.name}</h3>
                               </div>
                               <a
-                                href={card.url}
+                                href="https://invl.me/clo21n7"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors"
@@ -404,16 +404,26 @@ export function CompareClient() {
                             )}
 
                             {/* Key info row */}
-                            <div className="flex gap-4 mt-3 text-xs text-slate-400">
-                              {card.min_income_monthly > 0 && (
-                                <span>Min. RM{card.min_income_monthly.toLocaleString()}/bln</span>
-                              )}
-                              {card.interest_free_days > 0 && (
-                                <span>{card.interest_free_days} hari interest-free</span>
-                              )}
-                              {card.interest_rate && (
-                                <span>{card.interest_rate}</span>
-                              )}
+                            <div className="flex items-center justify-between mt-3">
+                              <div className="flex gap-3 text-xs text-slate-400 flex-wrap">
+                                {card.min_income_monthly > 0 && (
+                                  <span>Min. RM{card.min_income_monthly.toLocaleString()}/bln</span>
+                                )}
+                                {card.interest_free_days > 0 && (
+                                  <span>{card.interest_free_days} hari interest-free</span>
+                                )}
+                                {card.interest_rate && (
+                                  <span>{card.interest_rate}</span>
+                                )}
+                              </div>
+                              <a
+                                href="https://invl.me/clo21n7"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-shrink-0 text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg transition-colors font-medium"
+                              >
+                                Mohon →
+                              </a>
                             </div>
                           </div>
                         </div>
