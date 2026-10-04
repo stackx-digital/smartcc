@@ -14,7 +14,7 @@ import { Loader2, Check } from 'lucide-react'
 const FREE_FEATURES = ['Sehingga 2 kad kredit', 'Kalkulator float', 'Perancang Pintar', 'Sejarah 30 hari']
 const PRO_FEATURES = ['Kad kredit tanpa had', 'Eksport CSV', 'Sejarah penuh', 'Sokongan keutamaan', 'Analitik lanjutan']
 
-export function TetapanClient({ profile }: { profile: Profil | null }) {
+export function SettingsClient({ profile }: { profile: Profile | null }) {
   const router = useRouter()
   const [fullName, setFullName] = useState(profile?.full_name || '')
   const [saving, setSaving] = useState(false)
@@ -24,7 +24,7 @@ export function TetapanClient({ profile }: { profile: Profil | null }) {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
     if (!profile?.id) {
-      toast.error('Profil not loaded. Please refresh.')
+      toast.error('Profil tidak dimuatkan. Sila muat semula.')
       return
     }
     setSaving(true)
@@ -34,7 +34,7 @@ export function TetapanClient({ profile }: { profile: Profil | null }) {
       .update({ full_name: fullName })
       .eq('id', profile.id)
     if (error) toast.error(error.message)
-    else toast.success('Profil updated!')
+    else toast.success('Profil dikemaskini!')
     setSaving(false)
   }
 
