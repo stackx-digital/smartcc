@@ -201,13 +201,13 @@ export function CardDetailClient({ card }: { card: Card }) {
               )}
               {card.interest_rate && (
                 <div className="bg-white rounded-xl p-3 border border-gray-200">
-                  <p className="text-xs text-gray-400 mb-1">Kadar Faedah</p>
+                  <p className="text-xs text-gray-400 mb-1">{card.is_islamic ? 'Kadar Keuntungan' : 'Kadar Faedah'}</p>
                   <p className="text-gray-900 font-semibold text-sm">{card.interest_rate}</p>
                 </div>
               )}
               {card.interest_free_days > 0 && (
                 <div className="bg-white rounded-xl p-3 border border-gray-200">
-                  <p className="text-xs text-gray-400 mb-1">Tempoh Bebas Faedah</p>
+                  <p className="text-xs text-gray-400 mb-1">{card.is_islamic ? 'Tempoh Bebas Keuntungan' : 'Tempoh Bebas Faedah'}</p>
                   <p className="text-gray-900 font-semibold text-sm">{card.interest_free_days} hari</p>
                 </div>
               )}
