@@ -26,7 +26,15 @@ const BANK_LOGO_SLUG: Record<string, string> = {
 }
 
 function cleanText(s: string): string {
-  return s.replace(/\n+/g, '\n').trim()
+  return s
+    .replace(/\*\*\*(.+?)\*\*\*/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/__(.+?)__/g, '$1')
+    .replace(/_(.+?)_/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
 }
 
 // Parse markdown table rows into array of string arrays
@@ -76,7 +84,7 @@ function RichText({ text }: { text: string }) {
                   <thead className="bg-gray-50">
                     <tr>
                       {parsed.headers.map((h, j) => (
-                        <th key={j} className="px-3 py-2 text-left text-xs font-semibold text-gray-600 border-b border-gray-200">{h}</th>
+                        <th key={j} className="px-3 py-2 text-left text-xs font-semibold text-gray-600 border-b border-gray-200">{cleanText(h)}</th>
                       ))}
                     </tr>
                   </thead>
@@ -84,7 +92,7 @@ function RichText({ text }: { text: string }) {
                     {parsed.rows.map((row, j) => (
                       <tr key={j} className={j % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
                         {row.map((cell, k) => (
-                          <td key={k} className="px-3 py-2 text-gray-700 border-b border-gray-100 last:border-b-0">{cell}</td>
+                          <td key={k} className="px-3 py-2 text-gray-700 border-b border-gray-100 last:border-b-0">{cleanText(cell)}</td>
                         ))}
                       </tr>
                     ))}
