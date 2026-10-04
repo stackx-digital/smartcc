@@ -62,11 +62,11 @@ export default async function DashboardPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Welcome{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}! 👋
+            Selamat Kembali{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}! 👋
           </h1>
 
           <p className="text-gray-400 text-sm mt-0.5">
-            {today.toLocaleDateString('en-MY', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+            {today.toLocaleDateString('ms-MY', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
         <PushSubscriber />
@@ -77,7 +77,7 @@ export default async function DashboardPage() {
       {cardsWithFloat.length > 0 ? (
         <>
           <div className="space-y-3">
-            <h2 className="text-base font-semibold text-gray-700">My Credit Cards</h2>
+            <h2 className="text-base font-semibold text-gray-700">Kad Kredit Saya</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {cardsWithFloat.map(card => (
                 <CardDisplay key={card.id} card={card} />
@@ -89,9 +89,9 @@ export default async function DashboardPage() {
         </>
       ) : (
         <div className="text-center py-12 text-muted-foreground">
-          <p className="text-lg">No credit cards yet.</p>
+          <p className="text-lg">Belum ada kad kredit.</p>
           <p className="text-sm mt-1">
-            <a href="/cards" className="text-primary hover:underline">Add your card</a> to get started.
+            <a href="/cards" className="text-primary hover:underline">Tambah kad anda</a> untuk mula.
           </p>
         </div>
       )}
@@ -100,7 +100,7 @@ export default async function DashboardPage() {
       <div className="rounded-2xl p-4 bg-blue-50 border border-blue-100 text-blue-800 text-sm flex gap-3 items-start">
         <span className="text-xl mt-0.5">💡</span>
         <p className="leading-relaxed">
-          <strong>Tip:</strong> Always pay your <em>Statement Balance</em> (not the Outstanding Balance) to avoid interest charges.
+          <strong>Tip:</strong> Sentiasa bayar <em>Baki Penyata</em> (bukan Baki Tertunggak) untuk elak caj faedah.
         </p>
       </div>
     </div>

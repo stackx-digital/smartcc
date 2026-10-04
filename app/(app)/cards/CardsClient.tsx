@@ -42,7 +42,7 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Card deleted.')
+      toast.success('Kad dipadam.')
       setDeleteConfirm(null)
       await refresh()
     }
@@ -52,33 +52,33 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
     <div className="p-4 md:p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">My Credit Cards</h1>
-          <p className="text-muted-foreground text-sm mt-1">{cards.length} card{cards.length !== 1 ? 's' : ''}{isFree ? ` / 2 (Free Plan)` : ''}</p>
+          <h1 className="text-2xl font-bold">Kad Kredit Saya</h1>
+          <p className="text-muted-foreground text-sm mt-1">{cards.length} kad{isFree ? ` / 2 (Pelan Percuma)` : ''}</p>
         </div>
         {atLimit ? (
           <Button disabled className="gap-2">
             <Lock className="h-4 w-4" />
-            2 Card Limit (Free)
+            Had 2 Kad (Percuma)
           </Button>
         ) : (
           <Button onClick={() => setShowAdd(true)} className="gap-2">
             <Plus className="h-4 w-4" />
-            Add Card
+            Tambah Kad
           </Button>
         )}
       </div>
 
       {atLimit && (
         <div className="rounded-lg p-4 bg-amber-50 border border-amber-200 text-amber-800 text-sm">
-          ⚠ You have reached the 2-card limit for the Free plan.{' '}
-          <a href="/settings" className="font-semibold underline">Upgrade to Pro</a> to add more cards.
+          ⚠ Anda telah mencapai had 2 kad untuk Pelan Percuma.{' '}
+          <a href="/settings" className="font-semibold underline">Naik taraf ke Pro</a> untuk tambah lebih banyak kad.
         </div>
       )}
 
       {cards.length === 0 ? (
         <div className="text-center py-16 text-muted-foreground">
-          <p className="text-lg">No cards yet.</p>
-          <Button onClick={() => setShowAdd(true)} className="mt-4">Add Your First Card</Button>
+          <p className="text-lg">Belum ada kad.</p>
+          <Button onClick={() => setShowAdd(true)} className="mt-4">Tambah Kad Pertama</Button>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -100,7 +100,7 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
                     </div>
                     <div className="flex gap-1">
                       <Badge variant="outline" className="text-xs">{card.card_type}</Badge>
-                      {!card.is_active && <Badge variant="secondary" className="text-xs">Inactive</Badge>}
+                      {!card.is_active && <Badge variant="secondary" className="text-xs">Tidak Aktif</Badge>}
                     </div>
                   </div>
 
@@ -109,7 +109,7 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
                   <div>
                     <div className="flex justify-between text-sm mb-1">
                       <span className="text-muted-foreground">
-                        {isShared ? `Utilization (Shared)` : 'Utilization'}
+                        {isShared ? `Penggunaan (Dikongsi)` : 'Penggunaan'}
                       </span>
                       <span className={cn('font-medium', utilPct > 70 ? 'text-red-600' : utilPct > 30 ? 'text-amber-600' : 'text-green-600')}>
                         {utilPct}%
@@ -120,13 +120,13 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
                       className={cn('h-1.5', utilPct > 70 ? '[&>div]:bg-red-500' : utilPct > 30 ? '[&>div]:bg-amber-500' : '[&>div]:bg-green-500')}
                     />
                     <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                      <span>RM{(isShared ? groupBalance : card.current_balance).toLocaleString()}{isShared ? ' (combined)' : ''}</span>
+                      <span>RM{(isShared ? groupBalance : card.current_balance).toLocaleString()}{isShared ? ' (gabungan)' : ''}</span>
                       <span>RM{card.credit_limit.toLocaleString()}</span>
                     </div>
                   </div>
 
                   <div className="text-sm text-muted-foreground">
-                    Statement: Day {card.statement_day} • Due: +{card.due_day_offset} days
+                    Penyata: Hari {card.statement_day} • Bayar: +{card.due_day_offset} hari
                   </div>
 
                   <div className="flex gap-2 pt-1">
@@ -136,9 +136,9 @@ export function CardsClient({ initialCards, userId, plan }: CardsClientProps) {
                     {deleteConfirm === card.id ? (
                       <>
                         <Button size="sm" variant="destructive" className="flex-1" onClick={() => handleDelete(card.id)}>
-                          Confirm?
+                          Pasti?
                         </Button>
-                        <Button size="sm" variant="outline" onClick={() => setDeleteConfirm(null)}>Cancel</Button>
+                        <Button size="sm" variant="outline" onClick={() => setDeleteConfirm(null)}>Batal</Button>
                       </>
                     ) : (
                       <Button size="sm" variant="outline" className="text-red-600 hover:text-red-700" onClick={() => setDeleteConfirm(card.id)}>

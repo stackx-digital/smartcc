@@ -30,7 +30,7 @@ export default function RegisterPage() {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Account created! Please check your email for confirmation.')
+      toast.success('Akaun dibuat! Sila semak e-mel anda untuk pengesahan.')
       router.push('/dashboard')
       router.refresh()
     }
@@ -42,39 +42,39 @@ export default function RegisterPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center items-center">
           <Logo size="md" className="mb-2" />
-          <CardTitle className="text-2xl">Create Account</CardTitle>
-          <CardDescription>Start your float optimization journey</CardDescription>
+          <CardTitle className="text-2xl">Buat Akaun</CardTitle>
+          <CardDescription>Mulakan perjalanan pengoptimuman float anda</CardDescription>
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Full Name</Label>
+              <Label htmlFor="fullName">Nama Penuh</Label>
               <Input
                 id="fullName"
                 type="text"
-                placeholder="Your name"
+                placeholder="Nama anda"
                 value={fullName}
                 onChange={e => setFullName(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">E-mel</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="email@example.com"
+                placeholder="emel@contoh.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Kata Laluan</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="Minimum 6 characters"
+                placeholder="Minimum 6 aksara"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 minLength={6}
@@ -85,12 +85,12 @@ export default function RegisterPage() {
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign Up
+              Daftar
             </Button>
             <p className="text-sm text-muted-foreground text-center">
-              Already have an account?{' '}
+              Sudah ada akaun?{' '}
               <Link href="/auth/login" className="text-primary hover:underline font-medium">
-                Log in here
+                Log masuk di sini
               </Link>
             </p>
           </CardFooter>

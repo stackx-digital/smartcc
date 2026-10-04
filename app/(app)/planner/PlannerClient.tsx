@@ -41,7 +41,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (cards.length === 0) {
-      toast.error('No active cards. Please add a card first.')
+      toast.error('Tiada kad aktif. Sila tambah kad terlebih dahulu.')
       return
     }
     setLoading(true)
@@ -49,7 +49,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const date = new Date(purchaseDate + 'T00:00:00')
     const selectedCards = cards.filter(c => selectedCardIds.has(c.id))
     if (selectedCards.length === 0) {
-      toast.error('Please select at least one card.')
+      toast.error('Sila pilih sekurang-kurangnya satu kad.')
       setLoading(false)
       return
     }
@@ -61,7 +61,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     await saveCalculations(cardResults)
     await refreshHistory()
 
-    toast.success(`Use ${cardResults[0].card.name} for the best float!`)
+    toast.success(`Guna ${cardResults[0].card.name} untuk float terbaik!`)
     setLoading(false)
   }
 
@@ -70,7 +70,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const rows = cardResults.map((r, i) => ({
       user_id: userId,
       card_id: r.card.id,
-      item_name: itemName || 'Unnamed',
+      item_name: itemName || 'Tanpa Nama',
       purchase_date: purchaseDate,
       amount: parseFloat(amount) || 0,
       float_days: r.floatDays,
@@ -79,7 +79,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       was_recommended: i === 0,
     }))
     const { error } = await supabase.from('float_calculations').insert(rows)
-    if (error) toast.error('Failed to save calculation: ' + error.message)
+    if (error) toast.error('Gagal simpan pengiraan: ' + error.message)
   }
 
   async function refreshHistory() {
@@ -103,10 +103,10 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const supabase = createClient()
     const { error } = await supabase.from('float_calculations').delete().eq('id', id)
     if (error) {
-      toast.error('Failed to delete: ' + error.message)
+      toast.error('Gagal padam: ' + error.message)
     } else {
       setHistory(prev => prev.filter(h => h.id !== id))
-      toast.success('Record deleted.')
+      toast.success('Rekod dipadam.')
     }
     setDeletingId(null)
   }
@@ -121,13 +121,13 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
     const supabase = createClient()
     const { error } = await supabase
       .from('float_calculations')
-      .update({ item_name: editItemName || 'Unnamed', amount: parseFloat(editAmount) || 0 })
+      .update({ item_name: editItemName || 'Tanpa Nama', amount: parseFloat(editAmount) || 0 })
       .eq('id', id)
     if (error) {
-      toast.error('Failed to update: ' + error.message)
+      toast.error('Gagal kemaskini: ' + error.message)
     } else {
-      setHistory(prev => prev.map(h => h.id === id ? { ...h, item_name: editItemName || 'Unnamed', amount: parseFloat(editAmount) || 0 } : h))
-      toast.success('Record updated.')
+      setHistory(prev => prev.map(h => h.id === id ? { ...h, item_name: editItemName || 'Tanpa Nama', amount: parseFloat(editAmount) || 0 } : h))
+      toast.success('Rekod dikemaskini.')
       setEditingId(null)
     }
   }
@@ -141,19 +141,19 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
   return (
     <div className="p-4 md:p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Smart Purchase Planner</h1>
-        <p className="text-muted-foreground text-sm mt-1">Find the best card for your purchase</p>
+        <h1 className="text-2xl font-bold">Perancang Pembelian Pintar</h1>
+        <p className="text-muted-foreground text-sm mt-1">Cari kad terbaik untuk pembelian anda</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Enter Purchase Details</CardTitle>
+          <CardTitle className="text-base">Masukkan Butiran Pembelian</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="purchaseDate">Purchase Date</Label>
+                <Label htmlFor="purchaseDate">Tarikh Pembelian</Label>
                 <Input
                   id="purchaseDate"
                   type="date"
@@ -163,16 +163,16 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="itemName">Item Name</Label>
+                <Label htmlFor="itemName">Nama Item</Label>
                 <Input
                   id="itemName"
-                  placeholder="e.g. Laptop, Phone..."
+                  placeholder="cth. Laptop, Telefon..."
                   value={itemName}
                   onChange={e => setItemName(e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (RM)</Label>
+                <Label htmlFor="amount">Jumlah (RM)</Label>
                 <Input
                   id="amount"
                   type="number"
@@ -187,11 +187,11 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
             {/* Card selector */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label>Cards to Compare</Label>
+                <Label>Kad untuk Dibanding</Label>
                 <div className="flex gap-2 text-xs">
-                  <button type="button" onClick={() => setSelectedCardIds(new Set(cards.map(c => c.id)))} className="text-blue-500 hover:underline">All</button>
+                  <button type="button" onClick={() => setSelectedCardIds(new Set(cards.map(c => c.id)))} className="text-blue-500 hover:underline">Semua</button>
                   <span className="text-slate-300">|</span>
-                  <button type="button" onClick={() => setSelectedCardIds(new Set())} className="text-slate-400 hover:underline">None</button>
+                  <button type="button" onClick={() => setSelectedCardIds(new Set())} className="text-slate-400 hover:underline">Tiada</button>
                 </div>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -225,7 +225,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
 
             <Button type="submit" disabled={loading || cards.length === 0 || selectedCardIds.size === 0}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Calculate Float
+              Kira Float
             </Button>
           </form>
         </CardContent>
@@ -236,23 +236,23 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
           <div className="rounded-lg p-4 bg-[#EAF3DE] border border-[#3B6D11]/20">
             <div className="flex items-center gap-2 mb-2">
               <Trophy className="h-5 w-5 text-[#3B6D11]" />
-              <span className="font-bold text-[#3B6D11] text-lg">Best Recommendation!</span>
+              <span className="font-bold text-[#3B6D11] text-lg">Cadangan Terbaik!</span>
             </div>
             <p className="text-[#3B6D11] font-medium">
               Use <strong>{results[0].card.name}</strong>! Get{' '}
               <strong>{results[0].floatDays} days float</strong>
               {results.length > 1 && (
-                <span className="font-normal"> ({results[0].floatDays - results[results.length - 1].floatDays} days more than {results[results.length - 1].card.name})</span>
+                <span className="font-normal"> ({results[0].floatDays - results[results.length - 1].floatDays} hari lebih dari {results[results.length - 1].card.name})</span>
               )}
             </p>
             <p className="text-sm text-[#3B6D11]/80 mt-1">
-              Due: {format(results[0].dueDate, 'dd MMM yyyy')}
+              Bayar: {format(results[0].dueDate, 'dd MMM yyyy')}
             </p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Float Comparison — All Cards</CardTitle>
+              <CardTitle className="text-base">Perbandingan Float — Semua Kad</CardTitle>
             </CardHeader>
             <CardContent>
               <FloatBarChart data={chartData} />
@@ -281,7 +281,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
       {history.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Recent Calculations</CardTitle>
+            <CardTitle className="text-base">Pengiraan Terkini</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -292,7 +292,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                       <Input
                         value={editItemName}
                         onChange={e => setEditItemName(e.target.value)}
-                        placeholder="Item name"
+                        placeholder="Nama item"
                         className="h-7 text-xs flex-1"
                       />
                       <Input
@@ -316,7 +316,7 @@ export function PlannerClient({ cards, initialHistory, userId }: PlannerClientPr
                       <div className="flex-1 min-w-0">
                         <span className="font-medium">{h.item_name}</span>
                         {h.was_recommended && (
-                          <span className="ml-2 text-xs text-yellow-600">⭐ Recommended</span>
+                          <span className="ml-2 text-xs text-yellow-600">⭐ Disyorkan</span>
                         )}
                         <p className="text-xs text-muted-foreground">
                           {format(new Date(h.purchase_date), 'dd MMM yyyy')} •{' '}

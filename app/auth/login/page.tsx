@@ -25,7 +25,7 @@ export default function LoginPage() {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Login successful!')
+      toast.success('Log masuk berjaya!')
       router.push('/dashboard')
       router.refresh()
     }
@@ -37,23 +37,23 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center items-center">
           <Logo size="md" className="mb-2" />
-          <CardDescription>Sign in to your account</CardDescription>
+          <CardDescription>Masuk ke akaun anda</CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">E-mel</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="email@example.com"
+                placeholder="emel@contoh.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Kata Laluan</Label>
               <Input
                 id="password"
                 type="password"
@@ -67,12 +67,12 @@ export default function LoginPage() {
           <CardFooter className="flex flex-col gap-3">
             <Button type="submit" className="w-full" disabled={loading}>
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Log In
+              Log Masuk
             </Button>
             <p className="text-sm text-muted-foreground text-center">
-              Don&apos;t have an account?{' '}
+              Belum ada akaun?{' '}
               <Link href="/auth/register" className="text-primary hover:underline font-medium">
-                Sign up here
+                Daftar di sini
               </Link>
             </p>
           </CardFooter>
