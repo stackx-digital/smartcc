@@ -99,11 +99,11 @@ type BenefitFilter = 'cashback' | 'travel' | 'petrol' | 'dining' | 'grocery' | '
 
 const BENEFIT_CHIPS: { key: BenefitFilter; label: string; emoji: string }[] = [
   { key: 'cashback', label: 'Cashback', emoji: '💰' },
-  { key: 'travel', label: 'Travel', emoji: '✈️' },
+  { key: 'travel', label: 'Pelancongan', emoji: '✈️' },
   { key: 'petrol', label: 'Petrol', emoji: '⛽' },
-  { key: 'dining', label: 'Dining', emoji: '🍜' },
-  { key: 'grocery', label: 'Grocery', emoji: '🛒' },
-  { key: 'shopping', label: 'Shopping', emoji: '🛍️' },
+  { key: 'dining', label: 'Makan', emoji: '🍜' },
+  { key: 'grocery', label: 'Runcit', emoji: '🛒' },
+  { key: 'shopping', label: 'Membeli-belah', emoji: '🛍️' },
 ]
 
 // Group cards by bank, sorted by card count
@@ -251,7 +251,7 @@ export function CompareClient() {
             }`}
           >
             <SlidersHorizontal className="h-4 w-4" />
-            Filter
+            Tapis
             {activeFilterCount > 0 && (
               <span className="bg-white text-blue-600 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 {activeFilterCount}
@@ -261,7 +261,7 @@ export function CompareClient() {
 
           {activeFilterCount > 0 && (
             <button onClick={clearFilters} className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 px-3 py-2.5 rounded-xl border border-gray-200 hover:border-gray-300 transition-all">
-              <X className="h-3.5 w-3.5" /> Reset
+              <X className="h-3.5 w-3.5" /> Tetapkan Semula
             </button>
           )}
         </div>
@@ -345,7 +345,7 @@ export function CompareClient() {
         {filtered.length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <p className="text-lg">Tiada kad dijumpai</p>
-            <button onClick={clearFilters} className="mt-3 text-blue-500 underline text-sm">Reset filter</button>
+            <button onClick={clearFilters} className="mt-3 text-blue-500 underline text-sm">Tetapkan semula</button>
           </div>
         ) : (
           <div className="space-y-8">
@@ -446,7 +446,7 @@ export function CompareClient() {
                                 <p>Min. RM{card.min_income_monthly.toLocaleString()}/bln</p>
                               )}
                               {card.interest_rate && <p>{card.interest_rate}</p>}
-                              {card.interest_free_days > 0 && <p>{card.interest_free_days} hari interest-free</p>}
+                              {card.interest_free_days > 0 && <p>{card.interest_free_days} hari faedah percuma</p>}
                             </div>
 
                             {/* Buttons */}
