@@ -2,7 +2,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRight, ChevronLeft, Sparkles, ExternalLink, CheckCircle2, CreditCard } from 'lucide-react'
+import { ExternalLink, SlidersHorizontal, X, ChevronDown, ChevronUp, Search } from 'lucide-react'
 import cardsRaw from './cards-data.json'
 
 interface Card {
@@ -29,31 +29,19 @@ interface Card {
 
 const cards = cardsRaw as Card[]
 
-type Step = 'income' | 'fee' | 'benefit' | 'lifestyle' | 'results'
-
-const BENEFIT_OPTIONS = [
-  { key: 'cashback', label: 'Cashback', emoji: '💰', desc: 'Dapat balik duit setiap bulan' },
-  { key: 'travel', label: 'Travel', emoji: '✈️', desc: 'Miles, lounge, travel insurance' },
-  { key: 'dining', label: 'Makan & Minum', emoji: '🍜', desc: 'Diskaun restoran & F&B' },
-  { key: 'petrol', label: 'Petrol', emoji: '⛽', desc: 'Cashback atau rebat petrol' },
-  { key: 'grocery', label: 'Grocery', emoji: '🛒', desc: 'Jimat di supermarket & hypermarket' },
-  { key: 'shopping', label: 'Shopping', emoji: '🛍️', desc: 'Rewards untuk retail & e-commerce' },
-  { key: 'grab', label: 'Grab / e-Wallet', emoji: '📱', desc: 'Cashback untuk Grab & e-wallet' },
+const BANKS = [
+  'Semua Bank',
+  'Maybank', 'CIMB', 'Public Bank', 'Hong Leong', 'RHB', 'AmBank',
+  'UOB', 'HSBC', 'Standard Chartered', 'Alliance', 'AFFIN',
+  'BSN', 'AEON', 'Bank Islam', 'Bank Rakyat', 'OCBC', 'ICBC',
 ]
 
-const INCOME_OPTIONS = [
-  { label: 'Bawah RM2,000', value: 1500 },
-  { label: 'RM2,000 – RM3,999', value: 2500 },
-  { label: 'RM4,000 – RM7,999', value: 5000 },
-  { label: 'RM8,000 ke atas', value: 10000 },
-]
-
-function getBankFromName(name: string): string {
-  const banks = ['Maybank','CIMB','Public Bank','Hong Leong','RHB','AmBank','UOB','HSBC','Standard Chartered','Citibank','Alliance','AFFIN','BSN','AEON','Bank Islam','Bank Rakyat','OCBC','Bank Muamalat','ICBC']
+function getBank(name: string): string {
+  const banks = ['Maybank','CIMB','Public Bank','Hong Leong','RHB','AmBank','UOB','HSBC','Standard Chartered','Alliance','AFFIN','BSN','AEON','Bank Islam','Bank Rakyat','OCBC','Bank Muamalat','ICBC']
   for (const b of banks) {
     if (name.toLowerCase().includes(b.toLowerCase())) return b
   }
-  return name.split(' ')[0]
+  return 'Lain-lain'
 }
 
 const BANK_COLORS: Record<string, string> = {
@@ -66,7 +54,6 @@ const BANK_COLORS: Record<string, string> = {
   UOB: 'from-blue-900 to-blue-700',
   HSBC: 'from-red-700 to-rose-500',
   'Standard Chartered': 'from-teal-700 to-teal-500',
-  Citibank: 'from-sky-600 to-sky-400',
   Alliance: 'from-cyan-700 to-cyan-500',
   AFFIN: 'from-indigo-600 to-indigo-500',
   BSN: 'from-emerald-700 to-emerald-500',
@@ -78,294 +65,299 @@ const BANK_COLORS: Record<string, string> = {
   ICBC: 'from-red-800 to-red-600',
 }
 
-function bankColor(name: string) {
-  const bank = getBankFromName(name)
-  return BANK_COLORS[bank] || 'from-slate-600 to-slate-500'
+const INCOME_FILTERS = [
+  { label: 'Semua', value: 0 },
+  { label: '< RM2k', value: 2000 },
+  { label: 'RM2k–4k', value: 4000 },
+  { label: 'RM4k–8k', value: 8000 },
+  { label: '> RM8k', value: 99999 },
+]
+
+type BenefitFilter = 'cashback' | 'travel' | 'petrol' | 'dining' | 'grocery' | 'shopping' | 'islamic'
+
+const BENEFIT_CHIPS: { key: BenefitFilter; label: string; emoji: string }[] = [
+  { key: 'cashback', label: 'Cashback', emoji: '💰' },
+  { key: 'travel', label: 'Travel', emoji: '✈️' },
+  { key: 'petrol', label: 'Petrol', emoji: '⛽' },
+  { key: 'dining', label: 'Dining', emoji: '🍜' },
+  { key: 'grocery', label: 'Grocery', emoji: '🛒' },
+  { key: 'shopping', label: 'Shopping', emoji: '🛍️' },
+  { key: 'islamic', label: 'Islamik', emoji: '☪' },
+]
+
+// Group cards by bank, sorted by card count
+function groupByBank(list: Card[]): { bank: string; cards: Card[] }[] {
+  const map = new Map<string, Card[]>()
+  for (const c of list) {
+    const b = getBank(c.name)
+    if (!map.has(b)) map.set(b, [])
+    map.get(b)!.push(c)
+  }
+  return Array.from(map.entries())
+    .map(([bank, cards]) => ({ bank, cards }))
+    .sort((a, b) => {
+      // Known banks first, alphabetical
+      const order = ['Maybank','CIMB','Public Bank','Hong Leong','RHB','AmBank','UOB','HSBC','Standard Chartered','Alliance','AFFIN','BSN','AEON','Bank Islam','Bank Rakyat','OCBC','Bank Muamalat','ICBC']
+      const ai = order.indexOf(a.bank)
+      const bi = order.indexOf(b.bank)
+      if (ai !== -1 && bi !== -1) return ai - bi
+      if (ai !== -1) return -1
+      if (bi !== -1) return 1
+      return a.bank.localeCompare(b.bank)
+    })
 }
 
 export function CompareClient() {
-  const [step, setStep] = useState<Step>('income')
-  const [income, setIncome] = useState<number | null>(null)
-  const [wantFree, setWantFree] = useState<boolean | null>(null)
-  const [wantIslamic, setWantIslamic] = useState<boolean | null>(null)
-  const [benefits, setBenefits] = useState<Set<string>>(new Set())
-  const [showAll, setShowAll] = useState(false)
+  const [selectedBank, setSelectedBank] = useState('Semua Bank')
+  const [freeOnly, setFreeOnly] = useState(false)
+  const [incomeFilter, setIncomeFilter] = useState(0)
+  const [benefits, setBenefits] = useState<Set<BenefitFilter>>(new Set())
+  const [search, setSearch] = useState('')
+  const [showFilters, setShowFilters] = useState(false)
+  const [collapsedBanks, setCollapsedBanks] = useState<Set<string>>(new Set())
 
-  const results = useMemo(() => {
-    if (step !== 'results') return []
-    let filtered = cards.filter(c => {
-      if (income !== null && c.min_income_monthly > income) return false
-      if (wantFree && !c.is_free_annual) return false
-      if (wantIslamic && !c.is_islamic) return false
+  function toggleBenefit(k: BenefitFilter) {
+    setBenefits(prev => {
+      const n = new Set(prev)
+      n.has(k) ? n.delete(k) : n.add(k)
+      return n
+    })
+  }
+
+  function toggleBank(bank: string) {
+    setCollapsedBanks(prev => {
+      const n = new Set(prev)
+      n.has(bank) ? n.delete(bank) : n.add(bank)
+      return n
+    })
+  }
+
+  const filtered = useMemo(() => {
+    return cards.filter(c => {
+      if (selectedBank !== 'Semua Bank' && getBank(c.name) !== selectedBank) return false
+      if (freeOnly && !c.is_free_annual) return false
+      if (incomeFilter > 0) {
+        if (incomeFilter === 2000 && c.min_income_monthly >= 2000) return false
+        if (incomeFilter === 4000 && (c.min_income_monthly < 2000 || c.min_income_monthly >= 4000)) return false
+        if (incomeFilter === 8000 && (c.min_income_monthly < 4000 || c.min_income_monthly >= 8000)) return false
+        if (incomeFilter === 99999 && c.min_income_monthly < 8000) return false
+      }
+      if (benefits.has('cashback') && !c.has_cashback) return false
+      if (benefits.has('travel') && !c.is_travel) return false
+      if (benefits.has('petrol') && !c.is_petrol) return false
+      if (benefits.has('dining') && !c.is_dining) return false
+      if (benefits.has('grocery') && !c.is_grocery) return false
+      if (benefits.has('shopping') && !c.is_shopping) return false
+      if (benefits.has('islamic') && !c.is_islamic) return false
+      if (search && !c.name.toLowerCase().includes(search.toLowerCase())) return false
       return true
     })
+  }, [selectedBank, freeOnly, incomeFilter, benefits, search])
 
-    // Score by benefit match
-    filtered = filtered.map(c => {
-      let score = 0
-      if (benefits.has('cashback') && c.has_cashback) score += c.cashback_pct * 2
-      if (benefits.has('travel') && c.is_travel) score += 15
-      if (benefits.has('dining') && c.is_dining) score += 10
-      if (benefits.has('petrol') && c.is_petrol) score += 10
-      if (benefits.has('grocery') && c.is_grocery) score += 10
-      if (benefits.has('shopping') && c.is_shopping) score += 8
-      if (benefits.has('grab') && c.is_grab) score += 12
-      if (c.is_free_annual) score += 5
-      if (c.interest_free_days >= 50) score += 5
-      return { ...c, score }
-    }).sort((a: any, b: any) => b.score - a.score)
+  const grouped = useMemo(() => groupByBank(filtered), [filtered])
 
-    return filtered
-  }, [step, income, wantFree, wantIslamic, benefits])
+  const activeFilterCount = (freeOnly ? 1 : 0) + (incomeFilter > 0 ? 1 : 0) + benefits.size
 
-  const displayed = showAll ? results : results.slice(0, 6)
-
-  function toggleBenefit(key: string) {
-    setBenefits(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
-
-  function goResults() {
-    setStep('results')
-    setShowAll(false)
-  }
-
-  function reset() {
-    setStep('income')
-    setIncome(null)
-    setWantFree(null)
-    setWantIslamic(null)
+  function clearFilters() {
+    setFreeOnly(false)
+    setIncomeFilter(0)
     setBenefits(new Set())
-    setShowAll(false)
+    setSelectedBank('Semua Bank')
+    setSearch('')
   }
-
-  const progress = { income: 25, fee: 50, benefit: 75, lifestyle: 90, results: 100 }[step]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+    <div className="min-h-screen bg-slate-950 text-white">
       {/* Header */}
-      <header className="border-b border-white/5 bg-black/20 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="text-white font-bold text-lg tracking-tight">smartcc</Link>
-          {step !== 'income' && step !== 'results' && (
-            <button onClick={reset} className="text-xs text-slate-400 hover:text-white transition-colors">
-              Mula Semula
-            </button>
-          )}
+      <header className="border-b border-white/5 bg-black/30 backdrop-blur-sm sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <Link href="/" className="font-bold text-lg tracking-tight">smartcc</Link>
+          <span className="text-slate-400 text-sm hidden sm:block">Direktori Kad Kredit Malaysia</span>
         </div>
       </header>
 
-      <div className="max-w-2xl mx-auto px-4 py-8">
-        {/* Progress bar */}
-        {step !== 'results' && (
-          <div className="mb-8">
-            <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full transition-all duration-500"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
+      <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Title */}
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold">Kad Kredit Malaysia</h1>
+          <p className="text-slate-400 text-sm mt-1">{filtered.length} kad daripada {grouped.length} bank</p>
+        </div>
+
+        {/* Search + Filter bar */}
+        <div className="flex gap-3 mb-4 flex-wrap">
+          {/* Search */}
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="Cari nama kad..."
+              className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/50"
+            />
           </div>
-        )}
 
-        {/* STEP: Income */}
-        {step === 'income' && (
-          <div className="space-y-6 animate-fadeIn">
-            <div className="text-center space-y-2 mb-8">
-              <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-blue-400 text-sm mb-3">
-                <Sparkles className="h-3.5 w-3.5" /> Pencari Kad Kredit
-              </div>
-              <h1 className="text-3xl font-bold text-white">Kad Kredit Terbaik<br />Untuk Anda</h1>
-              <p className="text-slate-400">Jawab 4 soalan mudah, kami carikan kad yang paling sesuai</p>
-            </div>
+          {/* Filter toggle */}
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${
+              showFilters || activeFilterCount > 0
+                ? 'bg-blue-600 border-blue-500 text-white'
+                : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/20'
+            }`}
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+            Filter
+            {activeFilterCount > 0 && (
+              <span className="bg-white text-blue-600 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
 
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <p className="text-white font-semibold text-lg mb-1">Berapa pendapatan bulanan anda?</p>
-              <p className="text-slate-400 text-sm mb-5">Ini menentukan kad yang layak untuk anda mohon</p>
-              <div className="space-y-2">
-                {INCOME_OPTIONS.map(opt => (
-                  <button
-                    key={opt.value}
-                    onClick={() => { setIncome(opt.value); setStep('fee') }}
-                    className="w-full flex items-center justify-between p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/50 text-white transition-all group"
-                  >
-                    <span className="font-medium">{opt.label}</span>
-                    <ChevronRight className="h-4 w-4 text-slate-500 group-hover:text-blue-400 transition-colors" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* STEP: Annual Fee */}
-        {step === 'fee' && (
-          <div className="space-y-6 animate-fadeIn">
-            <button onClick={() => setStep('income')} className="flex items-center gap-1 text-slate-400 hover:text-white text-sm transition-colors">
-              <ChevronLeft className="h-4 w-4" /> Kembali
+          {activeFilterCount > 0 && (
+            <button onClick={clearFilters} className="flex items-center gap-1 text-sm text-slate-400 hover:text-white px-3 py-2.5 rounded-xl border border-white/10 hover:border-white/20 transition-all">
+              <X className="h-3.5 w-3.5" /> Reset
             </button>
+          )}
+        </div>
 
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <p className="text-white font-semibold text-lg mb-1">Yuran tahunan</p>
-              <p className="text-slate-400 text-sm mb-5">Ada kad dengan yuran tahunan percuma seumur hidup</p>
-              <div className="space-y-3">
-                {[
-                  { label: 'Mahu percuma (tiada yuran tahunan)', sub: 'Ramai pilihan kad free-for-life di Malaysia', val: true },
-                  { label: 'Tak kisah ada yuran', sub: 'Yuran berbaloi jika manfaat lebih tinggi', val: false },
-                ].map(opt => (
+        {/* Filter panel */}
+        {showFilters && (
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 mb-5 space-y-5">
+            {/* Benefit chips */}
+            <div>
+              <p className="text-xs text-slate-400 font-medium mb-2.5 uppercase tracking-wide">Faedah</p>
+              <div className="flex flex-wrap gap-2">
+                {BENEFIT_CHIPS.map(b => (
                   <button
-                    key={String(opt.val)}
-                    onClick={() => { setWantFree(opt.val); setStep('benefit') }}
-                    className="w-full text-left p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-blue-500/50 transition-all group"
-                  >
-                    <p className="text-white font-medium group-hover:text-blue-300 transition-colors">{opt.label}</p>
-                    <p className="text-slate-400 text-xs mt-0.5">{opt.sub}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <p className="text-white font-semibold mb-3">Adakah anda mahukan kad Islam (Shariah-compliant)?</p>
-              <div className="flex gap-3">
-                {[{ label: 'Ya', val: true }, { label: 'Tidak / Tak kisah', val: false }].map(opt => (
-                  <button
-                    key={String(opt.val)}
-                    onClick={() => setWantIslamic(opt.val)}
-                    className={`flex-1 py-3 rounded-xl border font-medium transition-all ${
-                      wantIslamic === opt.val
+                    key={b.key}
+                    onClick={() => toggleBenefit(b.key)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm border transition-all ${
+                      benefits.has(b.key)
                         ? 'bg-blue-600 border-blue-500 text-white'
-                        : 'bg-white/5 border-white/10 text-slate-300 hover:border-blue-500/50'
+                        : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/20'
                     }`}
                   >
-                    {opt.label}
+                    {b.emoji} {b.label}
                   </button>
                 ))}
               </div>
             </div>
-          </div>
-        )}
 
-        {/* STEP: Benefits */}
-        {step === 'benefit' && (
-          <div className="space-y-6 animate-fadeIn">
-            <button onClick={() => setStep('fee')} className="flex items-center gap-1 text-slate-400 hover:text-white text-sm transition-colors">
-              <ChevronLeft className="h-4 w-4" /> Kembali
-            </button>
-
-            <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-              <p className="text-white font-semibold text-lg mb-1">Apa faedah yang paling anda utamakan?</p>
-              <p className="text-slate-400 text-sm mb-5">Pilih satu atau lebih</p>
-              <div className="grid grid-cols-2 gap-3">
-                {BENEFIT_OPTIONS.map(opt => {
-                  const active = benefits.has(opt.key)
-                  return (
-                    <button
-                      key={opt.key}
-                      onClick={() => toggleBenefit(opt.key)}
-                      className={`p-4 rounded-xl border text-left transition-all ${
-                        active
-                          ? 'bg-blue-600/20 border-blue-500 text-white'
-                          : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/20'
-                      }`}
-                    >
-                      <div className="text-2xl mb-1">{opt.emoji}</div>
-                      <p className="font-medium text-sm">{opt.label}</p>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-tight">{opt.desc}</p>
-                      {active && <CheckCircle2 className="h-3.5 w-3.5 text-blue-400 mt-1" />}
-                    </button>
-                  )
-                })}
+            {/* Income filter */}
+            <div>
+              <p className="text-xs text-slate-400 font-medium mb-2.5 uppercase tracking-wide">Pendapatan Bulanan</p>
+              <div className="flex flex-wrap gap-2">
+                {INCOME_FILTERS.map(f => (
+                  <button
+                    key={f.value}
+                    onClick={() => setIncomeFilter(f.value)}
+                    className={`px-3 py-1.5 rounded-full text-sm border transition-all ${
+                      incomeFilter === f.value
+                        ? 'bg-blue-600 border-blue-500 text-white'
+                        : 'bg-white/5 border-white/10 text-slate-300 hover:border-white/20'
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
               </div>
             </div>
 
+            {/* Free annual fee */}
+            <div>
+              <label className="flex items-center gap-3 cursor-pointer w-fit">
+                <div
+                  onClick={() => setFreeOnly(!freeOnly)}
+                  className={`w-10 h-6 rounded-full transition-all relative ${freeOnly ? 'bg-blue-600' : 'bg-white/10'}`}
+                >
+                  <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${freeOnly ? 'left-5' : 'left-1'}`} />
+                </div>
+                <span className="text-sm text-slate-300">Yuran tahunan percuma sahaja</span>
+              </label>
+            </div>
+          </div>
+        )}
+
+        {/* Bank tabs (horizontal scroll) */}
+        <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
+          {BANKS.map(bank => (
             <button
-              onClick={goResults}
-              disabled={benefits.size === 0}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-lg hover:from-blue-500 hover:to-indigo-500 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              key={bank}
+              onClick={() => setSelectedBank(bank)}
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                selectedBank === bank
+                  ? 'bg-blue-600 border-blue-500 text-white'
+                  : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+              }`}
             >
-              <Sparkles className="h-5 w-5" />
-              Cari Kad Sesuai
+              {bank}
             </button>
+          ))}
+        </div>
+
+        {/* Results */}
+        {filtered.length === 0 ? (
+          <div className="text-center py-20 text-slate-500">
+            <p className="text-lg">Tiada kad dijumpai</p>
+            <button onClick={clearFilters} className="mt-3 text-blue-400 underline text-sm">Reset filter</button>
           </div>
-        )}
+        ) : (
+          <div className="space-y-8">
+            {grouped.map(({ bank, cards: bankCards }) => {
+              const collapsed = collapsedBanks.has(bank)
+              const initials = bank.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+              const color = BANK_COLORS[bank] || 'from-slate-600 to-slate-500'
+              return (
+                <div key={bank}>
+                  {/* Bank header */}
+                  <button
+                    onClick={() => toggleBank(bank)}
+                    className="w-full flex items-center justify-between mb-4 group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs`}>
+                        {initials}
+                      </div>
+                      <div className="text-left">
+                        <h2 className="font-semibold text-white group-hover:text-blue-300 transition-colors">{bank}</h2>
+                        <p className="text-xs text-slate-500">{bankCards.length} kad</p>
+                      </div>
+                    </div>
+                    {collapsed
+                      ? <ChevronDown className="h-4 w-4 text-slate-500" />
+                      : <ChevronUp className="h-4 w-4 text-slate-500" />
+                    }
+                  </button>
 
-        {/* RESULTS */}
-        {step === 'results' && (
-          <div className="space-y-6 animate-fadeIn">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold text-white">
-                  {results.length} Kad Ditemui
-                </h2>
-                <p className="text-slate-400 text-sm">Disusun mengikut kesesuaian untuk anda</p>
-              </div>
-              <button
-                onClick={reset}
-                className="text-sm text-blue-400 hover:text-blue-300 border border-blue-500/30 px-4 py-2 rounded-xl transition-colors"
-              >
-                Semula
-              </button>
-            </div>
-
-            {results.length === 0 ? (
-              <div className="text-center py-16 space-y-3">
-                <CreditCard className="h-12 w-12 text-slate-600 mx-auto" />
-                <p className="text-slate-400">Tiada kad yang sepadan dengan kriteria anda.</p>
-                <button onClick={reset} className="text-blue-400 underline text-sm">Cuba semula dengan kriteria berbeza</button>
-              </div>
-            ) : (
-              <>
-                <div className="space-y-4">
-                  {displayed.map((card, i) => {
-                    const bank = getBankFromName(card.name)
-                    const initials = bank.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
-                    return (
-                      <div key={card.name} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
-                        <div className="flex items-start gap-4">
+                  {/* Cards grid */}
+                  {!collapsed && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      {bankCards.map(card => (
+                        <div key={card.name} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all group flex flex-col">
                           {/* Card image */}
-                          {card.image ? (
-                            <div className="w-20 h-12 rounded-xl overflow-hidden flex-shrink-0 bg-slate-800">
+                          <div className="bg-slate-800 h-36 flex items-center justify-center p-4">
+                            {card.image ? (
                               <Image
                                 src={card.image}
                                 alt={card.name}
-                                width={80}
-                                height={48}
-                                className="w-full h-full object-cover"
+                                width={220}
+                                height={140}
+                                className="object-contain max-h-28 w-full"
                               />
-                            </div>
-                          ) : (
-                            <div className={`w-20 h-12 rounded-xl bg-gradient-to-br ${bankColor(card.name)} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-                              {initials}
-                            </div>
-                          )}
-
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-start justify-between gap-2">
-                              <div>
-                                {i === 0 && (
-                                  <span className="inline-flex items-center gap-1 text-xs bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full px-2 py-0.5 mb-1">
-                                    <Sparkles className="h-2.5 w-2.5" /> Cadangan Terbaik
-                                  </span>
-                                )}
-                                <h3 className="font-semibold text-white text-sm leading-tight">{card.name}</h3>
+                            ) : (
+                              <div className={`w-full h-24 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xl`}>
+                                {initials}
                               </div>
-                              <a
-                                href="https://invl.me/clo21n7"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-shrink-0 text-blue-400 hover:text-blue-300 transition-colors"
-                              >
-                                <ExternalLink className="h-4 w-4" />
-                              </a>
-                            </div>
+                            )}
+                          </div>
+
+                          {/* Card info */}
+                          <div className="p-4 flex flex-col flex-1">
+                            <h3 className="font-semibold text-sm text-white leading-tight mb-2">{card.name}</h3>
 
                             {/* Tags */}
-                            <div className="flex flex-wrap gap-1.5 mt-2">
+                            <div className="flex flex-wrap gap-1 mb-3">
                               {card.has_cashback && (
                                 <span className="text-xs bg-green-500/15 text-green-400 border border-green-500/20 rounded-full px-2 py-0.5">
                                   💰 {card.cashback}
@@ -373,93 +365,71 @@ export function CompareClient() {
                               )}
                               {card.is_free_annual && (
                                 <span className="text-xs bg-blue-500/15 text-blue-400 border border-blue-500/20 rounded-full px-2 py-0.5">
-                                  ✓ Percuma
+                                  Percuma
                                 </span>
                               )}
                               {card.is_travel && (
                                 <span className="text-xs bg-purple-500/15 text-purple-400 border border-purple-500/20 rounded-full px-2 py-0.5">
-                                  ✈️ Travel
+                                  ✈️
                                 </span>
                               )}
                               {card.is_petrol && (
                                 <span className="text-xs bg-orange-500/15 text-orange-400 border border-orange-500/20 rounded-full px-2 py-0.5">
-                                  ⛽ Petrol
-                                </span>
-                              )}
-                              {card.is_dining && (
-                                <span className="text-xs bg-pink-500/15 text-pink-400 border border-pink-500/20 rounded-full px-2 py-0.5">
-                                  🍜 Dining
+                                  ⛽
                                 </span>
                               )}
                               {card.is_islamic && (
                                 <span className="text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5">
-                                  ☪ Islamik
+                                  ☪
                                 </span>
                               )}
                             </div>
 
-                            {/* Description */}
-                            {card.description && (
-                              <p className="text-xs text-slate-400 mt-2 leading-relaxed line-clamp-2">{card.description}</p>
-                            )}
-
-                            {/* Key info row */}
-                            <div className="flex items-center justify-between mt-3">
-                              <div className="flex gap-3 text-xs text-slate-400 flex-wrap">
-                                {card.min_income_monthly > 0 && (
-                                  <span>Min. RM{card.min_income_monthly.toLocaleString()}/bln</span>
-                                )}
-                                {card.interest_free_days > 0 && (
-                                  <span>{card.interest_free_days} hari interest-free</span>
-                                )}
-                                {card.interest_rate && (
-                                  <span>{card.interest_rate}</span>
-                                )}
-                              </div>
-                              <a
-                                href="https://invl.me/clo21n7"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex-shrink-0 text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg transition-colors font-medium"
-                              >
-                                Mohon →
-                              </a>
+                            {/* Income & interest */}
+                            <div className="text-xs text-slate-500 space-y-0.5 mb-4 flex-1">
+                              {card.min_income_monthly > 0 && (
+                                <p>Min. RM{card.min_income_monthly.toLocaleString()}/bln</p>
+                              )}
+                              {card.interest_rate && <p>{card.interest_rate}</p>}
+                              {card.interest_free_days > 0 && <p>{card.interest_free_days} hari interest-free</p>}
                             </div>
+
+                            {/* Apply button */}
+                            <a
+                              href="https://invl.me/clo21n7"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+                            >
+                              Mohon Sekarang <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
                           </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      ))}
+                    </div>
+                  )}
                 </div>
-
-                {results.length > 6 && !showAll && (
-                  <button
-                    onClick={() => setShowAll(true)}
-                    className="w-full py-3 rounded-xl border border-white/10 text-slate-300 hover:text-white hover:border-white/20 text-sm transition-all"
-                  >
-                    Lihat {results.length - 6} kad lagi
-                  </button>
-                )}
-
-                <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-5 text-center space-y-3">
-                  <p className="text-white font-semibold">Dah ada kad kredit?</p>
-                  <p className="text-slate-400 text-sm">Gunakan smartcc untuk kira float terbaik dan elak bayar faedah</p>
-                  <Link
-                    href="/auth/login"
-                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-xl font-medium text-sm transition-colors"
-                  >
-                    Cuba Percuma <ChevronRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </>
-            )}
+              )
+            })}
           </div>
         )}
+
+        {/* CTA footer */}
+        <div className="mt-16 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/20 rounded-2xl p-8 text-center">
+          <h3 className="text-xl font-bold text-white mb-2">Dah ada kad kredit?</h3>
+          <p className="text-slate-400 text-sm mb-4">Gunakan smartcc untuk kira float terbaik — elak bayar faedah, maksimumkan 50 hari percuma</p>
+          <Link
+            href="/auth/login"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-medium transition-colors"
+          >
+            Cuba Percuma →
+          </Link>
+        </div>
       </div>
 
       <style>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </div>
   )
