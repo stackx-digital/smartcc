@@ -279,7 +279,7 @@
     "min_income_monthly": 2000,
     "annual_fee_str": "Free",
     "is_free_annual": true,
-    "cashback": "URL: https://ringgitplus.com/en/credit-card/Maybank-Islamic-Ikhwan-Mastercard-Gold-Card-i.html",
+    "cashback": "",
     "cashback_pct": 0,
     "interest_rate": "",
     "interest_free_days": 0,
@@ -290,7 +290,7 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true,
+    "has_cashback": false,
     "image": "/cards/maybank-islamic-ikhwan-mastercard-gold-card-i-54feb7d0fd1ef36571cfff76.jpg"
   },
   {
@@ -1140,7 +1140,7 @@
     "min_income_monthly": 2500,
     "annual_fee_str": "Free",
     "is_free_annual": true,
-    "cashback": "URL: https://ringgitplus.com/en/credit-card/Maybank-Islamic-Petronas-Ikhwan-Visa-Gold-Card-i.html",
+    "cashback": "",
     "cashback_pct": 0,
     "interest_rate": "",
     "interest_free_days": 0,
@@ -1151,7 +1151,7 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true,
+    "has_cashback": false,
     "image": "/cards/maybank-islamic-petronas-ikhwan-visa-gold-card-i-519489e2193821ed4a0000e7.jpg"
   },
   {
@@ -1182,7 +1182,7 @@
     "min_income_monthly": 6666,
     "annual_fee_str": "Waiver for RHB Islamic Cash Back Credit Card-i Cardholders",
     "is_free_annual": false,
-    "cashback": "Credit Cards](https://ringgitplus.com/en/credit-card/cashback/)",
+    "cashback": "",
     "cashback_pct": 0,
     "interest_rate": "",
     "interest_free_days": 0,
@@ -1193,7 +1193,7 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true,
+    "has_cashback": false,
     "image": "/cards/rhb-islamic-cash-back-credit-card-i-5bd7d7d0fea5d39b106cd0a5.jpg"
   },
   {
@@ -1224,7 +1224,7 @@
     "min_income_monthly": 2000,
     "annual_fee_str": "Waiver",
     "is_free_annual": false,
-    "cashback": "Credit Cards](https://ringgitplus.com/en/credit-card/cashback/)",
+    "cashback": "",
     "cashback_pct": 0,
     "interest_rate": "",
     "interest_free_days": 0,
@@ -1235,7 +1235,7 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true,
+    "has_cashback": false,
     "image": "/cards/ambank-islamic-visa-infinite-card-519489e2193821ed4a00003d.jpg"
   },
   {
@@ -1245,7 +1245,7 @@
     "min_income_monthly": 10000,
     "annual_fee_str": "Free",
     "is_free_annual": true,
-    "cashback": "Credit Cards](https://ringgitplus.com/en/credit-card/cashback/)",
+    "cashback": "",
     "cashback_pct": 0,
     "interest_rate": "",
     "interest_free_days": 0,
@@ -1256,7 +1256,7 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true,
+    "has_cashback": false,
     "image": "/cards/ambank-bonuslink-visa-signature-590af1db32d5e6fa36da31e8.jpg"
   },
   {
