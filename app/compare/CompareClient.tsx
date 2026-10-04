@@ -363,7 +363,7 @@ export function CompareClient() {
                     <div className="flex items-center gap-3">
                       {BANK_LOGO_SLUG[bank] ? (
                         <Image
-                          src={`/banks/${BANK_LOGO_SLUG[bank]}.svg`}
+                          src={`/banks/${BANK_LOGO_SLUG[bank]}`}
                           alt={bank}
                           width={36}
                           height={36}

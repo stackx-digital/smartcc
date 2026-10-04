@@ -19,10 +19,10 @@ function getBank(name: string): string {
 }
 
 const BANK_LOGO_SLUG: Record<string, string> = {
-  Maybank:'maybank', CIMB:'cimb', 'Public Bank':'public-bank', 'Hong Leong':'hong-leong',
-  RHB:'rhb', AmBank:'ambank', UOB:'uob', HSBC:'hsbc', 'Standard Chartered':'standard-chartered',
-  Alliance:'alliance', AFFIN:'affin', BSN:'bsn', AEON:'aeon', 'Bank Islam':'bank-islam',
-  'Bank Rakyat':'bank-rakyat', OCBC:'ocbc', 'Bank Muamalat':'bank-muamalat', ICBC:'icbc',
+  Maybank:'maybank.png', CIMB:'cimb.png', 'Public Bank':'public-bank.png', 'Hong Leong':'hong-leong.png',
+  RHB:'rhb.png', AmBank:'ambank.png', UOB:'uob.png', HSBC:'hsbc.png', 'Standard Chartered':'standard-chartered.png',
+  Alliance:'alliance.png', AFFIN:'affin.png', BSN:'bsn.jpg', AEON:'aeon.png', 'Bank Islam':'bank-islam.jpg',
+  'Bank Rakyat':'bank-rakyat.png', OCBC:'ocbc.png', 'Bank Muamalat':'bank-muamalat.svg', ICBC:'icbc.png',
 }
 
 function cleanText(s: string): string {
@@ -167,7 +167,7 @@ export function CardDetailClient({ card }: { card: Card }) {
             {/* Bank logo + name */}
             <div className="flex items-center gap-3">
               {bankLogo && (
-                <Image src={`/banks/${bankLogo}.svg`} alt={bank} width={32} height={32} className="rounded-lg" />
+                <Image src={`/banks/${bankLogo}`} alt={bank} width={32} height={32} className="rounded-lg" />
               )}
               <span className="text-gray-500 text-sm">{bank}</span>
             </div>
