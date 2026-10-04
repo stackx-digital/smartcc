@@ -53,27 +53,27 @@ export function CardDetailClient({ card }: { card: Card }) {
   const bankLogo = BANK_LOGO_SLUG[bank]
 
   const tags = [
-    card.has_cashback && { label: `💰 Cashback ${card.cashback}`, color: 'bg-green-500/15 text-green-400 border-green-500/20' },
-    card.is_free_annual && { label: '✓ Yuran Percuma', color: 'bg-blue-500/15 text-blue-400 border-blue-500/20' },
-    card.is_travel && { label: '✈️ Travel', color: 'bg-purple-500/15 text-purple-400 border-purple-500/20' },
-    card.is_petrol && { label: '⛽ Petrol', color: 'bg-orange-500/15 text-orange-400 border-orange-500/20' },
-    card.is_dining && { label: '🍜 Dining', color: 'bg-pink-500/15 text-pink-400 border-pink-500/20' },
-    card.is_grocery && { label: '🛒 Grocery', color: 'bg-lime-500/15 text-lime-400 border-lime-500/20' },
-    card.is_islamic && { label: '☪ Islamik', color: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20' },
+    card.has_cashback && { label: `💰 Cashback ${card.cashback}`, color: 'bg-green-50 text-green-700 border-green-200' },
+    card.is_free_annual && { label: '✓ Yuran Percuma', color: 'bg-blue-50 text-blue-700 border-blue-200' },
+    card.is_travel && { label: '✈️ Travel', color: 'bg-purple-50 text-purple-700 border-purple-200' },
+    card.is_petrol && { label: '⛽ Petrol', color: 'bg-orange-50 text-orange-700 border-orange-200' },
+    card.is_dining && { label: '🍜 Dining', color: 'bg-pink-50 text-pink-700 border-pink-200' },
+    card.is_grocery && { label: '🛒 Grocery', color: 'bg-lime-50 text-lime-700 border-lime-200' },
+    card.is_islamic && { label: '☪ Islamik', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
   ].filter(Boolean) as { label: string; color: string }[]
 
   const feeItems = parseFees(card.fees)
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Header */}
-      <header className="border-b border-white/5 bg-black/30 backdrop-blur-sm sticky top-0 z-30">
+      <header className="border-b border-gray-200 bg-white/90 backdrop-blur-sm sticky top-0 z-30">
         <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-4">
-          <Link href="/compare" className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm transition-colors">
+          <Link href="/compare" className="flex items-center gap-1.5 text-gray-500 hover:text-gray-900 text-sm transition-colors">
             <ArrowLeft className="h-4 w-4" /> Semua Kad
           </Link>
-          <span className="text-white/20">/</span>
-          <span className="text-slate-400 text-sm truncate">{card.name}</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-500 text-sm truncate">{card.name}</span>
         </div>
       </header>
 
@@ -81,11 +81,11 @@ export function CardDetailClient({ card }: { card: Card }) {
         {/* Hero section */}
         <div className="grid md:grid-cols-2 gap-8 items-start">
           {/* Card image */}
-          <div className="bg-slate-800/50 rounded-2xl p-8 flex items-center justify-center min-h-[220px] border border-white/5">
+          <div className="bg-white rounded-2xl p-8 flex items-center justify-center min-h-[220px] border border-gray-200 shadow-sm">
             {card.image ? (
-              <Image src={card.image} alt={card.name} width={320} height={200} className="object-contain max-h-44 w-full drop-shadow-xl" />
+              <Image src={card.image} alt={card.name} width={320} height={200} className="object-contain max-h-44 w-full drop-shadow-md" />
             ) : (
-              <CreditCard className="h-24 w-24 text-slate-600" />
+              <CreditCard className="h-24 w-24 text-gray-300" />
             )}
           </div>
 
@@ -96,10 +96,10 @@ export function CardDetailClient({ card }: { card: Card }) {
               {bankLogo && (
                 <Image src={`/banks/${bankLogo}.svg`} alt={bank} width={32} height={32} className="rounded-lg" />
               )}
-              <span className="text-slate-400 text-sm">{bank}</span>
+              <span className="text-gray-500 text-sm">{bank}</span>
             </div>
 
-            <h1 className="text-2xl font-bold leading-tight">{card.name}</h1>
+            <h1 className="text-2xl font-bold leading-tight text-gray-900">{card.name}</h1>
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2">
@@ -113,26 +113,26 @@ export function CardDetailClient({ card }: { card: Card }) {
             {/* Key stats */}
             <div className="grid grid-cols-2 gap-3 mt-2">
               {card.min_income_monthly > 0 && (
-                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-                  <p className="text-xs text-slate-500 mb-1">Pendapatan Min.</p>
-                  <p className="text-white font-semibold text-sm">RM{card.min_income_monthly.toLocaleString()}/bln</p>
+                <div className="bg-white rounded-xl p-3 border border-gray-200">
+                  <p className="text-xs text-gray-400 mb-1">Pendapatan Min.</p>
+                  <p className="text-gray-900 font-semibold text-sm">RM{card.min_income_monthly.toLocaleString()}/bln</p>
                 </div>
               )}
               {card.interest_rate && (
-                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-                  <p className="text-xs text-slate-500 mb-1">Kadar Faedah</p>
-                  <p className="text-white font-semibold text-sm">{card.interest_rate}</p>
+                <div className="bg-white rounded-xl p-3 border border-gray-200">
+                  <p className="text-xs text-gray-400 mb-1">Kadar Faedah</p>
+                  <p className="text-gray-900 font-semibold text-sm">{card.interest_rate}</p>
                 </div>
               )}
               {card.interest_free_days > 0 && (
-                <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-                  <p className="text-xs text-slate-500 mb-1">Tempoh Bebas Faedah</p>
-                  <p className="text-white font-semibold text-sm">{card.interest_free_days} hari</p>
+                <div className="bg-white rounded-xl p-3 border border-gray-200">
+                  <p className="text-xs text-gray-400 mb-1">Tempoh Bebas Faedah</p>
+                  <p className="text-gray-900 font-semibold text-sm">{card.interest_free_days} hari</p>
                 </div>
               )}
-              <div className="bg-white/5 rounded-xl p-3 border border-white/10">
-                <p className="text-xs text-slate-500 mb-1">Yuran Tahunan</p>
-                <p className={`font-semibold text-sm ${card.is_free_annual ? 'text-green-400' : 'text-white'}`}>
+              <div className="bg-white rounded-xl p-3 border border-gray-200">
+                <p className="text-xs text-gray-400 mb-1">Yuran Tahunan</p>
+                <p className={`font-semibold text-sm ${card.is_free_annual ? 'text-green-600' : 'text-gray-900'}`}>
                   {card.is_free_annual ? 'Percuma' : card.annual_fee_str || 'Tertakluk syarat'}
                 </p>
               </div>
@@ -143,7 +143,7 @@ export function CardDetailClient({ card }: { card: Card }) {
               href="https://invl.me/clo21n7"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold transition-all"
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold transition-all shadow-md"
             >
               Mohon Sekarang <ExternalLink className="h-4 w-4" />
             </a>
@@ -152,22 +152,22 @@ export function CardDetailClient({ card }: { card: Card }) {
 
         {/* Review / description */}
         {(card.review || card.description) && (
-          <section className="bg-white/5 border border-white/10 rounded-2xl p-6">
-            <h2 className="font-semibold text-lg mb-3">Tentang Kad Ini</h2>
-            <p className="text-slate-300 leading-relaxed text-sm">{card.review || card.description}</p>
+          <section className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <h2 className="font-semibold text-lg mb-3 text-gray-900">Tentang Kad Ini</h2>
+            <p className="text-gray-600 leading-relaxed text-sm">{card.review || card.description}</p>
           </section>
         )}
 
         {/* Benefits */}
         {card.benefits.length > 0 && (
           <section>
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-green-400" /> Faedah & Keistimewaan
+            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 text-gray-900">
+              <CheckCircle2 className="h-5 w-5 text-green-500" /> Faedah & Keistimewaan
             </h2>
             <div className="space-y-3">
               {card.benefits.map((b, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4">
-                  <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">{cleanText(b)}</p>
+                <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                  <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{cleanText(b)}</p>
                 </div>
               ))}
             </div>
@@ -177,13 +177,13 @@ export function CardDetailClient({ card }: { card: Card }) {
         {/* Features */}
         {card.features.length > 0 && (
           <section>
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Percent className="h-5 w-5 text-blue-400" /> Pelan & Kemudahan
+            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 text-gray-900">
+              <Percent className="h-5 w-5 text-blue-500" /> Pelan & Kemudahan
             </h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {card.features.filter(f => f.length > 10).map((f, i) => (
-                <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4">
-                  <p className="text-slate-300 text-sm leading-relaxed">{cleanText(f)}</p>
+                <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                  <p className="text-gray-700 text-sm leading-relaxed">{cleanText(f)}</p>
                 </div>
               ))}
             </div>
@@ -193,14 +193,14 @@ export function CardDetailClient({ card }: { card: Card }) {
         {/* Fees */}
         {feeItems.length > 0 && (
           <section>
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-amber-400" /> Yuran & Caj
+            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 text-gray-900">
+              <AlertCircle className="h-5 w-5 text-amber-500" /> Yuran & Caj
             </h2>
-            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
               {feeItems.map((item, i) => (
-                <div key={i} className={`flex justify-between items-start gap-4 px-5 py-3.5 text-sm ${i !== 0 ? 'border-t border-white/5' : ''}`}>
-                  <span className="text-slate-400 flex-shrink-0">{item.label}</span>
-                  <span className="text-white text-right">{item.value}</span>
+                <div key={i} className={`flex justify-between items-start gap-4 px-5 py-3.5 text-sm ${i !== 0 ? 'border-t border-gray-100' : ''}`}>
+                  <span className="text-gray-500 flex-shrink-0">{item.label}</span>
+                  <span className="text-gray-900 text-right font-medium">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -210,24 +210,24 @@ export function CardDetailClient({ card }: { card: Card }) {
         {/* Requirements */}
         {card.requirements && (
           <section>
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-slate-400" /> Kelayakan
+            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2 text-gray-900">
+              <Calendar className="h-5 w-5 text-gray-400" /> Kelayakan
             </h2>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">{cleanText(card.requirements)}</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+              <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{cleanText(card.requirements)}</p>
             </div>
           </section>
         )}
 
         {/* Apply bottom CTA */}
-        <div className="bg-gradient-to-r from-blue-600/20 to-indigo-600/20 border border-blue-500/20 rounded-2xl p-6 text-center space-y-3">
-          <h3 className="font-semibold text-white">Berminat dengan {card.name}?</h3>
-          <p className="text-slate-400 text-sm">Mohon sekarang dan nikmati faedah kad ini</p>
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 text-center space-y-3">
+          <h3 className="font-semibold text-gray-900">Berminat dengan {card.name}?</h3>
+          <p className="text-gray-500 text-sm">Mohon sekarang dan nikmati faedah kad ini</p>
           <a
             href="https://invl.me/clo21n7"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-medium transition-colors"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-medium transition-colors shadow-md"
           >
             Mohon Sekarang <ExternalLink className="h-4 w-4" />
           </a>
@@ -235,7 +235,7 @@ export function CardDetailClient({ card }: { card: Card }) {
 
         {/* Back link */}
         <div className="text-center pb-4">
-          <Link href="/compare" className="text-slate-500 hover:text-slate-300 text-sm transition-colors">
+          <Link href="/compare" className="text-gray-400 hover:text-gray-600 text-sm transition-colors">
             ← Lihat semua kad kredit
           </Link>
         </div>
