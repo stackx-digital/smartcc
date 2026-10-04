@@ -73,7 +73,7 @@ const INCOME_FILTERS = [
   { label: '> RM8k', value: 99999 },
 ]
 
-type BenefitFilter = 'cashback' | 'travel' | 'petrol' | 'dining' | 'grocery' | 'shopping' | 'islamic'
+type BenefitFilter = 'cashback' | 'travel' | 'petrol' | 'dining' | 'grocery' | 'shopping'
 
 const BENEFIT_CHIPS: { key: BenefitFilter; label: string; emoji: string }[] = [
   { key: 'cashback', label: 'Cashback', emoji: '💰' },
@@ -82,7 +82,6 @@ const BENEFIT_CHIPS: { key: BenefitFilter; label: string; emoji: string }[] = [
   { key: 'dining', label: 'Dining', emoji: '🍜' },
   { key: 'grocery', label: 'Grocery', emoji: '🛒' },
   { key: 'shopping', label: 'Shopping', emoji: '🛍️' },
-  { key: 'islamic', label: 'Islamik', emoji: '☪' },
 ]
 
 // Group cards by bank, sorted by card count
@@ -113,6 +112,7 @@ export function CompareClient() {
   const [incomeFilter, setIncomeFilter] = useState(0)
   const [benefits, setBenefits] = useState<Set<BenefitFilter>>(new Set())
   const [search, setSearch] = useState('')
+  const [cardType, setCardType] = useState<'all' | 'conventional' | 'islamic'>('all')
   const [showFilters, setShowFilters] = useState(false)
   const [collapsedBanks, setCollapsedBanks] = useState<Set<string>>(new Set())
 
@@ -148,7 +148,8 @@ export function CompareClient() {
       if (benefits.has('dining') && !c.is_dining) return false
       if (benefits.has('grocery') && !c.is_grocery) return false
       if (benefits.has('shopping') && !c.is_shopping) return false
-      if (benefits.has('islamic') && !c.is_islamic) return false
+      if (cardType === 'islamic' && !c.is_islamic) return false
+      if (cardType === 'conventional' && c.is_islamic) return false
       if (search && !c.name.toLowerCase().includes(search.toLowerCase())) return false
       return true
     })
@@ -156,7 +157,7 @@ export function CompareClient() {
 
   const grouped = useMemo(() => groupByBank(filtered), [filtered])
 
-  const activeFilterCount = (freeOnly ? 1 : 0) + (incomeFilter > 0 ? 1 : 0) + benefits.size
+  const activeFilterCount = (freeOnly ? 1 : 0) + (incomeFilter > 0 ? 1 : 0) + benefits.size + (cardType !== 'all' ? 1 : 0)
 
   function clearFilters() {
     setFreeOnly(false)
@@ -164,6 +165,7 @@ export function CompareClient() {
     setBenefits(new Set())
     setSelectedBank('Semua Bank')
     setSearch('')
+    setCardType('all')
   }
 
   return (
@@ -178,9 +180,30 @@ export function CompareClient() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         {/* Title */}
-        <div className="mb-6">
+        <div className="mb-5">
           <h1 className="text-2xl font-bold">Kad Kredit Malaysia</h1>
           <p className="text-slate-400 text-sm mt-1">{filtered.length} kad daripada {grouped.length} bank</p>
+        </div>
+
+        {/* Islamic / Conventional toggle */}
+        <div className="flex gap-1 bg-white/5 border border-white/10 rounded-xl p-1 w-fit mb-5">
+          {([
+            { key: 'all', label: 'Semua' },
+            { key: 'conventional', label: '🏦 Konvensional' },
+            { key: 'islamic', label: '☪ Islamik' },
+          ] as const).map(opt => (
+            <button
+              key={opt.key}
+              onClick={() => setCardType(opt.key)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                cardType === opt.key
+                  ? 'bg-blue-600 text-white shadow'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
         </div>
 
         {/* Search + Filter bar */}
