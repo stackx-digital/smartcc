@@ -25,6 +25,7 @@ interface Card {
   is_grab: boolean
   has_cashback: boolean
   image: string | null
+  slug: string
 }
 
 const cards = cardsRaw as Card[]
@@ -408,7 +409,7 @@ export function CompareClient() {
 
                           {/* Card info */}
                           <div className="p-4 flex flex-col flex-1">
-                            <h3 className="font-semibold text-sm text-white leading-tight mb-2">{card.name}</h3>
+                            <Link href={`/compare/${card.slug}`} className="font-semibold text-sm text-white leading-tight mb-2 hover:text-blue-300 transition-colors block">{card.name}</Link>
 
                             {/* Tags */}
                             <div className="flex flex-wrap gap-1 mb-3">
@@ -448,15 +449,23 @@ export function CompareClient() {
                               {card.interest_free_days > 0 && <p>{card.interest_free_days} hari interest-free</p>}
                             </div>
 
-                            {/* Apply button */}
-                            <a
-                              href="https://invl.me/clo21n7"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
-                            >
-                              Mohon Sekarang <ExternalLink className="h-3.5 w-3.5" />
-                            </a>
+                            {/* Buttons */}
+                            <div className="flex gap-2">
+                              <Link
+                                href={`/compare/${card.slug}`}
+                                className="flex-1 flex items-center justify-center py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-medium transition-colors border border-white/10"
+                              >
+                                Lihat Detail
+                              </Link>
+                              <a
+                                href="https://invl.me/clo21n7"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium transition-colors"
+                              >
+                                Mohon <ExternalLink className="h-3 w-3" />
+                              </a>
+                            </div>
                           </div>
                         </div>
                       ))}
