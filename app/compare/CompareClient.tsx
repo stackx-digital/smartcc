@@ -367,7 +367,7 @@ export function CompareClient() {
                           alt={bank}
                           width={144}
                           height={72}
-                          className="h-[72px] w-[144px] object-contain bg-white rounded-xl border border-gray-200"
+                          className="h-[72px] w-[144px] object-contain"
                         />
                       ) : (
                         <div className={`w-[144px] h-[72px] rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>

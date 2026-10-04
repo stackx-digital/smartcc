@@ -175,7 +175,7 @@ export function CardDetailClient({ card }: { card: Card }) {
             {/* Bank logo + name */}
             <div className="flex items-center gap-3">
               {bankLogo && (
-                <Image src={`/banks/${bankLogo}`} alt={bank} width={128} height={64} className="h-16 w-32 object-contain bg-white rounded-lg border border-gray-200" />
+                <Image src={`/banks/${bankLogo}`} alt={bank} width={128} height={64} className="h-16 w-32 object-contain" />
               )}
               <span className="text-gray-500 text-sm">{bank}</span>
             </div>
