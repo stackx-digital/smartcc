@@ -29,6 +29,79 @@ function cleanText(s: string): string {
   return s.replace(/\n+/g, '\n').trim()
 }
 
+// Parse markdown table rows into array of string arrays
+function parseMarkdownTable(text: string): { headers: string[]; rows: string[][] } | null {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean)
+  const tableLines = lines.filter(l => l.startsWith('|'))
+  if (tableLines.length < 3) return null
+  const parseRow = (line: string) =>
+    line.split('|').map(c => c.trim()).filter((_, i, arr) => i > 0 && i < arr.length - 1)
+  const separatorIdx = tableLines.findIndex(l => /^\|[\s\-|]+\|$/.test(l))
+  if (separatorIdx < 1) return null
+  const headers = parseRow(tableLines[0])
+  const rows = tableLines.slice(separatorIdx + 1).map(parseRow)
+  return { headers, rows }
+}
+
+// Render a block of text — markdown tables become <table>, rest stays as <p>
+function RichText({ text }: { text: string }) {
+  const lines = text.split('\n')
+  const segments: { type: 'table' | 'text'; content: string }[] = []
+  let buffer: string[] = []
+
+  for (const line of lines) {
+    if (line.trim().startsWith('|')) {
+      if (buffer.length) { segments.push({ type: 'text', content: buffer.join('\n') }); buffer = [] }
+      // collect into last table segment or start new
+      if (segments.length && segments[segments.length - 1].type === 'table') {
+        segments[segments.length - 1].content += '\n' + line
+      } else {
+        segments.push({ type: 'table', content: line })
+      }
+    } else {
+      buffer.push(line)
+    }
+  }
+  if (buffer.length) segments.push({ type: 'text', content: buffer.join('\n') })
+
+  return (
+    <div className="space-y-3">
+      {segments.map((seg, i) => {
+        if (seg.type === 'table') {
+          const parsed = parseMarkdownTable(seg.content)
+          if (parsed) {
+            return (
+              <div key={i} className="overflow-x-auto rounded-xl border border-gray-200">
+                <table className="w-full text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      {parsed.headers.map((h, j) => (
+                        <th key={j} className="px-3 py-2 text-left text-xs font-semibold text-gray-600 border-b border-gray-200">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {parsed.rows.map((row, j) => (
+                      <tr key={j} className={j % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                        {row.map((cell, k) => (
+                          <td key={k} className="px-3 py-2 text-gray-700 border-b border-gray-100 last:border-b-0">{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )
+          }
+        }
+        const trimmed = cleanText(seg.content)
+        if (!trimmed) return null
+        return <p key={i} className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{trimmed}</p>
+      })}
+    </div>
+  )
+}
+
 function parseFees(fees: string) {
   if (!fees) return []
   const lines = fees.split('\n').map(l => l.trim()).filter(Boolean)
@@ -167,7 +240,7 @@ export function CardDetailClient({ card }: { card: Card }) {
             <div className="space-y-3">
               {card.benefits.map((b, i) => (
                 <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                  <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{cleanText(b)}</p>
+                  <RichText text={b} />
                 </div>
               ))}
             </div>
@@ -183,7 +256,7 @@ export function CardDetailClient({ card }: { card: Card }) {
             <div className="grid sm:grid-cols-2 gap-3">
               {card.features.filter(f => f.length > 10).map((f, i) => (
                 <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                  <p className="text-gray-700 text-sm leading-relaxed">{cleanText(f)}</p>
+                  <RichText text={f} />
                 </div>
               ))}
             </div>
@@ -214,7 +287,7 @@ export function CardDetailClient({ card }: { card: Card }) {
               <Calendar className="h-5 w-5 text-gray-400" /> Kelayakan
             </h2>
             <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{cleanText(card.requirements)}</p>
+              <RichText text={card.requirements} />
             </div>
           </section>
         )}
