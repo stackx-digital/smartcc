@@ -162,7 +162,7 @@ export function CardDetailClient({ card }: { card: Card }) {
         {/* Hero section */}
         <div className="grid md:grid-cols-2 gap-8 items-start">
           {/* Card image */}
-          <div className="bg-white rounded-2xl p-8 flex items-center justify-center min-h-[220px] border border-gray-200 shadow-sm">
+          <div className="flex items-center justify-center min-h-[220px]">
             {card.image ? (
               <Image src={card.image} alt={card.name} width={320} height={200} className="object-contain max-h-44 w-full drop-shadow-md" />
             ) : (
