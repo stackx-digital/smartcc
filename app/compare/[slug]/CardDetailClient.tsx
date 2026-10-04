@@ -21,7 +21,7 @@ function getBank(name: string): string {
 const BANK_LOGO_SLUG: Record<string, string> = {
   Maybank:'maybank.png', CIMB:'cimb.png', 'Public Bank':'public-bank.png', 'Hong Leong':'hong-leong.png',
   RHB:'rhb.png', AmBank:'ambank.png', UOB:'uob.png', HSBC:'hsbc.png', 'Standard Chartered':'standard-chartered.png',
-  Alliance:'alliance.png', AFFIN:'affin.png', BSN:'bsn.jpg', AEON:'aeon.png', 'Bank Islam':'bank-islam.jpg',
+  Alliance:'alliance.png', AFFIN:'affin.png', BSN:'bsn.png', AEON:'aeon.png', 'Bank Islam':'bank-islam.png',
   'Bank Rakyat':'bank-rakyat.png', OCBC:'ocbc.png', 'Bank Muamalat':'bank-muamalat.svg', ICBC:'icbc.png',
 }
 
