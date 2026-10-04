@@ -298,7 +298,7 @@ export function TransactionsClient({ initialTransactions, cards, userId }: Props
   }
 
   function handleExportCSV() {
-    const headers = ['Date', 'Description', 'Category', 'Type', 'Amount', 'Card']
+    const headers = ['Tarikh', 'Keterangan', 'Kategori', 'Jenis', 'Jumlah', 'Kad']
     const rows = filtered.map(tx => [
       tx.transaction_date,
       `"${tx.description.replace(/"/g, '""')}"`,

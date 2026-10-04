@@ -18,8 +18,8 @@ export function DueReminder({ cards }: DueReminderProps) {
         // FIXED: skip cards already paid (balance 0) to avoid stale reminder after mark-as-paid
         if (card.current_balance === 0) return
         if (card.daysUntilDue <= (card.reminder_days_before ?? 3) && card.daysUntilDue >= 0) {
-          new Notification(`💳 ${card.name} — Due in ${card.daysUntilDue} days`, {
-            body: `Pay RM${card.current_balance.toLocaleString()} before the due date.`,
+          new Notification(`💳 ${card.name} — Bayar dalam ${card.daysUntilDue} hari`, {
+            body: `Bayar RM${card.current_balance.toLocaleString()} sebelum tarikh bayar.`,
             icon: '/icons/icon-192.png',
             tag: `due-${card.id}`,
           })

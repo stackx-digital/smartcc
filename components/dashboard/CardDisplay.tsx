@@ -19,10 +19,10 @@ function lightenColor(hex: string, amount: number) {
 }
 
 const REMINDER_OPTIONS = [
-  { label: '1 day', value: 1 },
-  { label: '3 days', value: 3 },
-  { label: '5 days', value: 5 },
-  { label: '7 days', value: 7 },
+  { label: '1 hari', value: 1 },
+  { label: '3 hari', value: 3 },
+  { label: '5 hari', value: 5 },
+  { label: '7 hari', value: 7 },
 ]
 
 interface ReminderPickerProps {
@@ -39,14 +39,14 @@ function ReminderPicker({ cardId, reminderDays, onUpdate }: ReminderPickerProps)
       .from('credit_cards')
       .update({ reminder_days_before: days })
       .eq('id', cardId)
-    if (error) { toast.error('Failed to set reminder: ' + error.message); return }
+    if (error) { toast.error('Gagal tetapkan peringatan: ' + error.message); return }
     if (days === null) {
-      toast.success('Reminder turned off.')
+      toast.success('Peringatan dimatikan.')
     } else {
       if ('Notification' in window && Notification.permission !== 'denied') {
         await Notification.requestPermission()
       }
-      toast.success(`Reminder set ${days} days before due date.`)
+      toast.success(`Peringatan ditetapkan ${days} hari sebelum tarikh bayar.`)
     }
     onUpdate(days)
     setOpen(false)
@@ -64,7 +64,7 @@ function ReminderPicker({ cardId, reminderDays, onUpdate }: ReminderPickerProps)
         )}
       >
         {reminderDays ? <Bell className="h-3.5 w-3.5" /> : <BellOff className="h-3.5 w-3.5" />}
-        {reminderDays ? `Reminder: ${reminderDays} days before due` : 'Set Due Date Reminder'}
+        {reminderDays ? `Peringatan: ${reminderDays} hari sebelum bayar` : 'Tetapkan Peringatan'}
       </button>
       {open && (
         <div className="absolute bottom-full mb-1 left-0 right-0 bg-white border border-slate-200 rounded-xl shadow-lg p-2 z-10 flex flex-col gap-1">
@@ -77,7 +77,7 @@ function ReminderPicker({ cardId, reminderDays, onUpdate }: ReminderPickerProps)
                 reminderDays === opt.value ? 'bg-blue-100 text-blue-700' : 'hover:bg-slate-50 text-slate-700'
               )}
             >
-              🔔 {opt.label} before due date
+              🔔 {opt.label} sebelum tarikh bayar
             </button>
           ))}
           {reminderDays && (
@@ -114,10 +114,10 @@ export function CardDisplay({ card }: CardDisplayProps) {
       .update({ current_balance: 0 })
       .eq('id', card.id)
     if (error) {
-      toast.error('Failed to update: ' + error.message)
+      toast.error('Gagal kemaskini: ' + error.message)
     } else {
       setBalance(0)
-      toast.success(`${card.name} — bill marked as paid!`)
+      toast.success(`${card.name} — bil ditanda bayar!`)
     }
     setPaying(false)
   }
@@ -186,7 +186,7 @@ export function CardDisplay({ card }: CardDisplayProps) {
                   'bg-red-100 text-red-700'
                 )}
               >
-                {utilPct <= 30 ? '✓ Good' : utilPct <= 70 ? '⚠ Moderate' : '✕ High'}
+                {utilPct <= 30 ? '✓ Baik' : utilPct <= 70 ? '⚠ Sederhana' : '✕ Tinggi'}
               </span>
               <span className="text-xs font-bold" style={{ color: utilColor }}>{utilPct}%</span>
             </div>
@@ -201,7 +201,7 @@ export function CardDisplay({ card }: CardDisplayProps) {
             <div
               className="absolute top-1/2 -translate-y-1/2 w-0.5 h-3.5 rounded-full bg-blue-400"
               style={{ left: '30%' }}
-              title="30% limit for good credit score"
+              title="Had 30% untuk skor kredit yang baik"
             />
           </div>
           <div className="flex justify-between text-[11px] text-slate-400 mt-1">
@@ -211,7 +211,7 @@ export function CardDisplay({ card }: CardDisplayProps) {
           </div>
           {utilPct > 30 && (
             <p className="text-[10px] text-slate-400 mt-1.5 leading-relaxed">
-              💡 Reduce balance to <span className="text-blue-500 font-semibold">RM{Math.round(card.credit_limit * 0.3).toLocaleString()}</span> for a better credit score.
+              💡 Kurangkan baki kepada <span className="text-blue-500 font-semibold">RM{Math.round(card.credit_limit * 0.3).toLocaleString()}</span> untuk skor kredit yang lebih baik.
             </p>
           )}
         </div>
@@ -232,7 +232,7 @@ export function CardDisplay({ card }: CardDisplayProps) {
           ) : (
             <CheckCircle2 className="h-3.5 w-3.5" />
           )}
-          {isPaid ? 'Bill Paid' : 'Mark as Paid'}
+          {isPaid ? 'Bil Dibayar' : 'Tandakan Dibayar'}
         </button>
 
         <ReminderPicker
@@ -245,12 +245,12 @@ export function CardDisplay({ card }: CardDisplayProps) {
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-xl bg-slate-50 px-3 py-2.5">
             <p className="text-[10px] text-slate-400 uppercase tracking-wide mb-0.5">Statement</p>
-            <p className="text-sm font-bold text-slate-700">Day {card.statement_day}</p>
+            <p className="text-sm font-bold text-slate-700">Hari {card.statement_day}</p>
           </div>
           <div className={cn('rounded-xl px-3 py-2.5', isUrgent ? 'bg-red-50' : 'bg-slate-50')}>
             <p className="text-[10px] text-slate-400 uppercase tracking-wide mb-0.5">Due</p>
             <p className={cn('text-sm font-bold', isUrgent ? 'text-red-600' : 'text-slate-700')}>
-              {isUrgent && '⚠ '}{card.daysUntilDue} days left
+              {isUrgent && '⚠ '}{card.daysUntilDue} hari lagi
             </p>
           </div>
         </div>

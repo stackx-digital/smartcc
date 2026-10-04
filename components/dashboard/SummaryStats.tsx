@@ -30,13 +30,13 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Nearest Due Date</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Tarikh Bayar Terdekat</CardTitle>
         </CardHeader>
         <CardContent>
           {nextDue ? (
             <>
               <div className={cn('text-2xl font-bold', nextDue.daysUntilDue <= 5 ? 'due-urgent' : '')}>
-                {nextDue.daysUntilDue} days left
+                {nextDue.daysUntilDue} hari lagi
               </div>
               <p className="text-xs text-muted-foreground mt-1">{nextDue.name} — {nextDue.dueDate.toLocaleDateString('en-MY')}</p>
             </>
@@ -48,7 +48,7 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Total Credit Utilization</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Jumlah Penggunaan Kredit</CardTitle>
         </CardHeader>
         <CardContent>
           <div className={cn('text-2xl font-bold', totalUtilization > 70 ? 'text-red-600' : totalUtilization > 30 ? 'text-amber-600' : 'text-green-600')}>
@@ -64,7 +64,7 @@ export function SummaryStats({ cards }: SummaryStatsProps) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Maximum Float Today</CardTitle>
+          <CardTitle className="text-sm font-medium text-muted-foreground">Float Maksimum Hari Ini</CardTitle>
         </CardHeader>
         <CardContent>
           {maxFloat ? (
