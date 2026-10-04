@@ -65,6 +65,27 @@ const BANK_COLORS: Record<string, string> = {
   ICBC: 'from-red-800 to-red-600',
 }
 
+const BANK_LOGO_SLUG: Record<string, string> = {
+  Maybank: 'maybank',
+  CIMB: 'cimb',
+  'Public Bank': 'public-bank',
+  'Hong Leong': 'hong-leong',
+  RHB: 'rhb',
+  AmBank: 'ambank',
+  UOB: 'uob',
+  HSBC: 'hsbc',
+  'Standard Chartered': 'standard-chartered',
+  Alliance: 'alliance',
+  AFFIN: 'affin',
+  BSN: 'bsn',
+  AEON: 'aeon',
+  'Bank Islam': 'bank-islam',
+  'Bank Rakyat': 'bank-rakyat',
+  OCBC: 'ocbc',
+  'Bank Muamalat': 'bank-muamalat',
+  ICBC: 'icbc',
+}
+
 const INCOME_FILTERS = [
   { label: 'Semua', value: 0 },
   { label: '< RM2k', value: 2000 },
@@ -339,9 +360,19 @@ export function CompareClient() {
                     className="w-full flex items-center justify-between mb-4 group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs`}>
-                        {initials}
-                      </div>
+                      {BANK_LOGO_SLUG[bank] ? (
+                        <Image
+                          src={`/banks/${BANK_LOGO_SLUG[bank]}.svg`}
+                          alt={bank}
+                          width={36}
+                          height={36}
+                          className="rounded-xl"
+                        />
+                      ) : (
+                        <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
+                          {initials}
+                        </div>
+                      )}
                       <div className="text-left">
                         <h2 className="font-semibold text-white group-hover:text-blue-300 transition-colors">{bank}</h2>
                         <p className="text-xs text-slate-500">{bankCards.length} kad</p>
