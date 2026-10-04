@@ -365,12 +365,12 @@ export function CompareClient() {
                         <Image
                           src={`/banks/${BANK_LOGO_SLUG[bank]}`}
                           alt={bank}
-                          width={36}
-                          height={36}
-                          className="rounded-xl"
+                          width={56}
+                          height={56}
+                          className="rounded-xl object-contain"
                         />
                       ) : (
-                        <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
+                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
                           {initials}
                         </div>
                       )}
