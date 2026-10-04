@@ -134,7 +134,7 @@ export function CardDetailClient({ card }: { card: Card }) {
   const bankLogo = BANK_LOGO_SLUG[bank]
 
   const tags = [
-    card.has_cashback && { label: `💰 Cashback ${card.cashback}`, color: 'bg-green-50 text-green-700 border-green-200' },
+    card.has_cashback && { label: `💰 Pulangan Tunai ${card.cashback}`, color: 'bg-green-50 text-green-700 border-green-200' },
     card.is_free_annual && { label: '✓ Yuran Percuma', color: 'bg-blue-50 text-blue-700 border-blue-200' },
     card.is_travel && { label: '✈️ Travel', color: 'bg-purple-50 text-purple-700 border-purple-200' },
     card.is_petrol && { label: '⛽ Petrol', color: 'bg-orange-50 text-orange-700 border-orange-200' },
