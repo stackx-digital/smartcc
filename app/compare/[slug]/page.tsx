@@ -1,18 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import cardsRaw from '../cards-data.json'
+import detailsRaw from '../cards-detail.json'
+import type { CardSummary, CardDetail } from '../types'
 import { CardDetailClient } from './CardDetailClient'
 
-interface Card {
-  name: string; slug: string; url: string; description: string
-  min_income_monthly: number; annual_fee_str: string; is_free_annual: boolean
-  cashback: string; cashback_pct: number; interest_rate: string; interest_free_days: number
-  is_travel: boolean; is_petrol: boolean; is_dining: boolean; is_grocery: boolean
-  is_islamic: boolean; is_shopping: boolean; has_cashback: boolean; image: string | null
-  benefits: string[]; features: string[]; fees: string; requirements: string; review: string
-}
-
-const cards = cardsRaw as Card[]
+const cards = cardsRaw as CardSummary[]
+const details = detailsRaw as Record<string, CardDetail>
 
 export async function generateStaticParams() {
   return cards.map(c => ({ slug: c.slug }))
@@ -24,13 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!card) return {}
   return {
     title: `${card.name} — smartcc`,
-    description: card.description || card.review || `Semak maklumat lengkap ${card.name} termasuk cashback, yuran, dan faedah.`,
+    description: card.description || `Semak maklumat lengkap ${card.name} termasuk pulangan tunai, yuran dan faedah.`,
   }
 }
 
 export default async function CardDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const card = cards.find(c => c.slug === slug)
-  if (!card) notFound()
-  return <CardDetailClient card={card} />
+  const detail = details[slug]
+  if (!card || !detail) notFound()
+  return <CardDetailClient card={card} detail={detail} />
 }
