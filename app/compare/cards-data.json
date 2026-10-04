@@ -17,7 +17,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-one-card-519489e2193821ed4a00014f.jpg"
   },
   {
     "name": "HSBC Visa Signature Credit Card",
@@ -37,7 +38,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hsbc-visa-signature-credit-card-519489e2193821ed4a0000dd.jpg"
   },
   {
     "name": "OCBC 365 MasterCard",
@@ -57,7 +59,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ocbc-365-mastercard-55026529cdba705925412fc8.jpg"
   },
   {
     "name": "AmBank Cash Rebate Visa Platinum Card",
@@ -77,7 +80,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ambank-cash-rebate-visa-platinum-card-5f88003140679bd7123bd035.jpg"
   },
   {
     "name": "Alliance Bank Visa Platinum",
@@ -97,7 +101,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/alliance-bank-visa-platinum-519489e2193821ed4a000024.jpg"
   },
   {
     "name": "UOB Simple Card",
@@ -117,7 +122,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-simple-card-64cc81ec909d473f02007989.jpg"
   },
   {
     "name": "Alliance Bank Visa Virtual Credit Card",
@@ -137,7 +143,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/alliance-bank-visa-virtual-credit-card-642e7c69056b64660333e503.jpg"
   },
   {
     "name": "HSBC Live+ Credit Card",
@@ -157,7 +164,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/hsbc-live-credit-card-667d1aa8df7bc6034d9258b7.jpg"
   },
   {
     "name": "Maybank 2 Gold Cards",
@@ -177,7 +185,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-2-gold-cards-519489e2193821ed4a0000f5.jpg"
   },
   {
     "name": "RHB Shell Visa Credit Card",
@@ -197,7 +206,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-shell-visa-credit-card-60d06b4905b5ace701fb9a72.jpg"
   },
   {
     "name": "UOB EVOL Card",
@@ -217,7 +227,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-evol-card-6437814b056b64660333e528.jpg"
   },
   {
     "name": "Alliance Bank Visa Infinite",
@@ -237,7 +248,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/alliance-bank-visa-infinite-519489e2193821ed4a000022.jpg"
   },
   {
     "name": "AmBank Visa Signature Card",
@@ -257,7 +269,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-visa-signature-card-519489e2193821ed4a000038.jpg"
   },
   {
     "name": "Maybank Islamic Ikhwan Mastercard Gold Card-i",
@@ -277,7 +290,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-ikhwan-mastercard-gold-card-i-54feb7d0fd1ef36571cfff76.jpg"
   },
   {
     "name": "Alliance Bank Visa Signature",
@@ -297,7 +311,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/alliance-bank-visa-signature-6170288db89bc7fe1ad4af76.jpg"
   },
   {
     "name": "RHB Visa Signature",
@@ -317,7 +332,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": true,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/rhb-visa-signature-51c028adcd7c300920000004.jpg"
   },
   {
     "name": "HSBC TravelOne Credit Card",
@@ -337,7 +353,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hsbc-travelone-credit-card-6465aef8f1e28a024967bcdd.jpg"
   },
   {
     "name": "OCBC Titanium MasterCard Pink",
@@ -357,7 +374,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ocbc-titanium-mastercard-pink-5396c9098ff8f5a04f5f3407.jpg"
   },
   {
     "name": "HSBC Platinum Credit Card",
@@ -377,7 +395,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hsbc-platinum-credit-card-519489e2193821ed4a0000e3.jpg"
   },
   {
     "name": "OCBC Titanium MasterCard Blue",
@@ -397,7 +416,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ocbc-titanium-mastercard-blue-539173d91aefae303d8bd6b4.jpg"
   },
   {
     "name": "UOB World Card",
@@ -417,7 +437,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-world-card-64cc8107909d473f02007985.jpg"
   },
   {
     "name": "HSBC Amanah MPower Platinum Credit Card-i",
@@ -437,7 +458,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/hsbc-amanah-mpower-platinum-credit-card-i-519489e2193821ed4a0000e1.jpg"
   },
   {
     "name": "OCBC Cashflo MasterCard",
@@ -457,7 +479,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ocbc-cashflo-mastercard-588831d6b8bc79665cc8a042.jpg"
   },
   {
     "name": "AmBank Visa Platinum Card",
@@ -477,7 +500,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-visa-platinum-card-519489e2193821ed4a00003b.jpg"
   },
   {
     "name": "AmBank Islamic Visa Platinum Card",
@@ -497,7 +521,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-islamic-visa-platinum-card-519489e2193821ed4a00003f.jpg"
   },
   {
     "name": "UOB Preferred Card",
@@ -517,7 +542,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-preferred-card-55532e4dd75c88f321f53b7b.jpg"
   },
   {
     "name": "HSBC Premier World Mastercard Credit Card",
@@ -537,7 +563,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hsbc-premier-world-mastercard-credit-card-519489e2193821ed4a0000de.jpg"
   },
   {
     "name": "Alliance Bank Visa Infinite Business Credit Card",
@@ -557,7 +584,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/alliance-bank-visa-infinite-business-credit-card-57035f4bbe80fc636acbfac0.jpg"
   },
   {
     "name": "Alliance Bank Visa Basic",
@@ -577,7 +605,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/alliance-bank-visa-basic-563c8f8fbca607d01210d545.jpg"
   },
   {
     "name": "OCBC 90⁰N Visa Card",
@@ -597,7 +626,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ocbc-90-n-visa-card-69708916e6586cfa65bf5f93.jpg"
   },
   {
     "name": "HSBC Amanah Premier World Mastercard Credit Card-i",
@@ -617,7 +647,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/hsbc-amanah-premier-world-mastercard-credit-card-i-519489e2193821ed4a0000db.jpg"
   },
   {
     "name": "UOB Visa Infinite Card",
@@ -637,7 +668,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/uob-visa-infinite-card-519489e2193821ed4a000153.jpg"
   },
   {
     "name": "UOB PRVI Miles Card",
@@ -657,7 +689,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/uob-prvi-miles-card-55e038d376092cc9694d446f.jpg"
   },
   {
     "name": "AmBank Visa Infinite",
@@ -677,7 +710,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-visa-infinite-519489e2193821ed4a000037.jpg"
   },
   {
     "name": "HSBC Premier Travel Credit Card",
@@ -697,7 +731,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hsbc-premier-travel-credit-card-58bfe18b38697197252abc24.jpg"
   },
   {
     "name": "OCBC World MasterCard",
@@ -717,7 +752,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ocbc-world-mastercard-529d7ab195dae3756f000d22.jpg"
   },
   {
     "name": "Lazada UOB Card",
@@ -737,7 +773,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/lazada-uob-card-64cc8262909d473f0200798b.jpg"
   },
   {
     "name": "UOB Platinum Business Card",
@@ -757,7 +794,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-platinum-business-card-64cc8189909d473f02007987.jpg"
   },
   {
     "name": "UOB Lady's Card",
@@ -777,7 +815,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/uob-lady-s-card-519489e2193821ed4a000148.jpg"
   },
   {
     "name": "OCBC Great Eastern Platinum MasterCard",
@@ -797,7 +836,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ocbc-great-eastern-platinum-mastercard-519489e2193821ed4a00010e.jpg"
   },
   {
     "name": "OCBC Premier Voyage MasterCard",
@@ -817,7 +857,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ocbc-premier-voyage-mastercard-5747c678db5852055504a184.jpg"
   },
   {
     "name": "UOB PRVI Miles Elite Card",
@@ -837,7 +878,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-prvi-miles-elite-card-64cc8078909d473f02007983.jpg"
   },
   {
     "name": "AmBank Islamic Visa Platinum CARz Card",
@@ -857,7 +899,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ambank-islamic-visa-platinum-carz-card-5fc7424981f128e811b9bb2a.jpg"
   },
   {
     "name": "AmBank Islamic Visa Signature Card",
@@ -877,7 +920,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-islamic-visa-signature-card-519489e2193821ed4a00003e.jpg"
   },
   {
     "name": "Maybank Shopee Visa Platinum",
@@ -897,7 +941,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-shopee-visa-platinum-5efb15f04e3602772bc1dbc2.jpg"
   },
   {
     "name": "Maybank Islamic myimpact Ikhwan Mastercard Platinum Credit Card-i",
@@ -917,7 +962,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-myimpact-ikhwan-mastercard-platinum-credit-card-i-659b7b9f38d9f7d624f14f98.jpg"
   },
   {
     "name": "RHB Cash Back Visa Credit Card",
@@ -937,7 +983,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-cash-back-visa-credit-card-5bd7cfde3d6823080f31967c.jpg"
   },
   {
     "name": "RHB Shell Visa Credit Card-i",
@@ -957,7 +1004,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-shell-visa-credit-card-i-63918728847cf2941726e77a.jpg"
   },
   {
     "name": "UOB Zenith Card",
@@ -977,7 +1025,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-zenith-card-64cc6d85909d473f02007981.jpg"
   },
   {
     "name": "UOB Lady's Solitaire Card",
@@ -997,7 +1046,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/uob-lady-s-solitaire-card-519489e2193821ed4a000154.jpg"
   },
   {
     "name": "Maybank Cash Back Mastercard Platinum",
@@ -1017,7 +1067,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-cash-back-mastercard-platinum-6aa22df2dc85190523b3c863.jpg"
   },
   {
     "name": "AmBank BonusLink Visa Platinum",
@@ -1037,7 +1088,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-bonuslink-visa-platinum-590ae38dc110f4691a8062d3.jpg"
   },
   {
     "name": "Maybank 2 Platinum Cards",
@@ -1057,7 +1109,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-2-platinum-cards-519489e2193821ed4a0000f7.jpg"
   },
   {
     "name": "Maybank Islamic Ikhwan American Express Platinum Card-i",
@@ -1077,7 +1130,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-ikhwan-american-express-platinum-card-i-519489e2193821ed4a0000ff.jpg"
   },
   {
     "name": "Maybank Islamic Petronas Ikhwan Visa Gold Card-i",
@@ -1097,7 +1151,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-petronas-ikhwan-visa-gold-card-i-519489e2193821ed4a0000e7.jpg"
   },
   {
     "name": "RHB Rewards MasterCard Credit Card",
@@ -1117,7 +1172,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/rhb-rewards-mastercard-credit-card-5bd82a4bfea5d39b106cd0b1.jpg"
   },
   {
     "name": "RHB Islamic Cash Back Credit Card-i",
@@ -1137,7 +1193,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-islamic-cash-back-credit-card-i-5bd7d7d0fea5d39b106cd0a5.jpg"
   },
   {
     "name": "AmBank UnionPay Platinum Credit Card",
@@ -1157,7 +1214,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-unionpay-platinum-credit-card-5dc53ebcc22711c828d18a6c.jpg"
   },
   {
     "name": "AmBank Islamic Visa Infinite Card",
@@ -1177,7 +1235,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ambank-islamic-visa-infinite-card-519489e2193821ed4a00003d.jpg"
   },
   {
     "name": "AmBank BonusLink Visa Signature",
@@ -1197,7 +1256,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/ambank-bonuslink-visa-signature-590af1db32d5e6fa36da31e8.jpg"
   },
   {
     "name": "AmBank SIGNATURE Priority Banking Visa Infinite Credit Card",
@@ -1217,7 +1277,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/ambank-signature-priority-banking-visa-infinite-credit-card-5dea0276e55d3cd66208049b.jpg"
   },
   {
     "name": "Maybank Islamic Ikhwan MasterCard Platinum Card-i",
@@ -1237,7 +1298,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-ikhwan-mastercard-platinum-card-i-54feb188bc1ea1de43cbd9eb.jpg"
   },
   {
     "name": "Maybank myimpact Visa Signature Credit Card",
@@ -1257,7 +1319,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-myimpact-visa-signature-credit-card-659b79bb38d9f7d624f14f96.jpg"
   },
   {
     "name": "RHB World MasterCard Credit Card",
@@ -1277,7 +1340,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-world-mastercard-credit-card-56d94e05e7a1074832bdd147.jpg"
   },
   {
     "name": "RHB Rewards Visa Credit Card",
@@ -1297,7 +1361,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-rewards-visa-credit-card-5bd7e773fea5d39b106cd0a7.jpg"
   },
   {
     "name": "Maybank Islamic Petronas Ikhwan Visa Platinum Card-i",
@@ -1317,7 +1382,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-islamic-petronas-ikhwan-visa-platinum-card-i-519489e2193821ed4a0000e8.jpg"
   },
   {
     "name": "Maybank Visa Signature",
@@ -1337,7 +1403,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-visa-signature-54bf212f6a3668363f2c4e56.jpg"
   },
   {
     "name": "Maybank American Express Cash Back Gold",
@@ -1357,7 +1424,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-american-express-cash-back-gold-599fd556c1a2c40f50a6e646.jpg"
   },
   {
     "name": "Maybank FC Barcelona Visa Signature",
@@ -1377,7 +1445,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-fc-barcelona-visa-signature-59ef11f1511e6e271733223d.jpg"
   },
   {
     "name": "Petronas Maybank Visa Platinum",
@@ -1397,7 +1466,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/petronas-maybank-visa-platinum-519489e2193821ed4a0000f6.jpg"
   },
   {
     "name": "Maybank Islamic World Elite Mastercard Ikhwan",
@@ -1417,7 +1487,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-islamic-world-elite-mastercard-ikhwan-5c874371f50752ac33dae6bb.jpg"
   },
   {
     "name": "RHB Cash Back MasterCard Credit Card",
@@ -1437,7 +1508,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-cash-back-mastercard-credit-card-5bd7d39d3d6823080f31967e.jpg"
   },
   {
     "name": "RHB Visa Infinite",
@@ -1457,7 +1529,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/rhb-visa-infinite-519489e2193821ed4a00012c.jpg"
   },
   {
     "name": "MyEG-RHB Credit Card",
@@ -1477,7 +1550,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/myeg-rhb-credit-card-53a16876bf33a92c17deb1f3.jpg"
   },
   {
     "name": "RHB Islamic Rewards Visa Credit Card-i",
@@ -1497,7 +1571,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/rhb-islamic-rewards-visa-credit-card-i-5bd8358efea5d39b106cd0b5.jpg"
   },
   {
     "name": "Maybank Manchester United Visa Infinite",
@@ -1517,7 +1592,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-manchester-united-visa-infinite-51ab5e7dba98fe5611000020.jpg"
   },
   {
     "name": "Maybank Visa Infinite",
@@ -1537,7 +1613,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/maybank-visa-infinite-519489e2193821ed4a0000eb.jpg"
   },
   {
     "name": "Singapore Airlines KrisFlyer American Express Gold",
@@ -1557,7 +1634,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/singapore-airlines-krisflyer-american-express-gold-519489e2193821ed4a0000fb.jpg"
   },
   {
     "name": "Maybank Manchester United Visa Card",
@@ -1577,7 +1655,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-manchester-united-visa-card-519489e2193821ed4a0000e4.jpg"
   },
   {
     "name": "RHB Premier Visa Infinite",
@@ -1597,7 +1676,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-premier-visa-infinite-586c76d19482ad7e26fceab4.jpg"
   },
   {
     "name": "RHB Corporate Credit Card",
@@ -1617,7 +1697,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-corporate-credit-card-63744931eac392487a76c65d.jpg"
   },
   {
     "name": "RHB World MasterCard Credit Card-i",
@@ -1637,7 +1718,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/rhb-world-mastercard-credit-card-i-5807030fe5881d466bf8f5df.jpg"
   },
   {
     "name": "Maybank 2 Cards Premier",
@@ -1657,7 +1739,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-2-cards-premier-53327be0dc39712b6c00000c.jpg"
   },
   {
     "name": "Singapore Airlines KrisFlyer American Express Platinum",
@@ -1677,7 +1760,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/singapore-airlines-krisflyer-american-express-platinum-624d3313fa6312da5aafee6c.jpg"
   },
   {
     "name": "Maybank American Express Platinum",
@@ -1697,7 +1781,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-american-express-platinum-519489e2193821ed4a000100.jpg"
   },
   {
     "name": "Petronas Maybank Visa Gold",
@@ -1717,7 +1802,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/petronas-maybank-visa-gold-519489e2193821ed4a0000e6.jpg"
   },
   {
     "name": "Maybank World Elite MasterCard",
@@ -1737,7 +1823,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-world-elite-mastercard-519489e2193821ed4a0000ec.jpg"
   },
   {
     "name": "Maybank Islamic Ikhwan Visa Infinite Card-i",
@@ -1757,7 +1844,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/maybank-islamic-ikhwan-visa-infinite-card-i-519489e2193821ed4a0000ea.jpg"
   },
   {
     "name": "AFFIN DUO Visa Cash Back",
@@ -1777,7 +1865,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-duo-visa-cash-back-5f5a03adb2a9381d10775b7e.jpg"
   },
   {
     "name": "Public Bank Quantum Visa",
@@ -1797,7 +1886,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-quantum-visa-58e1b9f94069a6115d57cc53.jpg"
   },
   {
     "name": "Bank Rakyat Platinum Explorer Credit Card-i",
@@ -1817,7 +1907,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-rakyat-platinum-explorer-credit-card-i-5d9ff9a04945eeac7b690da5.jpg"
   },
   {
     "name": "Hong Leong Infinite Credit Card",
@@ -1837,7 +1928,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hong-leong-infinite-credit-card-52de431e78d623a405002db3.jpg"
   },
   {
     "name": "Hong Leong Wise Credit Card",
@@ -1857,7 +1949,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/hong-leong-wise-credit-card-519489e2193821ed4a0000d9.jpg"
   },
   {
     "name": "Public Bank Petron Visa Gold",
@@ -1877,7 +1970,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-petron-visa-gold-55274c2e628926785afd1870.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Visa Gold Credit Card",
@@ -1897,7 +1991,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-member-plus-amp-visa-gold-credit-card-519489e2193821ed4a000009.jpg"
   },
   {
     "name": "Public Islamic Bank Visa Gold Credit Card-i",
@@ -1917,7 +2012,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-islamic-bank-visa-gold-credit-card-i-54d9c649f951fb0066e61f4b.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Visa Platinum Credit Card",
@@ -1937,7 +2033,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-member-plus-amp-visa-platinum-credit-card-5ab4a9dc2af8f39d1adf1434.jpg"
   },
   {
     "name": "Public Bank Visa Platinum",
@@ -1957,7 +2054,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-platinum-519489e2193821ed4a00011c.jpg"
   },
   {
     "name": "Standard Chartered Journey Credit Card",
@@ -1977,7 +2075,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/standard-chartered-journey-credit-card-519489e2193821ed4a000147.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Mastercard Platinum Credit Card",
@@ -1997,7 +2096,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/aeon-member-plus-amp-mastercard-platinum-credit-card-5badee25bf72ec1126f9cb47.jpg"
   },
   {
     "name": "AEON Biker Gold Visa Card",
@@ -2017,7 +2117,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-biker-gold-visa-card-6875f089c4a5069c56921a43.jpg"
   },
   {
     "name": "AEON Biker Infinite Visa Card",
@@ -2037,7 +2138,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-biker-infinite-visa-card-687de761c4a5069c56921a6f.jpg"
   },
   {
     "name": "Public Bank AIA Visa Gold",
@@ -2057,7 +2159,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-aia-visa-gold-51cc0764d9d93fa811000001.jpg"
   },
   {
     "name": "Public Bank Visa Signature",
@@ -2077,7 +2180,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-signature-537eea2c06a589d1189a6e0c.jpg"
   },
   {
     "name": "Public Islamic Bank Visa Platinum Credit Card-i",
@@ -2097,7 +2201,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-islamic-bank-visa-platinum-credit-card-i-54d9e0fc6b4be6cc17227f63.jpg"
   },
   {
     "name": "Public Bank Visa Gold",
@@ -2117,7 +2222,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-gold-519489e2193821ed4a00011a.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Mastercard Gold Credit Card",
@@ -2137,7 +2243,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-member-plus-amp-mastercard-gold-credit-card-519489e2193821ed4a000003.jpg"
   },
   {
     "name": "CIMB PETRONAS Visa Platinum-i Credit Card",
@@ -2157,7 +2264,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-petronas-visa-platinum-i-credit-card-64ec25e4909d473f02007ab4.jpg"
   },
   {
     "name": "CIMB e Credit Card",
@@ -2177,7 +2285,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-e-credit-card-5eec7e8eab6acc96484ae826.jpg"
   },
   {
     "name": "Public Bank Visa Infinite",
@@ -2197,7 +2306,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-infinite-519489e2193821ed4a000120.jpg"
   },
   {
     "name": "CIMB Cash Rebate Platinum Credit Card",
@@ -2217,7 +2327,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-cash-rebate-platinum-credit-card-51e3dc8bd24bc60868000001.jpg"
   },
   {
     "name": "CIMB PETRONAS Visa Infinite-i Credit Card",
@@ -2237,7 +2348,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-petronas-visa-infinite-i-credit-card-64ec266e909d473f02007ab6.jpg"
   },
   {
     "name": "Bank Islam Visa Infinite Credit Card-i",
@@ -2257,7 +2369,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-islam-visa-infinite-credit-card-i-56051c5234a4e55376a16124.jpg"
   },
   {
     "name": "CIMB Travel World Credit Card",
@@ -2277,7 +2390,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-travel-world-credit-card-64ec27ee909d473f02007aba.jpg"
   },
   {
     "name": "Public Bank Quantum MasterCard",
@@ -2297,7 +2411,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-quantum-mastercard-58e1c10e6b5269dd048aeaeb.jpg"
   },
   {
     "name": "AFFIN World Mastercard",
@@ -2317,7 +2432,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/affin-world-mastercard-53c8a6d3f2d42521322f2820.jpg"
   },
   {
     "name": "Public Islamic Bank Platinum MasterCard Credit Card-i",
@@ -2337,7 +2453,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-islamic-bank-platinum-mastercard-credit-card-i-54d9a832a556ca1e2c352859.jpg"
   },
   {
     "name": "CIMB Travel World Elite Credit Card",
@@ -2357,7 +2474,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-travel-world-elite-credit-card-64ec285f909d473f02007abc.jpg"
   },
   {
     "name": "Bank Rakyat Platinum Credit Card-i",
@@ -2377,7 +2495,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-rakyat-platinum-credit-card-i-563980363c97b2d92da60d90.jpg"
   },
   {
     "name": "Hong Leong I'm Credit Card",
@@ -2397,7 +2516,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hong-leong-i-m-credit-card-552b421e81576f1f3d29c7ca.jpg"
   },
   {
     "name": "Public Bank Gold MasterCard",
@@ -2417,7 +2537,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-gold-mastercard-519489e2193821ed4a000119.jpg"
   },
   {
     "name": "CIMB Travel Platinum Credit Card",
@@ -2437,7 +2558,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-travel-platinum-credit-card-64ec26f1909d473f02007ab8.jpg"
   },
   {
     "name": "AFFIN Visa Business Platinum",
@@ -2457,7 +2579,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-visa-business-platinum-5c78e50cb0c2a00b65590b1c.jpg"
   },
   {
     "name": "Public Bank Platinum MasterCard",
@@ -2477,7 +2600,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-platinum-mastercard-519489e2193821ed4a00011b.jpg"
   },
   {
     "name": "AFFIN Visa Business Platinum-i",
@@ -2497,7 +2621,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-visa-business-platinum-i-5c872981d564be6332e416a5.jpg"
   },
   {
     "name": "AFFIN World Mastercard-i",
@@ -2517,7 +2642,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/affin-world-mastercard-i-5b76805fd1077cae0c81204f.jpg"
   },
   {
     "name": "Public Bank World MasterCard Credit Card",
@@ -2537,7 +2663,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/public-bank-world-mastercard-credit-card-56d5232da05af65b5dced483.jpg"
   },
   {
     "name": "GSC - Hong Leong Platinum Visa",
@@ -2557,7 +2684,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/gsc-hong-leong-platinum-visa-519489e2193821ed4a0000b8.jpg"
   },
   {
     "name": "Public Islamic Bank Gold MasterCard Credit Card-i",
@@ -2577,7 +2705,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-islamic-bank-gold-mastercard-credit-card-i-54d89ae8aff7f54d6702664b.jpg"
   },
   {
     "name": "Bank Islam Visa Platinum Credit Card-i",
@@ -2597,7 +2726,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-islam-visa-platinum-credit-card-i-5295b80e28ea575849002407.jpg"
   },
   {
     "name": "GSC - Hong Leong Gold Visa",
@@ -2617,7 +2747,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/gsc-hong-leong-gold-visa-519489e2193821ed4a0000b7.jpg"
   },
   {
     "name": "BSN Al-Aiman Platinum Credit Card",
@@ -2637,7 +2768,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-al-aiman-platinum-credit-card-52d7c28387d70ef56d109926.jpg"
   },
   {
     "name": "CIMB Preferred Visa Infinite",
@@ -2657,7 +2789,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-preferred-visa-infinite-533281e6dc39712b6c00000e.jpg"
   },
   {
     "name": "Public Bank Visa Business",
@@ -2677,7 +2810,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-business-587ef0e0d1b0d5a9095feb65.jpg"
   },
   {
     "name": "ICBC Visa Platinum",
@@ -2697,7 +2831,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-visa-platinum-52cbc69a8dbd98902100116c.jpg"
   },
   {
     "name": "BSN Al-Aiman Gold Credit Card",
@@ -2717,7 +2852,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bsn-al-aiman-gold-credit-card-55483f4fad74384473a93ad9.jpg"
   },
   {
     "name": "Hong Leong Sutera Platinum Credit Card",
@@ -2737,7 +2873,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hong-leong-sutera-platinum-credit-card-56a874d842df52bf63de741b.jpg"
   },
   {
     "name": "BSN-Teachers Gold Credit Card",
@@ -2757,7 +2894,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-teachers-gold-credit-card-519489e2193821ed4a00005e.jpg"
   },
   {
     "name": "Hong Leong Essential Credit Card",
@@ -2777,7 +2915,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hong-leong-essential-credit-card-519489e2193821ed4a0000d6.jpg"
   },
   {
     "name": "Bank Islam Visa Gold Credit Card-i",
@@ -2797,7 +2936,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-islam-visa-gold-credit-card-i-519489e2193821ed4a000050.jpg"
   },
   {
     "name": "Hong Leong Infinite P Credit Card",
@@ -2817,7 +2957,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/hong-leong-infinite-p-credit-card-52de46d478d623a405002db7.jpg"
   },
   {
     "name": "AFFIN Visa Gold",
@@ -2837,7 +2978,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-visa-gold-519489e2193821ed4a000011.jpg"
   },
   {
     "name": "Bank Islam Mastercard World Credit Card-i",
@@ -2857,7 +2999,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-islam-mastercard-world-credit-card-i-519489e2193821ed4a000052.jpg"
   },
   {
     "name": "Bank Islam Visa Infinite Business Credit Card-i",
@@ -2877,7 +3020,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-islam-visa-infinite-business-credit-card-i-586c9d5e9482ad7e26fceab8.jpg"
   },
   {
     "name": "AFFIN BHPetrol MasterCard",
@@ -2897,7 +3041,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-bhpetrol-mastercard-519489e2193821ed4a000014.jpg"
   },
   {
     "name": "BSN Platinum Credit Card",
@@ -2917,7 +3062,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-platinum-credit-card-52d7bd7987d70ef56d10991f.jpg"
   },
   {
     "name": "BSN-AIAFAM Visa Platinum Credit Card",
@@ -2937,7 +3083,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bsn-aiafam-visa-platinum-credit-card-562f05b34a4eade933d5f913.jpg"
   },
   {
     "name": "ICBC Visa Gold",
@@ -2957,7 +3104,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": true,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-visa-gold-52cbb612725695036c001b38.jpg"
   },
   {
     "name": "BSN Gold Credit Card",
@@ -2977,7 +3125,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-gold-credit-card-519489e2193821ed4a00005d.jpg"
   },
   {
     "name": "Public Bank Visa Commercial",
@@ -2997,7 +3146,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/public-bank-visa-commercial-52cfce0c87d70ef56d00dca2.jpg"
   },
   {
     "name": "CIMB World MasterCard",
@@ -3017,7 +3167,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-world-mastercard-519489e2193821ed4a00006c.jpg"
   },
   {
     "name": "BSN Al-Aiman Classic Credit Card",
@@ -3037,7 +3188,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-al-aiman-classic-credit-card-55484c7f2097f5c41eb83bdc.jpg"
   },
   {
     "name": "BSN Visa Cash Back Credit Card",
@@ -3057,7 +3209,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bsn-visa-cash-back-credit-card-5fd3197981f128e811b9bb60.jpg"
   },
   {
     "name": "AFFIN MasterCard Gold",
@@ -3077,7 +3230,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/affin-mastercard-gold-519489e2193821ed4a000010.jpg"
   },
   {
     "name": "Bank Islam Mastercard Platinum Credit Card-i",
@@ -3097,7 +3251,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bank-islam-mastercard-platinum-credit-card-i-519489e2193821ed4a000053.jpg"
   },
   {
     "name": "Bank Islam Mastercard Gold Credit Card-i",
@@ -3117,7 +3272,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bank-islam-mastercard-gold-credit-card-i-519489e2193821ed4a00004f.jpg"
   },
   {
     "name": "BSN Classic Credit Card",
@@ -3137,7 +3293,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-classic-credit-card-519489e2193821ed4a00005f.jpg"
   },
   {
     "name": "Standard Chartered Beyond Credit Card",
@@ -3157,7 +3314,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/standard-chartered-beyond-credit-card-519489e2193821ed4a00013d.jpg"
   },
   {
     "name": "AFFIN DUO Mastercard Rewards",
@@ -3177,7 +3335,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/affin-duo-mastercard-rewards-5f5a064db2a9381d10775b80.jpg"
   },
   {
     "name": "BSN-Teachers Al-Aiman Gold Credit Card",
@@ -3197,7 +3356,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-teachers-al-aiman-gold-credit-card-551930d8ebbe192a7a6ef813.jpg"
   },
   {
     "name": "AFFIN Mastercard Gold-i",
@@ -3217,7 +3377,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-mastercard-gold-i-5b767bfcd1077cae0c812049.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Visa Classic Credit Card",
@@ -3237,7 +3398,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-member-plus-amp-visa-classic-credit-card-519489e2193821ed4a00000b.jpg"
   },
   {
     "name": "Standard Chartered Platinum MasterCard Basic",
@@ -3257,7 +3419,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/standard-chartered-platinum-mastercard-basic-5afe8d28138a1002029084de.jpg"
   },
   {
     "name": "BSN-UUM Al-Aiman Mastercard Credit Card",
@@ -3277,7 +3440,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-uum-al-aiman-mastercard-credit-card-519489e2193821ed4a000063.jpg"
   },
   {
     "name": "AFFIN DUO+ Mastercard",
@@ -3297,7 +3461,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-duo-mastercard-6a227dce4897a22b55296ba0.jpg"
   },
   {
     "name": "AEON Member Plus (AMP) Mastercard Classic Credit Card",
@@ -3317,7 +3482,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/aeon-member-plus-amp-mastercard-classic-credit-card-519489e2193821ed4a000005.jpg"
   },
   {
     "name": "Bank Rakyat Gold Credit Card-i",
@@ -3337,7 +3503,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bank-rakyat-gold-credit-card-i-519489e2193821ed4a000056.jpg"
   },
   {
     "name": "CIMB Visa Signature",
@@ -3357,7 +3524,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-visa-signature-519489e2193821ed4a00006b.jpg"
   },
   {
     "name": "AFFIN DUO+ Visa",
@@ -3377,7 +3545,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-duo-visa-6a22746d4897a22b55296b9c.jpg"
   },
   {
     "name": "CIMB Visa Infinite",
@@ -3397,7 +3566,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-visa-infinite-519489e2193821ed4a000074.jpg"
   },
   {
     "name": "CIMB Platinum BusinessCard",
@@ -3417,7 +3587,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/cimb-platinum-businesscard-519489e2193821ed4a000071.jpg"
   },
   {
     "name": "CIMB Platinum Credit Card",
@@ -3437,7 +3608,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-platinum-credit-card-519489e2193821ed4a000076.jpg"
   },
   {
     "name": "AFFIN Mastercard Basic-i",
@@ -3457,7 +3629,8 @@
     "is_islamic": true,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/affin-mastercard-basic-i-5b7675b2d1077cae0c812044.jpg"
   },
   {
     "name": "CIMB Platinum-i Credit Card",
@@ -3477,7 +3650,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/cimb-platinum-i-credit-card-519489e2193821ed4a00007a.jpg"
   },
   {
     "name": "BSN G-Card Al-Aiman Visa Credit Card",
@@ -3497,7 +3671,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-g-card-al-aiman-visa-credit-card-5cac4d20cbf9fb7115cddf6c.jpg"
   },
   {
     "name": "BSN G-Card Visa Credit Card",
@@ -3517,7 +3692,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/bsn-g-card-visa-credit-card-5cac4a7e5230859769b622f9.jpg"
   },
   {
     "name": "Hong Leong Visa Infinite Doctor's Edition",
@@ -3537,7 +3713,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/hong-leong-visa-infinite-doctor-s-edition-5dd64321746d443b4aeae1ed.jpg"
   },
   {
     "name": "ICBC UnionPay Dual Currency Platinum",
@@ -3557,7 +3734,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-unionpay-dual-currency-platinum-52ca8ca40a0eabfd19003ff1.jpg"
   },
   {
     "name": "ICBC UnionPay Dual Currency Gold",
@@ -3577,7 +3755,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-unionpay-dual-currency-gold-52ca7d3b974308c97300470a.jpg"
   },
   {
     "name": "AEON The Japan Club of Kuala Lumpur Visa",
@@ -3597,7 +3776,8 @@
     "is_islamic": false,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/aeon-the-japan-club-of-kuala-lumpur-visa-5892dd927244082635c2913b.jpg"
   },
   {
     "name": "ICBC UnionPay Dual Currency Classic",
@@ -3617,7 +3797,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-unionpay-dual-currency-classic-52ca7134974308c9730027f7.jpg"
   },
   {
     "name": "Bank Rakyat Muslimah Credit Card-i",
@@ -3637,7 +3818,8 @@
     "is_islamic": true,
     "is_shopping": false,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/bank-rakyat-muslimah-credit-card-i-5892f2627244082635c2913d.jpg"
   },
   {
     "name": "ICBC Visa Classic",
@@ -3657,7 +3839,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": false
+    "has_cashback": false,
+    "image": "/cards/icbc-visa-classic-52cbb079725695036c0009ec.jpg"
   },
   {
     "name": "Mutual Gold Public Bank Visa Platinum",
@@ -3677,7 +3860,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/mutual-gold-public-bank-visa-platinum-519489e2193821ed4a00011f.jpg"
   },
   {
     "name": "AFFIN INVIKTA World Mastercard",
@@ -3697,7 +3881,8 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-invikta-world-mastercard-692d70ceea37974b5a593db4.jpg"
   },
   {
     "name": "AFFIN INVIKTA Visa Infinite",
@@ -3717,6 +3902,7 @@
     "is_islamic": false,
     "is_shopping": true,
     "is_grab": false,
-    "has_cashback": true
+    "has_cashback": true,
+    "image": "/cards/affin-invikta-visa-infinite-692d65c4ea37974b5a593db1.jpg"
   }
 ]

@@ -1,6 +1,7 @@
 'use client'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronRight, ChevronLeft, Sparkles, ExternalLink, CheckCircle2, CreditCard } from 'lucide-react'
 import cardsRaw from './cards-data.json'
 
@@ -23,6 +24,7 @@ interface Card {
   is_shopping: boolean
   is_grab: boolean
   has_cashback: boolean
+  image: string | null
 }
 
 const cards = cardsRaw as Card[]
@@ -325,10 +327,22 @@ export function CompareClient() {
                     return (
                       <div key={card.name} className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-white/20 transition-all">
                         <div className="flex items-start gap-4">
-                          {/* Bank logo placeholder */}
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${bankColor(card.name)} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-                            {initials}
-                          </div>
+                          {/* Card image */}
+                          {card.image ? (
+                            <div className="w-20 h-12 rounded-xl overflow-hidden flex-shrink-0 bg-slate-800">
+                              <Image
+                                src={card.image}
+                                alt={card.name}
+                                width={80}
+                                height={48}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className={`w-20 h-12 rounded-xl bg-gradient-to-br ${bankColor(card.name)} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+                              {initials}
+                            </div>
+                          )}
 
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between gap-2">
