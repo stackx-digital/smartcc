@@ -3,9 +3,8 @@ import { createClient } from '@/lib/supabase-server'
 import { calculateFloat, getTrafficLight } from '@/lib/float'
 import { differenceInDays } from 'date-fns'
 import { CreditCard, CardWithFloat } from '@/types'
-import { SummaryStats } from '@/components/dashboard/SummaryStats'
 import { CardDisplay } from '@/components/dashboard/CardDisplay'
-import { TrafficLightSection } from '@/components/dashboard/TrafficLight'
+import { DashboardOverview, DashTx } from '@/components/dashboard/DashboardOverview'
 import { DueReminder } from '@/components/dashboard/DueReminder'
 import { PushSubscriber } from '@/components/PushSubscriber'
 
@@ -40,6 +39,15 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
+  const since = new Date(today)
+  since.setDate(since.getDate() - 56)
+  const { data: txs } = await supabase
+    .from('transactions')
+    .select('amount, type, transaction_date')
+    .eq('user_id', user.id)
+    .gte('transaction_date', since.toISOString().slice(0, 10))
+  const firstName = profile?.full_name?.split(' ')[0] ?? ''
+
   const highUtilCards = cardsWithFloat.filter(c => c.utilizationPct >= 80)
 
   return (
@@ -58,46 +66,29 @@ export default async function DashboardPage() {
           ))}
         </div>
       )}
-      {/* Page header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Selamat Kembali{profile?.full_name ? `, ${profile.full_name.split(' ')[0]}` : ''}! 👋
-          </h1>
-
-          <p className="text-gray-400 text-sm mt-0.5">
-            {today.toLocaleDateString('ms-MY', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-          </p>
-        </div>
-        <PushSubscriber />
-      </div>
-
-      <SummaryStats cards={cardsWithFloat} />
+      <div className="flex justify-end -mb-4"><PushSubscriber /></div>
+      <DashboardOverview cards={cardsWithFloat} transactions={(txs ?? []) as DashTx[]} firstName={firstName} />
 
       {cardsWithFloat.length > 0 ? (
-        <>
-          <div className="space-y-3">
-            <h2 className="text-base font-semibold text-gray-700">Kad Kredit Saya</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {cardsWithFloat.map(card => (
-                <CardDisplay key={card.id} card={card} />
-              ))}
-            </div>
+        <div className="space-y-3">
+          <h2 className="text-sm font-semibold text-slate-900">Kad Kredit Saya</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cardsWithFloat.map(card => (
+              <CardDisplay key={card.id} card={card} />
+            ))}
           </div>
-
-          <TrafficLightSection cards={cardsWithFloat} />
-        </>
+        </div>
       ) : (
-        <div className="text-center py-12 text-muted-foreground">
+        <div className="text-center py-12 text-slate-500 bg-white rounded-2xl border border-slate-200">
           <p className="text-lg">Belum ada kad kredit.</p>
           <p className="text-sm mt-1">
-            <a href="/cards" className="text-primary hover:underline">Tambah kad anda</a> untuk mula.
+            <a href="/cards" className="text-[#2c7a7b] font-medium hover:underline">Tambah kad anda</a> untuk mula.
           </p>
         </div>
       )}
 
       {/* Tip Banner */}
-      <div className="rounded-2xl p-4 bg-blue-50 border border-blue-100 text-blue-800 text-sm flex gap-3 items-start">
+      <div className="rounded-2xl p-4 bg-[#2c7a7b]/5 border border-[#2c7a7b]/15 text-[#1f5f60] text-sm flex gap-3 items-start">
         <span className="text-xl mt-0.5">💡</span>
         <p className="leading-relaxed">
           <strong>Tip:</strong> Sentiasa bayar <em>Baki Penyata</em> (bukan Baki Tertunggak) untuk elak caj faedah.
